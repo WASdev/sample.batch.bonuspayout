@@ -99,7 +99,7 @@ For each record, in confirms that the value now read from the database table cor
     - **Note:**  If you have compile failures, then the server environment was probably not defined correctly
 2. Right click the **BonusPayout** project, select **Generate->Java Batch Packaging Code**
 3. Export BonusPayoutControllerEAR project via Export -> EAR file 
-    - **Important: ** The file name MUST be exported with the name of **BonusPayoutControllerEAR.ear** exactly as shown.
+    - **Important:** The file name MUST be exported with the name of **BonusPayoutControllerEAR.ear** exactly as shown.
 
 
 ## Deeper look at Application
