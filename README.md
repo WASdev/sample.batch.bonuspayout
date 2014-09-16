@@ -7,23 +7,27 @@ This sample shows the javaBatch-1.0 and managedBatch-1.0 features on the WebSphe
 These instructions assume you're running from the directory which holds your 'wlp' installation directory
 
 1. Run the self-extracting sample archive:
-
-        $ java -jar BonusPayoutServer.jar
+    ```
+    $ java -jar BonusPayoutServer.jar
+    ```
 
 2. Start the BonusPayout server:
-
-        $ wlp/bin/server start BonusPayout
+    ```
+    $ wlp/bin/server start BonusPayout
+    ```
 
 3. Point to server keystore
-        $ export JVM_ARGS=-Djavax.net.ssl.trustStore=wlp/usr/servers/BonusPayout/resources/security/key.jks
+    ```
+    $ export JVM_ARGS=-Djavax.net.ssl.trustStore=wlp/usr/servers/BonusPayout/resources/security/key.jks
+    ```
 
 4. Submit (start) job, and wait for it to run to completion
-```
-$ wlp/bin/jbatch submit --host=localhost --port=9443  --user=bob --password=bobpwd --applicationName=BonusPayout --jobXMLName=BonusPayoutJob --jobPropertiesFile=wlp/usr/servers/BonusPayout/runToCompletionParms.txt  --wait
-[2014/09/15 21:57:57.767 -0400] CWWKY0101I: Job BonusPayout with instance ID 1 has been submitted.
-[2014/09/15 21:58:27.871 -0400] CWWKY0105I: Job BonusPayout with instance ID 1 has finished. Batch status: COMPLETED. Exit status: COMPLETED
-[2014/09/15 21:58:27.875 -0400] CWWKY0107I: JobExecution:executionId=1,jobName=BonusPayout,createTime=2014/09/15 21:57:57.676 -0400,startTime=2014/09/15 21:57:57.684 -0400,endTime=2014/09/15 21:57:58.535 -0400,lastUpdatedTime=2014/09/15 21:57:58.535 -0400,batchStatus=COMPLETED,exitStatus=COMPLETED,jobParameters={generateFileNameRoot=bonusPayoutGen}
-```
+    ```
+    $ wlp/bin/jbatch submit --host=localhost --port=9443  --user=bob --password=bobpwd --applicationName=BonusPayout --jobXMLName=BonusPayoutJob --jobPropertiesFile=wlp/usr/servers/BonusPayout/runToCompletionParms.txt  --wait
+    [2014/09/15 21:57:57.767 -0400] CWWKY0101I: Job BonusPayout with instance ID 1 has been submitted.
+    [2014/09/15 21:58:27.871 -0400] CWWKY0105I: Job BonusPayout with instance ID 1 has finished. Batch status: COMPLETED. Exit status: COMPLETED
+    [2014/09/15 21:58:27.875 -0400] CWWKY0107I: JobExecution:executionId=1,jobName=BonusPayout,createTime=2014/09/15 21:57:57.676 -0400,startTime=2014/09/15 21:57:57.684 -0400,endTime=2014/09/15 21:57:58.535 -0400,lastUpdatedTime=2014/09/15 21:57:58.535 -0400,batchStatus=COMPLETED,exitStatus=COMPLETED,jobParameters={generateFileNameRoot=bonusPayoutGen}
+    ```
 
 ## Application Overview
 
@@ -92,10 +96,10 @@ For each record, in confirms that the value now read from the database table cor
 ### Import POJO project and build EAR
 
 1. Import **BonusPayout** project into Eclipse via *Import->Existing Projects into Workspace*
-**Note:**  If you have compile failures, then the server environment was probably not defined correctly
+    - **Note:**  If you have compile failures, then the server environment was probably not defined correctly
 2. Right click the **BonusPayout** project, select **Generate->Java Batch Packaging Code**
 3. Export BonusPayoutControllerEAR project via Export -> EAR file 
-    - ** Important** .. the file name MUST be exported with the name of **BonusPayoutControllerEAR.ear** exactly as shown.
+    - **Important: ** The file name MUST be exported with the name of **BonusPayoutControllerEAR.ear** exactly as shown.
 
 
 ## Deeper look at Application
