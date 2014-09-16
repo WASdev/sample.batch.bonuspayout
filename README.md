@@ -2,8 +2,7 @@
 
 This sample makes use of the javaBatch-1.0 and managedBatch-1.0 features on the WebSphere Liberty Profile.
 
-It involves a three-step job, which generates some random data, performs a calculation on it writing the
-result into the database, and then verifies the result.
+It involves a three-step job, which generates some random data, performs a calculation on it (writing the result into the database), and then verifies the result.
 
 It uses the *jbatch* command-line utility to conveniently wrapper the REST-based remote dispatch and management interface.
 
