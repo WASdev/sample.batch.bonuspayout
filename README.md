@@ -1,6 +1,9 @@
 # sample.batch.bonuspayout
 
-This sample shows the javaBatch-1.0 and managedBatch-1.0 features on the WebSphere Liberty Profile
+This sample makes use of the javaBatch-1.0 and managedBatch-1.0 features on the WebSphere Liberty Profile.
+
+It involves a three-step job, which generates some random data, performs a calculation on it writing the
+result into the database, and then verifies the result.
 
 ## Quick Start - Install and run the sample
 
@@ -28,18 +31,6 @@ These instructions assume you're running from the directory which holds your 'wl
     [2014/09/15 21:58:27.871 -0400] CWWKY0105I: Job BonusPayout with instance ID 1 has finished. Batch status: COMPLETED. Exit status: COMPLETED
     [2014/09/15 21:58:27.875 -0400] CWWKY0107I: JobExecution:executionId=1,jobName=BonusPayout,createTime=2014/09/15 21:57:57.676 -0400,startTime=2014/09/15 21:57:57.684 -0400,endTime=2014/09/15 21:57:58.535 -0400,lastUpdatedTime=2014/09/15 21:57:58.535 -0400,batchStatus=COMPLETED,exitStatus=COMPLETED,jobParameters={generateFileNameRoot=bonusPayoutGen}
     ```
-
-## Application Overview
-
-The **BonusPayout** job is structured in 3 steps:   
-
-1. The first step, **generate**, is a batchlet step which generates some random values (representing account balances), and writes them into a text file in CSV format.
-
-1. The second step, **addBonus**, is a chunk step which reads these values from the text file, adds an amount representing a 'bonus' to each record, and writes the updated value into a database table.
-
-1. The third step, **validation**, is a chunk step which loops through the database table updated in step 2 as well as the text file generated in step 1 validating the calculation in the second step.
-For each record, in confirms that the value now read from the database table corresponds to the value in the generated text file, plus the bonus amount.  It also confirms that steps 1 and 2 have written the same number of records. 
-
 
 ## Other execution variants 
 ### Restart - run the variant forcing failure, then performing a restart
@@ -82,24 +73,6 @@ For each record, in confirms that the value now read from the database table cor
     [2014/09/15 22:51:20.181 -0400] CWWKY0106I: JobInstance:instanceId=8,jobName=BonusPayout,appName=BonusPayout,appTag=bob
     [2014/09/15 22:51:20.186 -0400] CWWKY0107I: JobExecution:executionId=9,jobName=BonusPayout,createTime=2014/09/15 22:50:55.631 -0400,startTime=2014/09/15 22:50:55.634 -0400,endTime=2014/09/15 22:51:03.204 -0400,lastUpdatedTime=2014/09/15 22:51:03.204 -0400,batchStatus=COMPLETED,exitStatus=COMPLETED,jobParameters={numRecords=50000, generateFileNameRoot=bonusPayoutGen}
     ```
-
-## Building the sample from source using WDT
-
-### Define the server environment
-1. Windows->Preferences, Server->Runtime Environments -> Add 
-2. Type of runtime enviroment: IBM -> WebSphere Application Server Liberty Profile -> Next
-3. Installation Folder -> New Directory (Any path), Also use any Java 7+ JRE, Next
-4. Install a new runtime environment from an archive (point to BonusPayoutServer.jar)
-5. Skip through "Install Add-Ons" 
-6. Accept License then Finish
-
-### Import POJO project and build EAR
-
-1. Import **BonusPayout** project into Eclipse via *Import->Existing Projects into Workspace*
-    - **Note:**  If you have compile failures, then the server environment was probably not defined correctly
-2. Right click the **BonusPayout** project, select **Generate->Java Batch Packaging Code**
-3. Export BonusPayoutControllerEAR project via Export -> EAR file 
-    - **Important:** The file name MUST be exported with the name of **BonusPayoutControllerEAR.ear** exactly as shown.
 
 ## Further reading
 
