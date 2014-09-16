@@ -40,7 +40,7 @@ dsJNDI | **jdbc/batch** | DataSource JNDI location for application table (not ne
 bonusAmount | **100** |	Amount the “account balance” will be incremented by in step 2
 tableName | **SAMPLE.ACCOUNT** | Application database table
 fileEncoding | **<None>** | Char encoding used to write text file generated in step 1 and read in step 3
-useGlobalJNDI | **true** | If set to **true**, look up **dsJNDI** name in the global JNDI namespace.  Otherwise, lookup DataSource at location *java:/comp/env/<**dsJNDI**>*
+useGlobalJNDI | **true** | If set to **true**, look up **dsJNDI** name in the global JNDI namespace.  Otherwise, lookup DataSource at location **java:/comp/env/<dsJNDI>**
 
 
 
