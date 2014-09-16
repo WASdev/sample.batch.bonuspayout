@@ -29,6 +29,15 @@ For each record, in confirms that the value now read from the database table cor
 3. Export BonusPayoutControllerEAR project via Export -> EAR file 
     - **Important:** The file name MUST be exported with the name of **BonusPayoutControllerEAR.ear** exactly as shown.
 
+## Creating the database tables
+
+1. To create the runtime tables, see this link
+[Runtime DDL templates] (https://github.com/WASdev/sample.batch.templateddls)
+
+2. To create the table used in the 2nd and 3rd steps by the application, use DDLs in the 
+[BonusPayout/resources] (BonusPayout/resources/) directory, e.g. 
+[bonusPayout.derby.ddl] (BonusPayout/resources/bonusPayout.derby.ddl) directory 
+
 ## Job Parameters - detailed look
 
  Parameter | Default | Description 
