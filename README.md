@@ -5,6 +5,11 @@ This sample makes use of the javaBatch-1.0 and managedBatch-1.0 features on the 
 It involves a three-step job, which generates some random data, performs a calculation on it writing the
 result into the database, and then verifies the result.
 
+It uses the *jbatch* command-line utility to conveniently wrapper the REST-based remote dispatch and management interface.
+
+This document simply shows how to execute the sample, and the internal details of the application (including how to 
+modify, build, etc.) are described here: [ApplicationDetails.md](ApplicationDetails.md)
+
 ## Quick Start - Install and run the sample
 
 These instructions assume you're running from the directory which holds your 'wlp' installation directory

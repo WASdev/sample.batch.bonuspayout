@@ -42,7 +42,39 @@ tableName | **SAMPLE.ACCOUNT** | Application database table
 fileEncoding | *\<None\>* | Char encoding used to write text file generated in step 1 and read in step 3
 useGlobalJNDI | **true** | If set to **true**, look up **dsJNDI** name in the global JNDI namespace.  Otherwise, lookup DataSource at location **java:/comp/env/\[dsJNDI\]**
 
+## Important BonusPayout flows/constructs
 
+### What is the logic flow of this application?
+
+#### Note:
+One thing to keep in mind looking at the **BonusPayout** source is that we intend to provide a couple variants 
+of essentially the same application.   For example, we will likely next publish a variant which uses a 
+partitioned third step.  Some other variants would include different techniques for performing the DB query
+in the third step, and a variant using CDI as well.
+
+With this in mind, some of the constructs are structured to allow for later inheritance/extension.  In some cases
+the logic could be captured a bit more compactly if this were not the goal, so do keep this in mind in case it looks
+like the sample is unnecessarily complex.
+
+### Some key constructs:
+
+#### The number of records validated 
+
+As part of the validation performed in **validate**, the app checks that the number of records read from the DB (written in the 2nd step), is equal to value of the *numRecords* job parameter.  
+We leverage the checkpoint capabilities of the batch chunk step by ensuring the validation count will pick up where it left off in case of restart.
+
+In more detail: 
+- We use the step's persistent user data to hold this count of validated records.
+- We update this count with the listener ValidationCountUpdatingWriteListener, updating the persistent user data (and also the exit status) with the updated count value.
+- Finally, at the end of the step we use listener ValidationCountAfterStepListener to compare the count from the exit status (and persistent user data) with the original *numRecords* value.
+- **Note:**  We decouple the reader checkpoint logic from this flow by not trying to also directly use the persistent user data in checkpointing (even though the values may be the same after each checkpoint).
+
+#### Mechanism for DB query in the validate step
+
+In this sample we issue a separate query (and get a separate ResultSet) per chunk.  We use the StepContext transient user data to pass query parameters from the reader to the
+ChunkListener, and we also use the transient user data to pass the ResultSet back from the ChunkListener to the reader.  
+
+The ItemReader stores values into the transient user data both in*open()* as well as in each *checkpointInfo()* invocation.  The ChunkListener's *beforeChunk()*  executes the query, and sets the ResultSet into the transient user data.  The ItemReader's *readItem()* then iterates through this chunk's ResultSet.
 
 
 
