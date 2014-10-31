@@ -41,9 +41,15 @@ public class ForceFailureReadListener extends AbstractItemReadListener {
 
     @Override
     public void afterRead(Object item) throws Exception {
+
+        if (item == null) {
+            return; // End of step
+        }
+        
         if (failureConfig == null) {
             failureConfig = new ForcedFailureConfig((AccountDataObject) item);
         }
+
         failureConfig.possiblyFailOn(item);
     }
 
