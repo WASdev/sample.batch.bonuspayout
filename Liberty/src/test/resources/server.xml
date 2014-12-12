@@ -1,0 +1,38 @@
+<server description="Server for BonusPayout sample">
+
+	<!-- Enable features -->
+	<featureManager>
+		<feature>managedBatch-1.0</feature>
+    </featureManager>
+
+	<!-- To access this server from a remote client add a host attribute to
+		the following element, e.g. host="*" -->
+	<httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+
+	<library id="DerbyLib">
+		<fileset dir="${server.config.dir}/resources/derby"/>
+	</library>
+
+    <logging traceSpecification="BonusPayout=all=enabled"/>
+
+	<dataSource id="batchDB" jndiName="jdbc/batch">
+		<jdbcDriver libraryRef="DerbyLib"/>
+		<properties.derby.embedded createDatabase="false" databaseName="${server.config.dir}/resources/BATCHDB" password="pass" user="user"/>
+	</dataSource>
+
+	<javaBatchContainerPersistence dataSourceRef="batchDB"/>
+
+	<applicationMonitor updateTrigger="mbean"/>
+
+	<keyStore id="defaultKeyStore" password="Liberty"/>
+
+	<basicRegistry id="basic" realm="ibm/api">
+		<user name="bob" password="bobpwd"/>
+		<user name="jane" password="janepwd"/>
+	</basicRegistry>
+
+	<administrator-role>
+		<user>bob</user>
+	</administrator-role> 
+
+</server>

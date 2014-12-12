@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ibm.websphere.samples.bonuspayout</groupId>
+        <artifactId>root</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <properties>
+        <server.name>BonusPayout</server.name>
+        <install.dir>${project.build.directory}/liberty</install.dir>
+    </properties>
+
+    <groupId>com.ibm.websphere.samples.bonuspayout</groupId>
+    <artifactId>Liberty</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ibm.websphere.samples.bonuspayout</groupId>
+            <artifactId>BonusPayout</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+          <plugin>
+            <groupId>net.wasdev.wlp.maven.plugins</groupId>
+            <artifactId>liberty-maven-plugin</artifactId> 
+            <version>1.0</version>
+            <executions>
+                <execution>
+                     <id>start-server</id>
+                     <phase>pre-integration-test</phase>
+                     <goals>
+                         <goal>start-server</goal>
+                     </goals>
+                    <configuration>
+                        <serverName>${server.name}</serverName>
+                        <assemblyArchive>BonusPayoutServer.jar</assemblyArchive>
+                        <assemblyInstallDirectory>${install.dir}</assemblyInstallDirectory>
+                    </configuration>              
+                </execution>
+                <execution>
+                    <id>deploy-app</id>
+                    <phase>pre-integration-test</phase>
+                    <goals>
+                        <goal>deploy</goal>
+                    </goals>
+                    <configuration>
+                        <appArtifact>
+                            <groupId>com.ibm.websphere.samples.bonuspayout</groupId>
+                            <artifactId>BonusPayout</artifactId>
+                            <type>war</type>
+                        </appArtifact>                        
+                        <installDirectory>${install.dir}/wlp</installDirectory>
+                        <serverName>${server.name}</serverName>
+                    </configuration>
+                </execution>
+                <execution>
+                     <id>stop-server</id>
+                     <phase>integration-test</phase>
+                     <goals>
+                         <goal>stop-server</goal>
+                     </goals>
+                    <configuration>
+                        <installDirectory>${install.dir}/wlp</installDirectory>
+                        <serverName>${server.name}</serverName>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+       </plugins>
+     </build>
+</project>
