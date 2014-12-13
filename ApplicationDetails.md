@@ -11,32 +11,41 @@ The **BonusPayout** job is structured in 3 steps:
 1. The third step, **validation**, is a chunk step which loops through the database table updated in step 2 as well as the text file generated in step 1 validating the calculation in the second step.
 For each record, in confirms that the value now read from the database table corresponds to the value in the generated text file, plus the bonus amount.  It also confirms that steps 1 and 2 have written the same number of records. 
 
-## Building the sample from source using WDT
+## Building and deploying the sample with Maven
 
-### Define the server environment
-1. Windows->Preferences, Server->Runtime Environments -> Add 
-2. Type of runtime enviroment: IBM -> WebSphere Application Server Liberty Profile -> Next
-3. Installation Folder -> New Directory (Any path), Also use any Java 7+ JRE, Next
-4. Install a new runtime environment from an archive (point to BonusPayoutServer.jar)
-5. Skip through "Install Add-Ons" 
-6. Accept License then Finish
+Both of the two options immediately following use the pre-packaged server archive at [Liberty/BonusPayoutServer.jar](Liberty/BonusPayoutServer.jar) to supply the Liberty installation binaries
+as well as the server config [server.xml](Liberty/src/test/resources/server.xml).
 
-### Import POJO project and build EAR
+This does all of:
+1. Compile the Java classes and zip up the WAR package
+1. Create a new Liberty server (from the packaged server)
+1. Deploy the newly-built WAR to the new server
 
-1. Import **BonusPayout** project into Eclipse via *Import->Existing Projects into Workspace*
-    - **Note:**  If you have compile failures, then the server environment was probably not defined correctly
-2. Right click the **BonusPayout** project, select **Generate->Java Batch Packaging Code**
-3. Export BonusPayoutControllerEAR project via Export -> EAR file 
-    - **Important:** The file name MUST be exported with the name of **BonusPayoutControllerEAR.ear** exactly as shown.
+### Building and deploy using default server name and location
+
+    ``` 
+    $ mvn clean install
+    ```
+
+Note this creates a server named **BonusPayout** with new Liberty installation directly under the Git repository at location:  **Liberty\target\liberty\wlp**
+
+### Building and deploy using specified server name and location
+
+    ``` 
+    $ mvn clean install -Dserver.name=MyBonusPayout -Dinstall.dir=/my/path/toinstallation.dir
+    ```
+Note this creates a server named **MyBonusPayout** with new Liberty installation at location:  **/my/path/toinstallation.dir**
 
 ## Creating the database tables
 
 1. To create the runtime tables, see this link
 [Runtime DDL templates] (https://github.com/WASdev/sample.batch.templateddls)
+for the latest.  A local copy is included in this repository at
+[batch-derby.ddl](Liberty/src/test/resources/batch-derby.ddl)
 
-2. To create the table used in the 2nd and 3rd steps by the application, use DDLs in the 
-[BonusPayout/resources] (BonusPayout/resources/) directory, e.g. 
-[bonusPayout.derby.ddl] (BonusPayout/resources/bonusPayout.derby.ddl) directory 
+2. To create the application table, **BONUSPAYOUT.ACCOUNT** used in the 2nd and 3rd steps, use DDLs in the 
+[BonusPayout/src/main/webapp/resources] (BonusPayout/src/main/webapp/resources/) directory, e.g. 
+[bonusPayout.derby.ddl] (BonusPayout/src/main/webapp/resources/bonusPayout.derby.ddl) directory 
 
 ## Job Parameters - detailed look
 
@@ -44,12 +53,11 @@ For each record, in confirms that the value now read from the database table cor
  :------------- | :----| :-----------
 numRecords  | **1000** | Total number of records generated in step 1 and processed later
 chunkSize | **100** | The chunk (transaction) size used in steps 2 and 3
-generateFileNameRoot | **/tmp/bpgen** |  Directory+prefix of file generated in step 1 (more detail below)
-dsJNDI | **jdbc/batch** | DataSource JNDI location for application table (not necessarily for container persistence as well)
+generateFileNameRoot | *\<None\>*  |  Directory+prefix of file generated in step 1.  No default defined in JSL, but there is a default in the Java logic.
+dsJNDI | **java:comp/env/jdbc/BonusPayoutDS** | DataSource JNDI location for application table (the sample could be refactored so this isn't also used for container persistence as it is right now).
 bonusAmount | **100** |	Amount the “account balance” will be incremented by in step 2
 tableName | **BONUSPAYOUT.ACCOUNT** | Application database table
 fileEncoding | *\<None\>* | Char encoding used to write text file generated in step 1 and read in step 3
-useGlobalJNDI | **true** | If set to **true**, look up **dsJNDI** name in the global JNDI namespace.  Otherwise, lookup DataSource at location **java:/comp/env/\[dsJNDI\]**
 
 ## Important BonusPayout flows/constructs
 
