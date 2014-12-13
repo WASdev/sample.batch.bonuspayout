@@ -1,5 +1,10 @@
 # Bonus Payout in detail
 
+## Prereq
+
+This sample assumes the December 2014 beta driver level (both the main **runtime** and the **extended** JARs).  However instructions are
+only given using the server packaged with this sample, not using an existing Liberty installation of the December 2014 beta.
+
 ## Application Overview
 
 The **BonusPayout** job is structured in 3 steps:   
@@ -17,24 +22,29 @@ Both of the two options immediately following use the pre-packaged server archiv
 as well as the server config [server.xml](Liberty/src/test/resources/server.xml).
 
 This does all of:
-1. Compile the Java classes and zip up the WAR package
-1. Create a new Liberty server (from the packaged server)
-1. Deploy the newly-built WAR to the new server
 
-### Building and deploy using default server name and location
+  1. Compile the Java classes and zip up the WAR package
+  1. Create a new Liberty server (from the packaged server)
+  1. Deploy the newly-built WAR to the new server
 
-    ``` 
+### Default server name and location
+``` 
     $ mvn clean install
-    ```
+```
 
-Note this creates a server named **BonusPayout** with new Liberty installation directly under the Git repository at location:  **Liberty\target\liberty\wlp**
+* Note this creates a server named **BonusPayout** with new Liberty installation directly under the Git repository at location:  **Liberty\target\liberty\wlp**
 
-### Building and deploy using specified server name and location
-
-    ``` 
+### Specified server name and location
+``` 
     $ mvn clean install -Dserver.name=MyBonusPayout -Dinstall.dir=/my/path/toinstallation.dir
-    ```
-Note this creates a server named **MyBonusPayout** with new Liberty installation at location:  **/my/path/toinstallation.dir**
+```
+
+* Note this creates a server named **MyBonusPayout** with new Liberty installation at location:  **/my/path/toinstallation.dir**
+
+### TODO 
+
+Not shown is how to create a new server and deploy starting from an existing Liberty installation (rather than one created from the packaged server)
+
 
 ## Creating the database tables
 
@@ -94,4 +104,12 @@ ChunkListener, and we also use the transient user data to pass the ResultSet bac
 The ItemReader stores values into the transient user data both in*open()* as well as in each *checkpointInfo()* invocation.  The ChunkListener's *beforeChunk()*  executes the query, and sets the ResultSet into the transient user data.  The ItemReader's *readItem()* then iterates through this chunk's ResultSet.
 
 
+# Change History
+
+## December 2014 beta
+
+* Refactored job from EJB built with WDT batch tooling to Maven WAR
+* Renamed application DB table to BONUSPAYOUT.ACCOUNT
+* Changed default for *dsJNDI* String to use a **java:comp/env** lookup with resource reference (and removed *useGlobalJNDI* parameter).  This parameter value can be a global one or one of the supported, standard scopes such as **java:comp/env/**
+* Adjusted defaulting of *generateFileNameRoot* in **BonusPayoutUtils.java**
 
