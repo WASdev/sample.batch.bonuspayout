@@ -1,6 +1,6 @@
 # Bonus Payout in detail
 
-## Prereq
+## Level of included code
 
 This sample assumes the December 2014 beta driver level (both the main **runtime** and the **extended** JARs).  However instructions are
 only given using the server packaged with this sample, not using an existing Liberty installation of the December 2014 beta.
@@ -108,6 +108,7 @@ The ItemReader stores values into the transient user data both in*open()* as wel
 
 ## December 2014 beta
 
+* Application name changed from **--applicationName BonusPayout** to **--applicationName BonusPayout-1.0** on jbatch **submit** command.
 * Refactored job from EJB built with WDT batch tooling to Maven WAR
 * Renamed application DB table to BONUSPAYOUT.ACCOUNT
 * Changed default for *dsJNDI* String to use a **java:comp/env** lookup with resource reference (and removed *useGlobalJNDI* parameter).  This parameter value can be a global one or one of the supported, standard scopes such as **java:comp/env/**
