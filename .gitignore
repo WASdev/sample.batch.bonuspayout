@@ -1,3 +1,6 @@
 /BonusPayout/build
-/BonusPayout/.settings
-/target
+.settings
+target
+derby.log
+.classpath
+.project

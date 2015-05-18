@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -12,14 +11,20 @@
     </parent>
 
     <properties>
-        <server.name>BonusPayout</server.name>
-        <install.dir>${project.build.directory}/liberty</install.dir>
+        <fs>${file.separator}</fs>
+        <serverName>BonusPayout</serverName>
+        <install.dir>/tmp/installdir</install.dir>
+        <wlp.install.dir>${install.dir}${fs}wlp</wlp.install.dir>
+        <server.config.dir>${wlp.install.dir}${fs}usr${fs}servers${fs}${serverName}</server.config.dir>
+        <shared.resource.dir>${wlp.install.dir}${fs}usr${fs}shared${fs}resources</shared.resource.dir>
+        <db.path>${shared.resource.dir}${fs}BatchDB</db.path>
     </properties>
 
     <groupId>com.ibm.websphere.samples.bonuspayout</groupId>
     <artifactId>Liberty</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
+    <!-- Use 'jar' to get SQL plugin to run -->
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -31,53 +36,162 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${shared.resource.dir}</targetPath>
+            </resource>
+        </resources>
         <plugins>
-          <plugin>
-            <groupId>net.wasdev.wlp.maven.plugins</groupId>
-            <artifactId>liberty-maven-plugin</artifactId> 
-            <version>1.0</version>
-            <executions>
-                <execution>
-                     <id>start-server</id>
-                     <phase>pre-integration-test</phase>
-                     <goals>
-                         <goal>start-server</goal>
-                     </goals>
-                    <configuration>
-                        <serverName>${server.name}</serverName>
-                        <assemblyArchive>BonusPayoutServer.jar</assemblyArchive>
-                        <assemblyInstallDirectory>${install.dir}</assemblyInstallDirectory>
-                    </configuration>              
-                </execution>
-                <execution>
-                    <id>deploy-app</id>
-                    <phase>pre-integration-test</phase>
-                    <goals>
-                        <goal>deploy</goal>
-                    </goals>
-                    <configuration>
-                        <appArtifact>
-                            <groupId>com.ibm.websphere.samples.bonuspayout</groupId>
-                            <artifactId>BonusPayout</artifactId>
-                            <type>war</type>
-                        </appArtifact>                        
-                        <installDirectory>${install.dir}/wlp</installDirectory>
-                        <serverName>${server.name}</serverName>
-                    </configuration>
-                </execution>
-                <execution>
-                     <id>stop-server</id>
-                     <phase>integration-test</phase>
-                     <goals>
-                         <goal>stop-server</goal>
-                     </goals>
-                    <configuration>
-                        <installDirectory>${install.dir}/wlp</installDirectory>
-                        <serverName>${server.name}</serverName>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-       </plugins>
-     </build>
+            <plugin>
+                <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>start-server</id>
+                        <!-- Different binding than some samples to allow for copying to new 
+                            dirs afterwards -->
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>start-server</goal>
+                        </goals>
+                        <configuration>
+                            <serverName>${serverName}</serverName>
+                            <serverHome>${wlp.install.dir}</serverHome>
+                        </configuration>
+                        <!-- This is how to unzip and start the pre-packaged server, left here 
+                            so I don't have to look it up for future reference -->
+                        <!-- 
+                             <configuration> 
+                                 <serverName>${serverName}</serverName> 
+                                 <assemblyArchive>BonusPayoutServer.jar</assemblyArchive> 
+                                 <assemblyInstallDirectory>${installDir}</assemblyInstallDirectory> 
+                             </configuration> 
+                         -->
+                    </execution>
+                    <execution>
+                        <id>deploy-app</id>
+                        <!-- Different binding than some samples to allow for copying to new 
+                            dirs afterwards -->
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                        <configuration>
+                            <appArtifact>
+                                <groupId>com.ibm.websphere.samples.bonuspayout</groupId>
+                                <artifactId>BonusPayout</artifactId>
+                                <type>war</type>
+                            </appArtifact>
+                            <installDirectory>${wlp.install.dir}</installDirectory>
+                            <serverName>${serverName}</serverName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-server</id>
+                        <!-- Different binding than some samples to allow for copying to new 
+                            dirs afterwards -->
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>stop-server</goal>
+                        </goals>
+                        <configuration>
+                            <installDirectory>${wlp.install.dir}</installDirectory>
+                            <serverName>${serverName}</serverName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- To prime the database with the BonusPayout application-level table. 
+                By calling it "application-level", we're referring to the fact that this 
+                is data written by the application, not by the runtime. Note the runtime 
+                tables may be created in the same database, as it is for this sample -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.derby</groupId>
+                        <artifactId>derby</artifactId>
+                        <version>10.10.1.1</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+                    <url>jdbc:derby:${db.path};create=true</url>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>drop-db-before-test-if-any</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>drop table BONUSPAYOUT.ACCOUNT</sqlCommand>
+                            <onError>continue</onError>
+                            <skip>${skipDropDB}</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-db</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/test/resources/bonusPayout.derby.ddl</srcFile>
+                            </srcFiles>
+                            <skip>${skipCreateDB}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.derby</groupId>
+                                    <artifactId>derby</artifactId>
+                                    <version>10.10.1.1</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${shared.resource.dir}/derby</outputDirectory>
+                                    <destFileName>derby.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
