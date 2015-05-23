@@ -43,9 +43,11 @@ public class ValidationCountAfterStepListener extends AbstractStepListener imple
     @Override
     public void afterStep() throws Exception {
 
-        // Make sure step hasn't already failed.
-        if (stepCtx.getBatchStatus() == BatchStatus.FAILED) {
-            logger.info("Don't bother parsing exit status since step has already failed");
+        BatchStatus stepBatchStatus = stepCtx.getBatchStatus();
+
+        // If step has already failed or is stopping, don't validate the exit status
+        if (stepBatchStatus == BatchStatus.FAILED || stepBatchStatus == BatchStatus.STOPPING) {
+            logger.info("Don't bother parsing exit status since step has batchStatus = " + stepBatchStatus.name());
             return;
         }
 

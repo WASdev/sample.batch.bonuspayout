@@ -27,6 +27,7 @@ import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.beans.AccountType;
 import com.ibm.websphere.samples.batch.beans.CheckingAccountType;
+import com.ibm.websphere.samples.batch.beans.PriorityAccount;
 import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
 
@@ -68,7 +69,7 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
      * Included for CDI version of sample.
      */
     @Inject
-    public void setAccountType(AccountType acctType) {
+    public void setAccountType(@PriorityAccount AccountType acctType) {
         this.acctType = acctType;
     }
 
@@ -81,6 +82,10 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
 
         writer = new BonusPayoutUtils(jobCtx).openCurrentInstanceStreamWriter();
 
+        String accountCode = acctType.getAccountCode();
+        
+        logger.info("In GenerateDataBatchlet, using account code = " + accountCode);
+        
         int numRecords = Integer.parseInt(numRecordsStr);
         for (int i = 0; i < numRecords; i++) {
 
@@ -93,7 +98,7 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
             line.append(new Random().nextInt(maxAccountValue)).append(',');
 
             // 3. Write account code
-            line.append(acctType.getAccountCode());
+            line.append(accountCode);
 
             writer.write(line.toString());
             writer.newLine();
