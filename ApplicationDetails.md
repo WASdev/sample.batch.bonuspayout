@@ -109,11 +109,9 @@ The ItemReader stores values into the transient user data both in*open()* as wel
 
 The sample shows that a CDI bean can be injected into a batch artifact.
 
-The ***GenerateDataBatchlet*** class contains a field ***AccountType acctType*** with a setter injection marked with the @PriorityAccount qualifier, defined within this sample (and note that ***PreferredAccountType*** is annotated with this qualifier).
+The ***GenerateDataBatchlet*** class contains a field ***AccountType acctType*** with a setter injection marked with the @PriorityAccount qualifier, defined within this sample (and note that ***PreferredAccountType*** is annotated with this qualifier). 
 
-    ```
     public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
-
     ...
 
     /*
@@ -128,34 +126,33 @@ The ***GenerateDataBatchlet*** class contains a field ***AccountType acctType***
     public void setAccountType(@PriorityAccount AccountType acctType) {
         this.acctType = acctType;
     }
-    ```
+
 
 Note that while the included server configuration uses:
 
-    ```
     <feature>cdi-1.2</feature>
-    ```
+
 
 This feature may be removed and the application will be restarted, after which it will continue to work.
 
 You can see this by doing:
 
-    1.  submit job with predefined server config (including cdi-1.2)
+1.  submit job with predefined server config (including cdi-1.2)
 
     ```
     ./wlp/bin/batchManager submit  ....
     ```
 
-    2. Look in messages.log (to see ***account code = PREF***) from ***PreferredAccountType***
+2. Look in messages.log (to see ***account code = PREF***) from ***PreferredAccountType***
 
     ```
     $ tail wlp/usr/servers/BonusPayout/logs/messages.log
     ...
     ...
     [5/23/15 18:45:46:633 EDT] 0000001e BonusPayout                                                  I In GenerateDataBatchlet, using account code = PREF
-    ```
-
-    3. Edit server.xml, comment out ***cdi-1.2*** feature, save, and wait for app to be restarted
+   ```
+    
+3. Edit server.xml, comment out ***cdi-1.2*** feature, save, and wait for app to be restarted
 
     ```
     $ tail wlp/usr/servers/BonusPayout/logs/messages.log
@@ -163,13 +160,13 @@ You can see this by doing:
     [5/23/15 22:20:46:306 EDT] 00000028 com.ibm.ws.app.manager.AppMessageHelper                      A CWWKZ0003I: The application BonusPayout-1.0 updated in 0.081 seconds.
     ```
 
-    4.  submit job again
+4.  submit job again
 
     ```
     ./wlp/bin/batchManager submit  ....
     ```
 
-    5. Look in messages.log again (to see ***account code = CHK***) from ***CheckingAccountType***
+5. Look in messages.log again (to see ***account code = CHK***) from ***CheckingAccountType***
 
     ```
     $ tail wlp/usr/servers/BonusPayout/logs/messages.log
@@ -177,7 +174,6 @@ You can see this by doing:
     ...
     [5/23/15 22:21:27:546 EDT] 00000033 BonusPayout                                                  I In GenerateDataBatchlet, using account code = CHK
     ```
-
 
 
 # Change History
@@ -195,4 +191,5 @@ You can see this by doing:
 * Renamed application DB table to BONUSPAYOUT.ACCOUNT
 * Changed default for *dsJNDI* String to use a **java:comp/env** lookup with resource reference (and removed *useGlobalJNDI* parameter).  This parameter value can be a global one or one of the supported, standard scopes such as **java:comp/env/**
 * Adjusted defaulting of *generateFileNameRoot* in **BonusPayoutUtils.java**
+
 
