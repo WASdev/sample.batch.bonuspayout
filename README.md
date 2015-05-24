@@ -1,19 +1,16 @@
 # sample.batch.bonuspayout
 
 This sample makes use of the ***batch-1.0*** and ***batchManagement-1.0*** features of the WebSphere Liberty Profile.
+It uses the *batchManager* command-line utility to conveniently wrapper the REST-based remote dispatch and management interface.
 
 It involves a three-step job, which generates some random data, performs a calculation on it (writing the result into the database), and then verifies the result.
-
-It uses the *batchManager* command-line utility to conveniently wrapper the REST-based remote dispatch and management interface.
 
 This document simply shows how to execute the sample, and the internal details of the application (including how to 
 modify, build, etc.) are described here: [ApplicationDetails.md](ApplicationDetails.md)
 
+## Install Option #1 
 
-## Install Option #1 - Extract prepackaged server with sample app
-
-
-These instructions assume you're running from the directory which holds your 'wlp' installation directory
+### Extract prepackaged server with sample app
 
 * Run the self-extracting sample archive (and accept all license agreements, etc.):
 
@@ -21,9 +18,12 @@ These instructions assume you're running from the directory which holds your 'wl
     $ java -jar <git repository home>/PrePackaged/BonusPayoutServer.jar    
     ```
 
-## Install Option #2 - Install with Maven to your WLP install location
+## Install Option #2 
+### Install with Maven to your WLP install location
 
 1. Install with Maven
+
+From the top-level directory, (the git repository home), run:
 
    ```
    mvn -Dinstall.dir=/usr/websphere clean install
@@ -31,8 +31,9 @@ These instructions assume you're running from the directory which holds your 'wl
 
 This will create a server at directory:   ***/usr/websphere/wlp/usr/servers/BonusPayout***
 
-
 ## Run the sample
+
+These instructions assume you're running from the directory which holds your 'wlp' installation directory
 
 2. Start the BonusPayout server:
 
@@ -41,6 +42,7 @@ This will create a server at directory:   ***/usr/websphere/wlp/usr/servers/Bonu
    ```
 
 3. Submit (start) job, and wait for it to run to completion
+
     ```
    $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=BonusPayoutJob --jobPropertiesFile=wlp/usr/shared/resources/runToCompletionParms.txt --wait --pollingInterval_s=2 
    [2015/05/23 12:49:17.041 -0400] CWWKY0101I: Job BonusPayoutJob with instance ID 31 has been submitted.

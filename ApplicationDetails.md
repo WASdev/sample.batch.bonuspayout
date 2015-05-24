@@ -2,12 +2,12 @@
 
 ## Level of included code
 
-This sample assumes the December 2014 beta driver level (both the main **runtime** and the **extended** JARs).  However instructions are
-only given using the server packaged with this sample, not using an existing Liberty installation of the December 2014 beta.
+This sample includes the May 2015 beta driver level (both the main **runtime** and the **extended** JARs).  In addition to using
+the beta driver embedded in the [pre-packaged server](PrePackaged/BonusPayoutServer.jar), you can also point the sample to your own WebSphere Liberty Profile insteallation.
 
 ## Application Overview
 
-The **BonusPayout** job is structured in 3 steps:   
+The [BonusPayoutJob.xml](BonusPayout/src/main/webapp/WEB-INF/classes/META-INF/batch-jobs/BonusPayoutJob.xml) is structured in 3 steps:   
 
 1. The first step, **generate**, is a batchlet step which generates some random values (representing account balances), and writes them into a text file in CSV format.
 
@@ -16,46 +16,48 @@ The **BonusPayout** job is structured in 3 steps:
 1. The third step, **validation**, is a chunk step which loops through the database table updated in step 2 as well as the text file generated in step 1 validating the calculation in the second step.
 For each record, in confirms that the value now read from the database table corresponds to the value in the generated text file, plus the bonus amount.  It also confirms that steps 1 and 2 have written the same number of records. 
 
+### SimpleBonusPayoutJob - A simplified sample
+
+We provide a simplified job definition [SimpleBonusPayoutJob.xml](BonusPayout/src/main/webapp/WEB-INF/classes/META-INF/batch-jobs/SimpleBonusPayoutJob.xml) which only includes the first two steps of the BonusPayoutJob.
+
+Though the third step, **validation**, of **BonusPayoutJob** provides a way to force a failure and demonstrate restart, and makes the job more interesting overall, it does make the sample signficantly more complicated.
+
+If you just want to see a simple example of a chunk step without as much application detail to filter through, the SimpleBonusPayoutJob may be a better place to start.
+
+Note there is no separate application for SimpleBonusPayoutJob, it's just another JSL within the same WAR file as BonusPayoutJob, which would be submitted via commands like:
+
+    ```
+    $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=SimpleBonusPayoutJob --jobPropertiesFile=wlp/usr/shared/resources/runToCompletionParms.txt --wait --pollingInterval_s=2 
+    ```
+
+
 ## Building and deploying the sample with Maven
 
-Both of the two options immediately following use the pre-packaged server archive at [Liberty/BonusPayoutServer.jar](Liberty/BonusPayoutServer.jar) to supply the Liberty installation binaries
-as well as the server config [server.xml](Liberty/src/test/resources/server.xml).
+There are two Maven modules:
 
-This does all of:
+### BonusPayout
 
-  1. Compile the Java classes and zip up the WAR package
-  1. Create a new Liberty server (from the packaged server)
-  1. Deploy the newly-built WAR to the new server
+This builds a WAR module, ***BonusPayout-1.0.war***, consisting of the batch Java artifacts, the job definition (XML), and other related application classes
 
-### Default server name and location
+### Liberty
+
+This creates a new server named ***BonusPayout*** in an existing Liberty installation, and deploys the ***BonusPayout-1.0.war*** module to the server. 
+
+It also performs some other application setup such as creating the application database tables and copying the Derby JDBC driver into place.
+
+The server configuration used is contained in [server.xml](Liberty/src/test/resources/server.xml).
+
+Create the server and deploy the WAR with command:
+
 ``` 
-    $ mvn clean install
+   $ mvn -Dinstall.dir=/usr/websphere clean install
 ```
 
-* Note this creates a server named **BonusPayout** with new Liberty installation directly under the Git repository at location:  **Liberty\target\liberty\wlp**
+## Application database tables
 
-### Specified server name and location
-``` 
-    $ mvn clean install -Dserver.name=MyBonusPayout -Dinstall.dir=/my/path/toinstallation.dir
-```
+The application table, **BONUSPAYOUT.ACCOUNT**, used in the 2nd and 3rd steps, is defined by the DDL in the 
+[Liberty/src/test/resources](Liberty/src/test/resources/) directory, e.g.  [bonusPayout.derby.ddl](Liberty/src/test/resources/bonusPayout.derby.ddl)
 
-* Note this creates a server named **MyBonusPayout** with new Liberty installation at location:  **/my/path/toinstallation.dir**
-
-### TODO 
-
-Not shown is how to create a new server and deploy starting from an existing Liberty installation (rather than one created from the packaged server)
-
-
-## Creating the database tables
-
-1. To create the runtime tables, see this link
-[Runtime DDL templates] (https://github.com/WASdev/sample.batch.templateddls)
-for the latest.  A local copy is included in this repository at
-[batch-derby.ddl](Liberty/src/test/resources/batch-derby.ddl)
-
-2. To create the application table, **BONUSPAYOUT.ACCOUNT** used in the 2nd and 3rd steps, use DDLs in the 
-[BonusPayout/src/main/webapp/resources] (BonusPayout/src/main/webapp/resources/) directory, e.g. 
-[bonusPayout.derby.ddl] (BonusPayout/src/main/webapp/resources/bonusPayout.derby.ddl) directory 
 
 ## Job Parameters - detailed look
 
@@ -103,8 +105,88 @@ ChunkListener, and we also use the transient user data to pass the ResultSet bac
 
 The ItemReader stores values into the transient user data both in*open()* as well as in each *checkpointInfo()* invocation.  The ChunkListener's *beforeChunk()*  executes the query, and sets the ResultSet into the transient user data.  The ItemReader's *readItem()* then iterates through this chunk's ResultSet.
 
+### CDI integration
+
+The sample shows that a CDI bean can be injected into a batch artifact.
+
+The ***GenerateDataBatchlet*** class contains a field ***AccountType acctType*** with a setter injection marked with the @PriorityAccount qualifier, defined within this sample (and note that ***PreferredAccountType*** is annotated with this qualifier).
+
+    ```
+    public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
+
+    ...
+
+    /*
+     * For CDI version of sample this will be injectable.
+     */
+    private AccountType acctType = new CheckingAccountType();
+
+    /*
+     * Included for CDI version of sample.
+     */
+    @Inject
+    public void setAccountType(@PriorityAccount AccountType acctType) {
+        this.acctType = acctType;
+    }
+    ```
+
+Note that while the included server configuration uses:
+
+    ```
+    <feature>cdi-1.2</feature>
+    ```
+
+This feature may be removed and the application will be restarted, after which it will continue to work.
+
+You can see this by doing:
+
+    1.  submit job with predefined server config (including cdi-1.2)
+
+    ```
+    ./wlp/bin/batchManager submit  ....
+    ```
+
+    2. Look in messages.log (to see ***account code = PREF***) from ***PreferredAccountType***
+
+    ```
+    $ tail wlp/usr/servers/BonusPayout/logs/messages.log
+    ...
+    ...
+    [5/23/15 18:45:46:633 EDT] 0000001e BonusPayout                                                  I In GenerateDataBatchlet, using account code = PREF
+    ```
+
+    3. Edit server.xml, comment out ***cdi-1.2*** feature, save, and wait for app to be restarted
+
+    ```
+    $ tail wlp/usr/servers/BonusPayout/logs/messages.log
+    ...
+    [5/23/15 22:20:46:306 EDT] 00000028 com.ibm.ws.app.manager.AppMessageHelper                      A CWWKZ0003I: The application BonusPayout-1.0 updated in 0.081 seconds.
+    ```
+
+    4.  submit job again
+
+    ```
+    ./wlp/bin/batchManager submit  ....
+    ```
+
+    5. Look in messages.log again (to see ***account code = CHK***) from ***CheckingAccountType***
+
+    ```
+    $ tail wlp/usr/servers/BonusPayout/logs/messages.log
+    ...
+    ...
+    [5/23/15 22:21:27:546 EDT] 00000033 BonusPayout                                                  I In GenerateDataBatchlet, using account code = CHK
+    ```
+
+
 
 # Change History
+
+## May 2015 beta
+
+* Refactored the Maven automation to point to an existing WLP installation rather than the one pre-packaged within the sample
+* Added the SimpleBonusPayoutJob
+* Provided CDI-enabled injection of AccountType into the GenerateDataBatchlet
 
 ## December 2014 beta
 
