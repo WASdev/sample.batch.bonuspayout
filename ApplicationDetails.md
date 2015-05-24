@@ -149,7 +149,7 @@ You can see this by doing:
     $ tail wlp/usr/servers/BonusPayout/logs/messages.log
     ...
     ...
-    [5/23/15 18:45:46:633 EDT] 0000001e BonusPayout                                                  I In GenerateDataBatchlet, using account code = PREF
+    [5/23/15 18:45:46:633 EDT] 0000001e BonusPayout   I In GenerateDataBatchlet, using account code = PREF
    ```
     
 3. Edit server.xml, comment out ***cdi-1.2*** feature, save, and wait for app to be restarted
@@ -157,7 +157,7 @@ You can see this by doing:
     ```
     $ tail wlp/usr/servers/BonusPayout/logs/messages.log
     ...
-    [5/23/15 22:20:46:306 EDT] 00000028 com.ibm.ws.app.manager.AppMessageHelper                      A CWWKZ0003I: The application BonusPayout-1.0 updated in 0.081 seconds.
+    [5/23/15 22:20:46:306 EDT] 00000028 com.ibm.ws.app.manager.AppMessageHelper    A CWWKZ0003I: The application BonusPayout-1.0 updated in 0.081 seconds.
     ```
 
 4.  submit job again
@@ -172,7 +172,7 @@ You can see this by doing:
     $ tail wlp/usr/servers/BonusPayout/logs/messages.log
     ...
     ...
-    [5/23/15 22:21:27:546 EDT] 00000033 BonusPayout                                                  I In GenerateDataBatchlet, using account code = CHK
+    [5/23/15 22:21:27:546 EDT] 00000033 BonusPayout   I In GenerateDataBatchlet, using account code = CHK
     ```
 
 
