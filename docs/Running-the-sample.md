@@ -28,7 +28,7 @@ $ tail -f ${WLP_USER_DIR}/servers/BonusPayout/logs/console.log
 3. Submit (start) job, and wait for it to run to completion
 
     ```
-   $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=BonusPayoutJob --jobPropertiesFile=wlp/usr/shared/resources/runToCompletionParms.txt --wait --pollingInterval_s=2 
+   $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=BonusPayoutJob --jobPropertiesFile=$WLP_USER_DIR/shared/resources/runToCompletionParms.txt --wait --pollingInterval_s=2 
    [2015/05/23 12:49:17.041 -0400] CWWKY0101I: Job BonusPayoutJob with instance ID 31 has been submitted.
    [2015/05/23 12:49:17.042 -0400] CWWKY0106I: JobInstance:{"jobName":"BonusPayoutJob","instanceId":31,"appName":"BonusPayout-1.0#BonusPayout-1.0.war","submitter":"bob","batchStatus":"STARTING","jobXMLName":"BonusPayoutJob","instanceState":"SUBMITTED"}
    [2015/05/23 12:49:19.159 -0400] CWWKY0105I: Job BonusPayoutJob with instance ID 31 has finished. Batch status: COMPLETED. Exit status: COMPLETED
@@ -41,7 +41,7 @@ $ tail -f ${WLP_USER_DIR}/servers/BonusPayout/logs/console.log
 1. Submit job using "force failure" parameters, (notice it ends with **FAILED** status).
 
    ```
-   $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=BonusPayoutJob --jobPropertiesFile=wlp/usr/shared/resources/forceFailureParms.txt --wait --pollingInterval_s=2 
+   $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=BonusPayoutJob --jobPropertiesFile=$WLP_USER_DIR/shared/resources/forceFailureParms.txt --wait --pollingInterval_s=2 
    [2015/05/23 13:13:25.650 -0400] CWWKY0101I: Job BonusPayoutJob with instance ID 33 has been submitted.
    [2015/05/23 13:13:25.652 -0400] CWWKY0106I: JobInstance:{"jobName":"BonusPayoutJob","instanceId":33,"appName":"BonusPayout-1.0#BonusPayout-1.0.war","submitter":"bob","batchStatus":"STARTING","jobXMLName":"BonusPayoutJob","instanceState":"SUBMITTED"}
    [2015/05/23 13:13:27.715 -0400] CWWKY0105I: Job BonusPayoutJob with instance ID 33 has finished. Batch status: FAILED. Exit status: FAILED
@@ -51,7 +51,7 @@ $ tail -f ${WLP_USER_DIR}/servers/BonusPayout/logs/console.log
 2. Restart job, this time it will run to **COMPLETED** status.
 
    ```
-   $ ./wlp/bin/batchManager restart --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --jobInstanceId=33 --jobPropertiesFile=wlp/usr/shared/resources/forceFailureParms.txt --wait --pollingInterval_s=2 
+   $ ./wlp/bin/batchManager restart --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --jobInstanceId=33 --jobPropertiesFile=$WLP_USER_DIR/shared/resources/forceFailureParms.txt --wait --pollingInterval_s=2 
    [2015/05/23 13:13:38.283 -0400] CWWKY0102I: A restart request has been submitted for job BonusPayoutJob with instance ID 33.
    [2015/05/23 13:13:38.285 -0400] CWWKY0106I: JobInstance:{"jobName":"BonusPayoutJob","instanceId":33,"appName":"BonusPayout-1.0#BonusPayout-1.0.war","submitter":"bob","batchStatus":"FAILED","jobXMLName":"BonusPayoutJob","instanceState":"FAILED"}
    [2015/05/23 13:13:40.352 -0400] CWWKY0105I: Job BonusPayoutJob with instance ID 33 has finished. Batch status: COMPLETED. Exit status: COMPLETED
@@ -63,7 +63,7 @@ $ tail -f ${WLP_USER_DIR}/servers/BonusPayout/logs/console.log
 1. Submit job without wait (use 'lotsOfRecords.txt' parameters file with 50K records)
 
    ```
-   $ ./wlp/bin/batchManager submit --batchManager=localhost:9443   --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=BonusPayoutJob --jobPropertiesFile=wlp/usr/shared/resources/lotsOfRecords.txt
+   $ ./wlp/bin/batchManager submit --batchManager=localhost:9443   --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=BonusPayoutJob --jobPropertiesFile=$WLP_USER_DIR/shared/resources/lotsOfRecords.txt
    [2015/05/23 13:18:29.237 -0400] CWWKY0101I: Job BonusPayoutJob with instance ID 35 has been submitted.
    [2015/05/23 13:18:29.239 -0400] CWWKY0106I: JobInstance:{"jobName":"BonusPayoutJob","instanceId":35,"appName":"BonusPayout-1.0#BonusPayout-1.0.war","submitter":"bob","batchStatus":"STARTING","jobXMLName":"BonusPayoutJob","instanceState":"SUBMITTED"}
    ```

@@ -19,13 +19,13 @@ If you just want to see a simple example of a chunk step without as much applica
 Note there is no separate application for SimpleBonusPayoutJob, it's just another JSL within the same WAR file as BonusPayoutJob, which would be submitted via commands like:
 
     ```
-    $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=SimpleBonusPayoutJob --jobPropertiesFile=wlp/usr/shared/resources/runToCompletionParms.txt --wait --pollingInterval_s=2 
+    $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=SimpleBonusPayoutJob --jobPropertiesFile=$WLP_USER_DIR/shared/resources/runToCompletionParms.txt --wait --pollingInterval_s=2 
     ```
 
 ## Application database tables
 
 The application table, **BONUSPAYOUT.ACCOUNT**, used in the 2nd and 3rd steps, is defined by the DDL in the 
-[Liberty/src/test/resources](Liberty/src/test/resources/) directory, e.g.  [bonusPayout.derby.ddl](Liberty/src/test/resources/bonusPayout.derby.ddl)
+[batch-bonuspayout-wlpcfg/shared/resources/ddls](batch-bonuspayout-wlpcfg/shared/resources/ddls) directory, e.g.  [BonusPayout.derby.ddl](batch-bonuspayout-wlpcfg/shared/resources/ddls/BonusPayout.derby.ddl)
 
 
 ## Job Parameters - detailed look
@@ -104,7 +104,7 @@ Note that while the included server configuration uses:
 
 This feature may be removed and the application will be restarted, after which it will continue to work.
 
-You can see this by doing:
+You can see this by doing (from the directory that contains your 'wlp' install directory)
 
 1.  submit job with predefined server config (including cdi-1.2)
 
@@ -115,7 +115,7 @@ You can see this by doing:
 2. Look in messages.log (to see ***account code = PREF***) from ***PreferredAccountType***
 
     ```
-    $ tail wlp/usr/servers/BonusPayout/logs/messages.log
+    $ tail $WLP_USER_DIR/servers/BonusPayout/logs/messages.log
     ...
     ...
     [5/23/15 18:45:46:633 EDT] 0000001e BonusPayout   I In GenerateDataBatchlet, using account code = PREF
@@ -124,7 +124,7 @@ You can see this by doing:
 3. Edit server.xml, comment out ***cdi-1.2*** feature, save, and wait for app to be restarted
 
     ```
-    $ tail wlp/usr/servers/BonusPayout/logs/messages.log
+    $ tail $WLP_USER_DIR/servers/BonusPayout/logs/messages.log
     ...
     [5/23/15 22:20:46:306 EDT] 00000028 com.ibm.ws.app.manager.AppMessageHelper    A CWWKZ0003I: The application BonusPayout-1.0 updated in 0.081 seconds.
     ```
@@ -138,7 +138,7 @@ You can see this by doing:
 5. Look in messages.log again (to see ***account code = CHK***) from ***CheckingAccountType***
 
     ```
-    $ tail wlp/usr/servers/BonusPayout/logs/messages.log
+    $ tail $WLP_USER_DIR/servers/BonusPayout/logs/messages.log
     ...
     ...
     [5/23/15 22:21:27:546 EDT] 00000033 BonusPayout   I In GenerateDataBatchlet, using account code = CHK
@@ -146,6 +146,12 @@ You can see this by doing:
 
 
 # Change History
+
+## August 2015, (for 8.5.5.6 GA)
+
+* Restructured project to match [https://github.com/WASdev/sample.async.websocket
+* Abandoned the pre-packaged server 
+
 
 ## May 2015 beta
 

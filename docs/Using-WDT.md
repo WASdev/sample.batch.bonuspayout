@@ -21,19 +21,19 @@ If the sample git repository hasn't been cloned yet, WDT has git tools integrate
 2.  Copy Git repo url by finding the textbox under "HTTPS clone URL" at the top of this page, and select *Copy to clipboard*
 3.  In the Git repositories view, select the hyperlink `Clone a Git repository`
 4.  The git repo url should already be filled in.  Select *Next -> Next -> Finish*
-5.  The "sample.async.websockets [master]" repo should appear in the view
+5.  The "sample.batch.bonuspayout [master]" repo should appear in the view
 
 ### Import Gradle projects into WDT
 
 This assumes you have the Gradle IDE tools installed into Eclipse.
 
-1. In the Git Repository view, expand the websocket repo to see the "Working Directory" folder
+1. In the Git Repository view, expand the bonuspayout repo to see the "Working Directory" folder
 2.  Right-click on this folder, and select *Copy path to Clipboard*
 3.  Select menu *File -> Import -> Gradle -> Gradle Project*
 4.  In the Root folder textbox, Paste in the repository directory.
 5. Click *Build Model* 
 6. Select all the projects (there should be three) and click *Finish*
-7.  This will create 3 projects in Eclipse: async-websocket, async-websocket-application, and async-websocket-wlpcfg
+7.  This will create 3 projects in Eclipse: batch-bonuspayout, batch-bonuspayout-application, and batch-bonuspayout-wlpcfg
 
 :star: *Note:* If you did not use Eclipse/WDT to clone the git repository, follow from step 3, but navigate to the cloned repository directory rather than pasting its name in step 4.
 
@@ -45,13 +45,13 @@ This assumes you have the Gradle IDE tools installed into Eclipse.
 3.  Select menu *File -> Import -> Maven -> Existing Maven Projects*
 4.  In the Root Directory textbox, Paste in the repository directory.
 5.  Select *Browse...* button and select *Finish* (confirm it finds 3 pom.xml files)
-6.  This will create 3 projects in Eclipse: async-websocket, async-websocket-application, and async-websocket-wlpcfg
+6.  This will create 3 projects in Eclipse: batch-bonuspayout, batch-bonuspayout-application, and batch-bonuspayout-wlpcfg
 
 :star: *Note:* If you did not use Eclipse/WDT to clone the git repository, follow from step 3, but navigate to the cloned repository directory rather than pasting its name in step 4.
 
 ### Create a Runtime Environment and a Liberty Server
 
-For the purposes of this sample, we will create the Liberty server (step 3 in the wasdev.net instructions) a little differently to create and customize a Runtime Environment that will allow the server to directly use the configuraiton in the `async-websocket-wlp` project.
+For the purposes of this sample, we will create the Liberty server (step 3 in the wasdev.net instructions) a little differently to create and customize a Runtime Environment that will allow the server to directly use the configuraiton in the `batch-bonuspayout-wlpcfg` project.
 
 #### Create a Runtime Environment in Eclipse
 
@@ -69,21 +69,20 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
 
 1. Right-click on the Runtime Environment created above in the 'Runtime Explorer' view, and select *Edit*
 2. Click the `Advanced Options...` link
-3. If the `async-websocket-wlpcfg` directory is not listed as a User Directory, we need to add it:
+3. If the `batch-bonuspayout-wlpcfg` directory is not listed as a User Directory, we need to add it:
     1. Click New
-    2. Select the `async-websocket-wlpcfg` project
+    2. Select the `batch-bonuspayout-wlpcfg` project
     3. Select *Finish*, *OK*, *Finish*
-4. Right-click on the `async-websocket-wlpcfg` user directory listed under the target Runtime Environment in the Runtime Explorer view, and select *New Server*.
-5. The resulting dialog should be pre-populated with the `websocketSample` Liberty profile server.
+4. Right-click on the `batch-bonuspayout-wlpcfg` user directory listed under the target Runtime Environment in the Runtime Explorer view, and select *New Server*.
+5. The resulting dialog should be pre-populated with the `BonusPayout` Liberty profile server.
    The default name for this server can vary, you might also opt to rename it from the Right-click menu in the Servers view to make it easier to identify.
 6. Click *Finish*
 
 #### Running Liberty and the sample application from WDT
 
-1.  Select the `async-websocket-application` project
-2.  Right-click -> *Run As... -> Run On Server*
+1.  Select the `batch-bonuspayout-application` project
+2.  Right-click -> ***TODO*** 
 3.  Select the appropriate server (as created above) and select *Finish*
-4.  Confirm web browser opens on "http://localhost:9082/websocket/" with 5 hyperlinks to run samples
 
 :star: *Note:* Some versions of WDT incorrectly map the cdi-1.2 dependency to the CDI 1.0 Facet, which prevents the *Run As ...* operation in step 2 from succeeding. If this happens, Right-click on the `async-jaxrs-application` project, and select *Properties*, then select *Project Facets* in the left-hand pane. Change the the "Context and dependency injection (CDI)" facet to use version 1.2, at which point, step 2 (above) should work. 
 
