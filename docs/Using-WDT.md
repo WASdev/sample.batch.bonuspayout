@@ -1,3 +1,8 @@
+## WARNING: NOT WORKING YET FOR this sample
+
+These instructions are common with other WebSphere samples on WASdev.   They are not yet complete for this particular sample, however.
+Though they provide some value in sketching out how one might ultimately bring this sample into WDT, this does not contain a complete sequence of working steps, so be forewarned !
+
 ## Eclipse / WDT
 
 The WebSphere Development Tools (WDT) for Eclipse can be used to control the server (start/stop/dump/etc.), it also supports incremental publishing with minimal restarts, working with a debugger to step through your applications, etc.
@@ -23,7 +28,7 @@ If the sample git repository hasn't been cloned yet, WDT has git tools integrate
 4.  The git repo url should already be filled in.  Select *Next -> Next -> Finish*
 5.  The "sample.batch.bonuspayout [master]" repo should appear in the view
 
-### Import Gradle projects into WDT
+### Import Gradle projects into WDT (!!! IGNORE:  NOT YET WORKING!!!!)
 
 This assumes you have the Gradle IDE tools installed into Eclipse.
 
@@ -40,7 +45,7 @@ This assumes you have the Gradle IDE tools installed into Eclipse.
 
 ### Import Maven projects into WDT
 
-1.  In the Git Repository view, expand the websocket repo to see the "Working Directory" folder
+1.  In the Git Repository view, expand the bonuspayout repo to see the "Working Directory" folder
 2.  Right-click on this folder, and select *Copy path to Clipboard*
 3.  Select menu *File -> Import -> Maven -> Existing Maven Projects*
 4.  In the Root Directory textbox, Paste in the repository directory.
@@ -51,7 +56,7 @@ This assumes you have the Gradle IDE tools installed into Eclipse.
 
 ### Create a Runtime Environment and a Liberty Server
 
-For the purposes of this sample, we will create the Liberty server (step 3 in the wasdev.net instructions) a little differently to create and customize a Runtime Environment that will allow the server to directly use the configuraiton in the `batch-bonuspayout-wlpcfg` project.
+For the purposes of this sample, we will create the Liberty server (step 3 in the wasdev.net instructions) a little differently to create and customize a Runtime Environment that will allow the server to directly use the configuration in the `batch-bonuspayout-wlpcfg` project.
 
 #### Create a Runtime Environment in Eclipse
 
