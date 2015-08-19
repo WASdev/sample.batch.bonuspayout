@@ -11,10 +11,13 @@ Browse the code to see what it does, or build and run it yourself:
 * [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
 * [Run the sample using the command line, or Maven/Gradle plugins](/docs/Running-the-sample.md)
 * [Using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
-* [Take a deeper look at the sample application](ApplicationDetails.md)
+* [Take a deeper look at the sample application](/docs/ApplicationDetails.md)
 * TODO - Add Gradle build instructions
 
 ## Further reading
+
+* [A nice set of documents](https://www.ibm.com/support/techdocs/atsmastr.nsf/WebIndex/WP102544) describing Java Batch in WebSphere at various levels of detail (WP102544)
+* [The sleepy batchlet sample](https://github.com/WASdev/sample.batch.sleepybatchlet), a simpler sample using just the ***batch-1.0*** feature and thus just the Java Batch 1.0 API, without the managed batch features.
 
 ## Notice
 
