@@ -59,7 +59,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>servers/BonusPayout/dropins</outputDirectory>
+                            <outputDirectory>servers/BonusPayout/apps</outputDirectory>
                             <silent>true</silent>
                             <stripVersion>true</stripVersion>
                             <artifactItems>

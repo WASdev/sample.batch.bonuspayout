@@ -1,12 +1,5 @@
 # Bonus Payout in detail
 
-## Level of included code
-
-This sample includes the May 2015 beta driver level (both the main **runtime** and the **extended** JARs).  In addition to using
-the beta driver embedded in the [pre-packaged server](PrePackaged/BonusPayoutServer.jar), you can also point the sample to your own WebSphere Liberty Profile insteallation.
-
-## Application Overview
-
 The [BonusPayoutJob.xml](BonusPayout/src/main/webapp/WEB-INF/classes/META-INF/batch-jobs/BonusPayoutJob.xml) is structured in 3 steps:   
 
 1. The first step, **generate**, is a batchlet step which generates some random values (representing account balances), and writes them into a text file in CSV format.
@@ -15,8 +8,7 @@ The [BonusPayoutJob.xml](BonusPayout/src/main/webapp/WEB-INF/classes/META-INF/ba
 
 1. The third step, **validation**, is a chunk step which loops through the database table updated in step 2 as well as the text file generated in step 1 validating the calculation in the second step.
 For each record, in confirms that the value now read from the database table corresponds to the value in the generated text file, plus the bonus amount.  It also confirms that steps 1 and 2 have written the same number of records. 
-
-### SimpleBonusPayoutJob - A simplified sample
+## SimpleBonusPayoutJob - A simplified sample
 
 We provide a simplified job definition [SimpleBonusPayoutJob.xml](BonusPayout/src/main/webapp/WEB-INF/classes/META-INF/batch-jobs/SimpleBonusPayoutJob.xml) which only includes the first two steps of the BonusPayoutJob.
 
@@ -29,29 +21,6 @@ Note there is no separate application for SimpleBonusPayoutJob, it's just anothe
     ```
     $ ./wlp/bin/batchManager submit --batchManager=localhost:9443 --trustSslCertificates --user=bob --password=bobpwd --applicationName=BonusPayout-1.0 --jobXMLName=SimpleBonusPayoutJob --jobPropertiesFile=wlp/usr/shared/resources/runToCompletionParms.txt --wait --pollingInterval_s=2 
     ```
-
-
-## Building and deploying the sample with Maven
-
-There are two Maven modules:
-
-### BonusPayout
-
-This builds a WAR module, ***BonusPayout-1.0.war***, consisting of the batch Java artifacts, the job definition (XML), and other related application classes
-
-### Liberty
-
-This creates a new server named ***BonusPayout*** in an existing Liberty installation, and deploys the ***BonusPayout-1.0.war*** module to the server. 
-
-It also performs some other application setup such as creating the application database tables and copying the Derby JDBC driver into place.
-
-The server configuration used is contained in [server.xml](Liberty/src/test/resources/server.xml).
-
-Create the server and deploy the WAR with command:
-
-``` 
-   $ mvn -Dinstall.dir=/usr/websphere clean install
-```
 
 ## Application database tables
 

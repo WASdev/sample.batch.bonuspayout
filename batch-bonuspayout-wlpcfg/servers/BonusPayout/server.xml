@@ -3,8 +3,9 @@
     <!-- Enable features -->
     <featureManager>
         <feature>batchManagement-1.0</feature>
-        <feature>cdi-1.2</feature>
         <feature>localConnector-1.0</feature>
+        <!-- This sample can work with or without CDI configured -->
+        <feature>cdi-1.2</feature>
     </featureManager>
 
     <!-- To access this server from a remote client add a host attribute to
@@ -39,4 +40,6 @@
         <user>bob</user>
     </administrator-role> 
 
+    <webApplication location="BonusPayout-1.0.war"/>
+    
 </server>
