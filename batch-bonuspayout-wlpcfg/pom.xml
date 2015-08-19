@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>net.wasdev.wlp.sample</groupId>
+        <artifactId>batch-bonuspayout</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    
+    <artifactId>batch-bonuspayout-wlpcfg</artifactId>
+    <!-- Use 'jar' to get SQL plugin to run -->
+    <packaging>jar</packaging>
+    <name>WAS Liberty Sample - Batch BonusPayout Server Configuration and Database Table Creation</name>
+    <url>https://wasdev.github.io</url>
+
+    <properties>
+        <fs>${file.separator}</fs>
+        <shared.resource.dir>${basedir}${fs}shared${fs}resources</shared.resource.dir>
+        <ddl.dir>${shared.resource.dir}${fs}ddls</ddl.dir>
+        <db.url>${shared.resource.dir}${fs}BatchDB</db.url>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+                <configuration>
+                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                    <filesets>
+                        <fileset>
+                            <directory>target</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>servers</directory>
+                            <followSymlinks>false</followSymlinks>
+                            <includes>
+                                <include>**/logs/*</include>
+                                <include>**/dropins/*</include>
+                                <include>**/workarea/*</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>servers/BonusPayout/dropins</outputDirectory>
+                            <silent>true</silent>
+                            <stripVersion>true</stripVersion>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>net.wasdev.wlp.sample</groupId>
+                                    <artifactId>batch-bonuspayout-application</artifactId>
+                                    <version>1.0-SNAPSHOT</version>
+                                    <type>war</type>
+                                    <!-- Use "legacy" name to preserve continuity with earlier doc and command history -->
+                                    <destFileName>BonusPayout-1.0.war</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-process-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.derby</groupId>
+                                    <artifactId>derby</artifactId>
+                                    <version>10.10.1.1</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${shared.resource.dir}/derby</outputDirectory>
+                                    <destFileName>derby.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Used to create and prime the database with the BonusPayout application-level table. 
+                By calling it "application-level", we're referring to the fact that this 
+                is data written by the application, not by the runtime. Note the runtime 
+                tables may be created in the same database, as we do in this sample execution. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.derby</groupId>
+                        <artifactId>derby</artifactId>
+                        <version>10.10.1.1</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+                    <url>jdbc:derby:${db.url};create=true</url>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>drop-db-before-test-if-any</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>drop table BONUSPAYOUT.ACCOUNT</sqlCommand>
+                            <onError>continue</onError>
+                            <skip>${skipDropDB}</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-db</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>${ddl.dir}${fs}BonusPayout.derby.ddl</srcFile>
+                            </srcFiles>
+                            <skip>${skipCreateDB}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.derby</groupId>
+                                    <artifactId>derby</artifactId>
+                                    <version>10.10.1.1</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${shared.resource.dir}/derby</outputDirectory>
+                                    <destFileName>derby.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+-->
+        </plugins>
+    </build>
+</project>
