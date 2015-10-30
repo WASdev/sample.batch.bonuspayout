@@ -41,7 +41,7 @@
     <administrator-role>
         <user>bob</user>
     </administrator-role>
-    
-    <webApplication id="batch-bonuspayout-application" location="BonusPayout-1.0.war" name="batch-bonuspayout-application"/>
 
+
+    <webApplication id="batch-bonuspayout-application" location="batch-bonuspayout-application.war" name="batch-bonuspayout-application"/>
 </server>

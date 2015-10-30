@@ -31,8 +31,8 @@
     </scm>
 
     <modules>
-        <module>batch-bonuspayout-application</module>
         <module>batch-bonuspayout-wlpcfg</module>
+        <module>batch-bonuspayout-application</module>
     </modules>
 
 </project>

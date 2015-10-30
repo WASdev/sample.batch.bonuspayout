@@ -71,7 +71,9 @@
                                     <version>1.0-SNAPSHOT</version>
                                     <type>war</type>
                                     <!-- Use "legacy" name to preserve continuity with earlier doc and command history -->
+                                    <!--
                                     <destFileName>BonusPayout-1.0.war</destFileName>
+-->
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
