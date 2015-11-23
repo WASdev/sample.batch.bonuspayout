@@ -1,9 +1,9 @@
 # Common ignore entries from other samples
-/.settings/
-/target/
+**/.settings/
+**/target/
 .*.swp
-/.project
-/.settings/
+**/.project
+**/.classpath
 .DS_Store
 /build/
 /.gradle/

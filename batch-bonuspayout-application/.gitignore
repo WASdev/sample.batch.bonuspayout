@@ -5,5 +5,8 @@
 /.apt_generated/
 /target
 /build/
-/bin/
+
+# At the moment the contents generated here by WDT are uninteresting, but uncomment if you add something here.
+/WebContent/
+
 

@@ -1,7 +1,5 @@
 # Common ignore entries from other samples
-/.settings/
 /target/
-/.project
 .*.swp
 /build/
 /servers/.classCache
