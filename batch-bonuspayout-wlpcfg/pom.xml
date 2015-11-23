@@ -39,9 +39,10 @@
                             <directory>servers</directory>
                             <followSymlinks>false</followSymlinks>
                             <includes>
-                                <include>**/logs/*</include>
-                                <include>**/dropins/*</include>
-                                <include>**/workarea/*</include>
+                                <include>**/logs/**</include>
+                                <include>**/apps/**</include>
+                                <include>**/dropins/**</include>
+                                <include>**/workarea/**</include>
                             </includes>
                         </fileset>
                     </filesets>
@@ -52,28 +53,6 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.6</version>
                 <executions>
-                    <execution>
-                        <id>copy-package</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>servers/BonusPayout/apps</outputDirectory>
-                            <silent>true</silent>
-                            <stripVersion>true</stripVersion>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>net.wasdev.wlp.sample</groupId>
-                                    <artifactId>batch-bonuspayout-application</artifactId>
-                                    <version>1.0-SNAPSHOT</version>
-                                    <type>war</type>
-                                    <!-- Use "legacy" name to preserve continuity with earlier doc and command history -->
-                                    <destFileName>BonusPayout-1.0.war</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
                     <execution>
                         <id>copy-process-resources</id>
                         <phase>process-resources</phase>
@@ -145,35 +124,35 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.derby</groupId>
-                                    <artifactId>derby</artifactId>
-                                    <version>10.10.1.1</version>
-                                    <type>jar</type>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>${shared.resource.dir}/derby</outputDirectory>
-                                    <destFileName>derby.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
--->
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.codehaus.mojo</groupId>
+                                        <artifactId>sql-maven-plugin</artifactId>
+                                        <versionRange>[1.5,)</versionRange>
+                                        <goals>
+                                            <goal>execute</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>
