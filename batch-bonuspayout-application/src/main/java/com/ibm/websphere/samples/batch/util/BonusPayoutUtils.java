@@ -51,7 +51,7 @@ public class BonusPayoutUtils implements BonusPayoutConstants {
 
         String generateFileNameRoot = jobCtx.getProperties().getProperty(GENERATE_FILE_NAME_ROOT_PROPNAME);
 
-        if (generateFileNameRoot == null) {
+        if (generateFileNameRoot == null || generateFileNameRoot.length() == 0) {
             String tmpDir = System.getProperty("java.io.tmpdir", "/tmp");
             return tmpDir + java.io.File.separator + DFLT_GEN_FILE_PREFIX;
         } else {
