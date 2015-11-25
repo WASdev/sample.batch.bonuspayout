@@ -71,17 +71,29 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
     1. Click New
     2. Select the `batch-bonuspayout-wlpcfg` project
     3. Select *Finish*, *OK*, *Finish*
+<<<<<<< HEAD
 4. Right-click on the `batch-bonuspayout-wlpcfg` user directory listed under the target Runtime Environment in the Runtime Explorer view, and select *New->Server* (not *New->Liberty Server* which you might have expected).
+=======
+4. Right-click on the `batch-bonuspayout-wlpcfg` user directory listed under the target Runtime Environment in the Runtime Explorer view, and select *New->Server* (not **New->Liberty Server** which you might have expected).
+>>>>>>> 4bfc3defd69a5b28a5d6bf700cb7695a184e02dd
 5. The resulting dialog should be pre-populated with the `BonusPayout` Liberty profile server.
    The default name for this server can vary, you might also opt to rename it from the Right-click menu in the Servers view to make it easier to identify.
 6. Click *Finish*
 
 #### Publish the application to the new server.  
+<<<<<<< HEAD
 
 1. From the ***Servers*** view, right-click the newly-created server and select *Add and Remove*.
 2. Select **batch-bonuspayout-application** from the left-hand pane ("Available") and click "Add" so that it ends up on the right-hand pane ("Configured").   Click "Finish".
 3. Start the server by right-clicking in the ***Servers*** view and selecting ***Start***. Ignore any warnings or error messages that "Problem Occurred" or "Publishing failed".
 
+=======
+
+1. From the ***Servers*** view, right-click the newly-created server and select ***Add and Remove***.  
+2. Select **batch-bonuspayout-application** from the left-hand pane ("Available") and click "Add" so that it ends up on the right-hand pane ("Configured").   Click "Finish".
+3. Start the server by right-clicking in the ***Servers*** view and selecting ***Start***. Ignore any warnings or error messages that "Problem Occurred" or "Publishing failed".
+
+>>>>>>> 4bfc3defd69a5b28a5d6bf700cb7695a184e02dd
 #### Running Liberty and the sample application from WDT
 
 1.  Select the `batch-bonuspayout-application` project
