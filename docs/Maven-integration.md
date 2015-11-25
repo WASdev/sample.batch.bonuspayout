@@ -82,6 +82,3 @@ Clear server logs and workarea, reuse app tables
 
 [wdt]: docs/Using-WDT.md
 
-
-## scratch
- **batch-bonuspayout-application/target/wlp**, creating new application tables, run tests
