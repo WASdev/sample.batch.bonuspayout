@@ -21,57 +21,57 @@ The [Liberty maven plugin][liberty-maven-plugin] is used to install Liberty, add
 Run everything:  Create a new Liberty install in default location, create new application tables, run tests
 
 ```bash
-[sample.batch.bonuspayout]$ mvn clean install
+$ mvn clean install
 ```
 
 Reuse Liberty install in default location, create new application tables, run tests
 
 ```bash
-[sample.batch.bonuspayout]$ mvn    # Same thing as 'mvn install'
+$ mvn    # Same thing as 'mvn install'
 ```
 
 ### From batch-bonuspayout-application
 
 Create a new Liberty install in default location, run tests
 ```bash
-[batch-bonuspayout-application]$ mvn clean install
+$ mvn clean install
 ```
 
 Reuse Liberty install in default location, run tests
 ```bash
-[batch-bonuspayout-application]$ mvn install
+$ mvn install
 ```
 
 Install needed features in existing Liberty install, run tests
 ```bash
-[batch-bonuspayout-application]$ mvn install -Dwlp.install.dir=/my/path/to/wlp
+$ mvn install -Dwlp.install.dir=/my/path/to/wlp
 ```
 
 Just build and package WAR, but skip all the server-related install and testing
 ```bash
-[batch-bonuspayout-application]$ mvn install -DskipTests
+$ mvn install -DskipTests
 ```
 
 Just start the server, using pre-existing Liberty install
 ```bash
-[batch-bonuspayout-application]$ mvn liberty:start-server -Dwlp.install.dir=/my/path/to/wlp
+$ mvn liberty:start-server -Dwlp.install.dir=/my/path/to/wlp
 ```
 
 Just stop the server, using default Liberty install
 ```bash
-[batch-bonuspayout-application]$ mvn liberty:stop-server
+$ mvn liberty:stop-server
 
 Just run the integration tests, using pre-existing Liberty install
 ```bash
-[batch-bonuspayout-application]$ mvn failsafe:integration-test -Dwlp.install.dir=/my/path/to/wlp
+$ mvn failsafe:integration-test -Dwlp.install.dir=/my/path/to/wlp
 ```
 
-#### Other configuration
+#### Other configuration (running from batch-bonuspayout-application)
 
 The sample relies on these two properties which can be overridden on the command line:
 
 ```bash
-[batch-bonuspayout-application]$ mvn -DserverHost=my.domain.com -DhttpsPort=9444 
+$ mvn -DserverHost=my.domain.com -DhttpsPort=9444 
 ```
 (Defaults: ***serverHost*** => **localhost**, ***httpsPort*** => **9443**)
 
@@ -80,13 +80,13 @@ The sample relies on these two properties which can be overridden on the command
 Clear server logs, workarea, create new application tables
 
 ```bash
-[batch-bonuspayout-wlpcfg]$ mvn clean install
+$ mvn clean install
 ```
 
 Clear server logs and workarea, reuse app tables
 
 ```bash
-[batch-bonuspayout-wlpcfg]$ mvn clean install -DreuseDB  
+$ mvn clean install -DreuseDB  
 ```
 ## General warning
 
