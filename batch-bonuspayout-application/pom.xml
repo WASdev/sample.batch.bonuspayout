@@ -131,10 +131,6 @@
                             </features>
                         </configuration>
                     </execution>
-                    <!-- Don't install over WDT -->
-                    <!-- <execution> <id>install-apps</id> <phase>none</phase> <goals> <goal>install-apps</goal> 
-                        </goals> <configuration> <appsDirectory>apps</appsDirectory> <stripVersion>false</stripVersion> 
-                        </configuration> </execution> -->
                     <execution>
                         <id>start-server</id>
                         <phase>integration-test</phase>

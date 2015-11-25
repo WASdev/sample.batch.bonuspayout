@@ -1,6 +1,6 @@
 # Building and running with Maven
 
-This sample features a fairly complete automation using [Apache Maven](http://maven.apache.org/) to set up and execute a small set of integration tests against a Liberty server.
+This sample features a somewhat complete automation using [Apache Maven](http://maven.apache.org/) to set up and execute a small set of integration tests against a Liberty server.
 
 In addition to compiling and packaging the Java application into a WAR, the Maven automation performs all these tasks:
 
@@ -12,7 +12,7 @@ In addition to compiling and packaging the Java application into a WAR, the Mave
 
 In addition, it is designed to allow for [use in a WDT environment][wdt] and the Maven environment at the same time.
 
-The [Liberty maven plugin](https://github.com/WASdev/ci.maven) is used to install Liberty, add the required features, and start and stop the server during the integration tests.
+The [Liberty maven plugin][liberty-maven-plugin] is used to install Liberty, add the required features, and start and stop the server during the integration tests.
 
 ## Running with maven
 
@@ -52,6 +52,20 @@ Just build and package WAR, but skip all the server-related install and testing
 [batch-bonuspayout-application]$ mvn install -DskipTests
 ```
 
+Just start the server, using pre-existing Liberty install
+```bash
+[batch-bonuspayout-application]$ mvn liberty:start-server -Dwlp.install.dir=/my/path/to/wlp
+```
+
+Just stop the server, using default Liberty install
+```bash
+[batch-bonuspayout-application]$ mvn liberty:stop-server
+
+Just run the integration tests, using pre-existing Liberty install
+```bash
+[batch-bonuspayout-application]$ mvn failsafe:integration-test -Dwlp.install.dir=/my/path/to/wlp
+```
+
 #### Other configuration
 
 The sample relies on these two properties which can be overridden on the command line:
@@ -74,11 +88,24 @@ Clear server logs and workarea, reuse app tables
 ```bash
 [batch-bonuspayout-wlpcfg]$ mvn clean install -DreuseDB  
 ```
+## General warning
+
+One problem with starting and stopping servers during Maven execution is that there are some gaps where test failure can leave the system in a state where we're not ready to attempt the next execution.   
+
+In general, this can be dealt with simply by stopping the *BonusPayout* server, either using **mvn liberty:stop-server** or any other mechanism.
+
+## Using Maven with WDT
+
+Follow for [more info][wdt-maven-notes] on organizing the project to support WDT publish and deploy within Maven build
 
 ## Links
 
-[Back](../README.md) to main page.
-[Using-WDT][wdt]
+* [Back](../README.md) to main page.
+* [Using WDT][wdt]
+* [Using Maven with the app published by WDT][wdt-maven-notes]
+* The [Liberty maven plugin][liberty-maven-plugin]
 
 [wdt]: docs/Using-WDT.md
+[wdt-maven-notes]: docs/Using-Maven-With-WDT-Published-App.md
+[liberty-maven-plugin]: https://github.com/WASdev/ci.maven
 

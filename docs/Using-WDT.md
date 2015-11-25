@@ -18,8 +18,18 @@ Installing WDT on Eclipse is as simple as a drag-and-drop, but the process is ex
 * In Eclipse, click *Help->Install WebSphere Software*.
 * Click *Install* in the ***IBM Java EE Batch*** option then click *Finish*.
 
+### Tested versions:
 
-### Clone Git Repo
+The latest versions of WDT and the ***Java EE Batch*** tools are  recommended.  This sample was tested at versions:
+ * [Eclipse Mars SR 1](https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/mars1)
+ * ***IBM Java EE Batch Tools for WebSphere Liberty Profile***  
+     * Version: 1.0.100.v20151015_1628
+
+### m2e installs
+
+If this is the first time you've ever used Maven from within your Eclipse installation, you will probably be prompted somewhere along the way to install some m2e-related Eclipse plugins into your Eclipse installation (some m2e connector).   We don't heavily rely on m2e in particular but it's nice to see the red X's disappear.
+
+## Clone Git Repo
 
 If the sample git repository hasn't been cloned yet, WDT has git tools integrated into the IDE:
 
@@ -45,11 +55,11 @@ If the sample git repository hasn't been cloned yet, WDT has git tools integrate
 7. Select *Finish* now that only 2 checkboxes are selected.
 8.  This will create 2 projects in Eclipse: batch-bonuspayout-application, and batch-bonuspayout-wlpcfg.    
 
-### Create a Runtime Environment and a Liberty Server
+## Create a Runtime Environment and a Liberty Server
 
 For the purposes of this sample, we will create the Liberty server (step 3 in the wasdev.net instructions) a little differently to create and customize a Runtime Environment that will allow the server to directly use the configuration in the `batch-bonuspayout-wlpcfg` project.
 
-#### Create a Runtime Environment in Eclipse
+### Create a Runtime Environment in Eclipse
 
 1. Open the 'Runtime Explorer' view:
     * *Window -> Show View -> Other*
@@ -63,7 +73,7 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
   
 5. Follow the prompts (and possibly choose additional features to install) until you *Finish* creating the Runtime Environment
 
-#### Add the User directory from the maven project, and create a server
+### Add the User directory from the maven project, and create a server
 
 1. Right-click on the Runtime Environment created above in the 'Runtime Explorer' view, and select *Edit*
 2. Click the `Advanced Options...` link
@@ -71,30 +81,18 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
     1. Click New
     2. Select the `batch-bonuspayout-wlpcfg` project
     3. Select *Finish*, *OK*, *Finish*
-<<<<<<< HEAD
 4. Right-click on the `batch-bonuspayout-wlpcfg` user directory listed under the target Runtime Environment in the Runtime Explorer view, and select *New->Server* (not *New->Liberty Server* which you might have expected).
-=======
-4. Right-click on the `batch-bonuspayout-wlpcfg` user directory listed under the target Runtime Environment in the Runtime Explorer view, and select *New->Server* (not **New->Liberty Server** which you might have expected).
->>>>>>> 4bfc3defd69a5b28a5d6bf700cb7695a184e02dd
 5. The resulting dialog should be pre-populated with the `BonusPayout` Liberty profile server.
    The default name for this server can vary, you might also opt to rename it from the Right-click menu in the Servers view to make it easier to identify.
 6. Click *Finish*
 
-#### Publish the application to the new server.  
-<<<<<<< HEAD
+### Publish the application to the new server.  
 
 1. From the ***Servers*** view, right-click the newly-created server and select *Add and Remove*.
 2. Select **batch-bonuspayout-application** from the left-hand pane ("Available") and click "Add" so that it ends up on the right-hand pane ("Configured").   Click "Finish".
 3. Start the server by right-clicking in the ***Servers*** view and selecting ***Start***. Ignore any warnings or error messages that "Problem Occurred" or "Publishing failed".
 
-=======
-
-1. From the ***Servers*** view, right-click the newly-created server and select ***Add and Remove***.  
-2. Select **batch-bonuspayout-application** from the left-hand pane ("Available") and click "Add" so that it ends up on the right-hand pane ("Configured").   Click "Finish".
-3. Start the server by right-clicking in the ***Servers*** view and selecting ***Start***. Ignore any warnings or error messages that "Problem Occurred" or "Publishing failed".
-
->>>>>>> 4bfc3defd69a5b28a5d6bf700cb7695a184e02dd
-#### Running Liberty and the sample application from WDT
+### Running Liberty and the sample application from WDT
 
 1.  Select the `batch-bonuspayout-application` project
 2.  Find the Job definition (XML) in Package Explorer view (or possibly Enterprise Explorer) in folder ***src/main/java/META-INF/batch-jobs***
@@ -108,4 +106,18 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
 6.  You should see a dialog like the following showing that the job was successfully committed.  Typically the response will occur quickly enough relative to the job execution that you will see its Batch Status as "STARTED".  
 
 7. Leave the checkbox selected to go to the ***Java EE Batch Job Logs*** view afterwards, refreshing if necessary until the exit status shows as "COMPLETED" (with default job parameters this will happen quickly).
+
+## Using Maven with WDT
+
+Follow for [more info][wdt-maven-notes] on organizing the project to support WDT publish and deploy within Maven build
+
+
+## Links
+
+* [Back](../README.md) to main page.
+* [Running with Maven](docs/Maven-integration.md)
+* [Using Maven with the app published by WDT][wdt-maven-notes]
+
+[wdt-maven-notes]: docs/Using-Maven-With-WDT-Published-App.md
+
 

@@ -8,10 +8,11 @@ It involves a three-step job, which generates some random data, performs a calcu
 Browse the code to see what it does, or build and run it yourself:
 
 * [Building and running with Maven](/docs/Maven-integration.md)
+* [Using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 * [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
 * [Run the sample manually from the command line](/docs/Running-manually-from-CLI.md)
-* [Using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 * [Take a deeper look at the sample application](/docs/ApplicationDetails.md)
+* [Organizing the project to support WDT publish and deploy within Maven build] (/docs/Using-Maven-With-WDT-Published-App.md)
 
 ## Further reading
 
