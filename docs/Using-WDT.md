@@ -116,8 +116,6 @@ Follow for [more info][wdt-maven-notes] on organizing the project to support WDT
 
 * Jump to [main page](/README.md)
 * [Running with Maven](/docs/Maven-integration.md)
-* [Using Maven with the app published by WDT][wdt-maven-notes]
-
-[wdt-maven-notes]: (/docs/Using-Maven-With-WDT-Published-App.md)
+* [Using Maven with the app published by WDT](/docs/Using-Maven-With-WDT-Published-App.md)
 
 

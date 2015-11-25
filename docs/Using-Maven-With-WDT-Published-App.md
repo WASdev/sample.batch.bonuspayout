@@ -23,10 +23,8 @@ This isn't meant to be the final word on the subject, the [Liberty maven plugin]
 ## Links
 
 * Jump to [main page](/README.md)
-* [Using WDT][wdt]
+* [Using WDT](/docs/Using-WDT.md)
 * [Building and running with Maven](/docs/Maven-integration.md)
 * The [Liberty maven plugin][liberty-maven-plugin]
-
-[wdt]: (/docs/Using-WDT.md)
 [liberty-maven-plugin]: https://github.com/WASdev/ci.maven
 
