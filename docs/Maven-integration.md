@@ -10,9 +10,9 @@ In addition to compiling and packaging the Java application into a WAR, the Mave
 - Copies the WAR into the server config
 - Executes the integration tests and reports results
 
-In addition, it is designed to allow for [use in a WDT environment][wdt] and the Maven environment at the same time.
+In addition, it is designed to allow for [use in a WDT environment](/docs/Using-WDT.md) and the Maven environment at the same time.
 
-The [Liberty maven plugin][liberty-maven-plugin] is used to install Liberty, add the required features, and start and stop the server during the integration tests.
+The [Liberty maven plugin](https://github.com/WASdev/ci.maven) is used to install Liberty, add the required features, and start and stop the server during the integration tests.
 
 ## Running with maven
 
@@ -96,14 +96,12 @@ In general, this can be dealt with simply by stopping the *BonusPayout* server, 
 
 ## Using Maven with WDT
 
-Follow for [more info][wdt-maven-notes] on organizing the project to support WDT publish and deploy within Maven build
+Follow for [more info](/docs/Using-Maven-With-WDT-Published-App.md) on organizing the project to support WDT publish and deploy within Maven build
 
 ## Links
 
 * Jump to [main page](/README.md)
 * [Using WDT](/docs/Using-WDT.md)
 * [Using Maven with the app published by WDT](/docs/Using-Maven-With-WDT-Published-App.md)
-* The [Liberty maven plugin][liberty-maven-plugin]
-
-[liberty-maven-plugin]: https://github.com/WASdev/ci.maven
+* The [Liberty maven plugin](https://github.com/WASdev/ci.maven)
 
