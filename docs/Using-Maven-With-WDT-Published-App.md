@@ -10,7 +10,7 @@ This isn't meant to be the final word on the subject, the [Liberty maven plugin]
 
 * server config separated into version-controlled core named [server.versioned.xml](../batch-bonuspayout-wlpcfg/servers/BonusPayout/server.versioned.xml) included by [server.xml wrapper](../batch-bonuspayout-wlpcfg/servers/BonusPayout/server.xml).
     * The idea here is that publishing the app will cause WDT to update the wrapper server.xml, which you won't want to include in version control.
-    * You might want to ue this command to have git not treat WDT-initiated updates as a file update:
+    * You might want to use this command to have git not treat WDT-initiated updates as a file update:
     ```
     git update-index --assume-unchanged batch-bonuspayout-wlpcfg/servers/BonusPayout/server.xml
     ```
