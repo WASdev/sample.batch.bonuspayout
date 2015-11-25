@@ -105,7 +105,7 @@ Follow for [more info][wdt-maven-notes] on organizing the project to support WDT
 * [Using Maven with the app published by WDT][wdt-maven-notes]
 * The [Liberty maven plugin][liberty-maven-plugin]
 
-[wdt]: (/docs/Using-WDT.md)
-[wdt-maven-notes]: (/docs/Using-Maven-With-WDT-Published-App.md)
+[wdt]: /docs/Using-WDT.md
+[wdt-maven-notes]: /docs/Using-Maven-With-WDT-Published-App.md
 [liberty-maven-plugin]: https://github.com/WASdev/ci.maven
 
