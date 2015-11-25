@@ -1,6 +1,6 @@
 * Control the server [directly from the command line](#running-on-the-command-line) for manual testing.
 * Use [maven](/docs/Maven-integration.md) to control and manipulate the server for use in automated builds to support continuous integration.
-* Use [Eclipse and WDT](/docs/Using-WDd.md) for development in an IDE with live, incremental updates to your application without restarting the server
+* Use [Eclipse and WDT](/docs/Using-WDT.md) for development in an IDE with live, incremental updates to your application without restarting the server
 
 # Running on the command line
 
@@ -91,6 +91,10 @@ $ tail -f $WLP_USER_DIR/servers/BonusPayout/logs/console.log
 ```bash
 $ export WLP_OUTPUT_DIR=$WLP_USER_DIR/target
 ```
+
+## Tips
+
+* If you use bash, consider trying the [command line tools](https://github.com/WASdev/util.bash.completion), which provide tab-completion for the server and other commands.
 
 
 
