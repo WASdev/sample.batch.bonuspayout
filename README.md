@@ -7,12 +7,11 @@ It involves a three-step job, which generates some random data, performs a calcu
 
 Browse the code to see what it does, or build and run it yourself:
 
-* [Building with maven](/docs/Building-the-sample.md#building-with-maven)
+* [Building and running with Maven](/docs/Maven-integration.md)
 * [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
 * [Run the sample using the command line, or Maven/Gradle plugins](/docs/Running-the-sample.md)
 * [Using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 * [Take a deeper look at the sample application](/docs/ApplicationDetails.md)
-* TODO - Add Gradle build instructions
 
 ## Further reading
 

@@ -1,6 +1,6 @@
 * Control the server [directly from the command line](#running-on-the-command-line) for manual testing.
-* Use the [Gradle](#running-with-gradle) or [maven](#running-with-maven) to control and manipulate the server for use in automated builds to support continuous integration.
-* Use [Eclipse and WDT](/docs/Downloading-WAS-Liberty.md) for development in an IDE with live, incremental updates to your application without restarting the server
+* Use [maven](/docs/Maven-integration.md) to control and manipulate the server for use in automated builds to support continuous integration.
+* Use [Eclipse and WDT](/docs/Using-WDd.md) for development in an IDE with live, incremental updates to your application without restarting the server
 
 # Running on the command line
 
@@ -93,19 +93,4 @@ $ export WLP_OUTPUT_DIR=$WLP_USER_DIR/target
 ```
 
 
-## Running with Gradle
 
-The [Gradle plugin](https://github.com/WASdev/ci.gradle) can manage the server using the following operations:
-
-* TODO
-
-## Running with maven
-
-The [maven plugin](https://github.com/WASdev/ci.maven) can manage the server using the following operations:
-
-* TODO:
-
-
-## Next step
-
-* [Running the sample using the command line, or Maven/Gradle plugins](/docs/Running-the-sample.md)
