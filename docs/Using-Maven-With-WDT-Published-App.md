@@ -22,11 +22,11 @@ This isn't meant to be the final word on the subject, the [Liberty maven plugin]
 
 ## Links
 
-* [Back](../README.md) to main page.
+* Jump to [main page](/README.md)
 * [Using WDT][wdt]
 * [Building and running with Maven](/docs/Maven-integration.md)
 * The [Liberty maven plugin][liberty-maven-plugin]
 
-[wdt]: docs/Using-WDT.md
+[wdt]: (/docs/Using-WDT.md)
 [liberty-maven-plugin]: https://github.com/WASdev/ci.maven
 

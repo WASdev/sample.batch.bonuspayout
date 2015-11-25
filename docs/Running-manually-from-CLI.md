@@ -96,5 +96,8 @@ $ export WLP_OUTPUT_DIR=$WLP_USER_DIR/target
 
 * If you use bash, consider trying the [command line tools](https://github.com/WASdev/util.bash.completion), which provide tab-completion for the server and other commands.
 
+## Links
+
+* Jump to [main page](/README.md)
 
 

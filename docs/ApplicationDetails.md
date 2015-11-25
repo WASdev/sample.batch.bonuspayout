@@ -147,6 +147,11 @@ You can see this by doing (from the directory that contains your 'wlp' install d
 
 # Change History
 
+## November 2015, (for maven-liberty-plugin 1.1)
+
+* Another major restructure to leverage the maven-liberty-plugin to install Liberty and needed features, and to better integrate Maven and WDT
+* Added default file root to generated CSV file names.
+
 ## August 2015, (for 8.5.5.6 GA)
 
 * Restructured project to match [https://github.com/WASdev/sample.async.websocket
@@ -167,4 +172,6 @@ You can see this by doing (from the directory that contains your 'wlp' install d
 * Changed default for *dsJNDI* String to use a **java:comp/env** lookup with resource reference (and removed *useGlobalJNDI* parameter).  This parameter value can be a global one or one of the supported, standard scopes such as **java:comp/env/**
 * Adjusted defaulting of *generateFileNameRoot* in **BonusPayoutUtils.java**
 
+## Links
 
+* Jump to [main page](/README.md)

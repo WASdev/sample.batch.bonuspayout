@@ -1,6 +1,6 @@
 # Downloading Liberty
 
-***NOTE:***  There is no need to download and install WAS Liberty to run this sample.   You can use the [maven integration](/docs/Maven-integration.md) to download one to run the sample against.
+***NOTE:***  There is no need to download and install WAS Liberty to run this sample.   You can use the [maven integration](Maven-integration.md) to download one to run the sample against.
 
 ## Instructions
 
@@ -10,7 +10,7 @@ Note that you will need a version of Liberty that has support for the ***batchMa
 
 Since at the time of this writing,  there is not a download which includes the ***batchManagement-1.0*** feature, a good approach would be to download the Java EE 7 Web Profile (which includes CDI 1.2) and then one of the tools (such as [installUtility][installUtility]) for adding the ***batchManagement-1.0*** feature afterwards.  See [example.](#example-use-of-installutility)  
 
-To download just the WAS Liberty runtime, go to the [wasdev.net Downloads page][wasdev], and choose between the [latest version of the runtime][wasdev-latest] or the [latest beta][wasdev-beta]. You can also download Liberty via [Eclipse and WDT](/docs/Downloading-WAS-Liberty.md)
+To download just the WAS Liberty runtime, go to the [wasdev.net Downloads page][wasdev], and choose between the [latest version of the runtime][wasdev-latest] or the [latest beta][wasdev-beta]. You can also download Liberty via [Eclipse and WDT](Downloading-WAS-Liberty.md)
 
 There are a few options to choose from (especially for the beta drivers). Choose the one that is most appropriate.
 * There are convenience archives for downloading pre-defined content groupings
@@ -29,4 +29,7 @@ There are a few options to choose from (especially for the beta drivers). Choose
    $ ./wlp/bin/installUtility install batchManagement-1.0 --acceptLicense
    ```
 
+## Links
+
+* Jump to [main page](/README.md)
 
