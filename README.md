@@ -7,17 +7,21 @@ It involves a three-step job, which generates some random data, performs a calcu
 
 Browse the code to see what it does, or build and run it yourself:
 
-* [Building with maven](/docs/Building-the-sample.md#building-with-maven)
+* [Building and running with Maven](/docs/Maven-integration.md)
 * [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
-* [Run the sample using the command line, or Maven/Gradle plugins](/docs/Running-the-sample.md)
+* [Run the sample manually from the command line](/docs/Running-manually-from-CLI.md)
 * [Using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 * [Take a deeper look at the sample application](/docs/ApplicationDetails.md)
-* TODO - Add Gradle build instructions
 
 ## Further reading
 
 * [A nice set of documents](https://www.ibm.com/support/techdocs/atsmastr.nsf/WebIndex/WP102544) describing Java Batch in WebSphere at various levels of detail (WP102544)
 * [The sleepy batchlet sample](https://github.com/WASdev/sample.batch.sleepybatchlet), a simpler sample using just the ***batch-1.0*** feature and thus just the Java Batch 1.0 API, without the managed batch features.
+
+## Acknowledgements
+
+* As noted in the [maven integration](/docs/Maven-integration.md) page, this sample uses the [Liberty maven](https://github.com/WASdev/ci.maven) plugin
+* Uses [ExpectIt](https://github.com/Alexey1Gavrilov/ExpectIt) for testing the ***batchManager*** command-line output
 
 ## Notice
 

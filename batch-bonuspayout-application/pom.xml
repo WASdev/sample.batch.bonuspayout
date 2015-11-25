@@ -43,13 +43,11 @@
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
 
+        <!-- DON'T EDIT after this point -->
+
         <!-- liberty plugin default, passed to integration test -->
         <wlpInstallDir>${project.build.directory}/liberty/wlp</wlpInstallDir>  
 
-        <!-- DON'T EDIT after this point -->
-
-        <!-- Go through a bit of extra work to avoid dealing with the version name 
-            later on -->
         <warName>batch-bonuspayout-application</warName>
         <warPath>${project.build.directory}/${warName}-${project.version}.war</warPath>
         <wlp.user.dir>${project.basedir}/../batch-bonuspayout-wlpcfg</wlp.user.dir>
@@ -77,7 +75,6 @@
             <artifactId>junit</artifactId>
             <version>4.10</version>
         </dependency>
-
     </dependencies>
 
     <build>

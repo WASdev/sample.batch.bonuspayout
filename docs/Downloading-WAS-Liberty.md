@@ -1,3 +1,9 @@
+# Downloading Liberty
+
+***NOTE:***  There is no need to download and install WAS Liberty to run this sample.   You can use the [maven integration](/docs/Maven-integration.md) to download one to run the sample against.
+
+## Instructions
+
 There are lots of ways to get your hands on WAS Liberty. 
 
 Note that you will need a version of Liberty that has support for the ***batchManagement-1.0*** feature and (optionally) CDI 1.2 for this sample.
@@ -23,11 +29,4 @@ There are a few options to choose from (especially for the beta drivers). Choose
    $ ./wlp/bin/installUtility install batchManagement-1.0 --acceptLicense
    ```
 
-## Tips
 
-* If you use bash, consider trying the [command line tools](https://github.com/WASdev/util.bash.completion), which provide tab-completion for the server and other commands.
-
-## Next step
-
-* [Start the server and run the sample using the command line, or Maven/Gradle plugins](/docs/Running-the-sample.md), or
-* [Start the server and run the sample using Eclipse and WebSphere Devlopment Tools (WDT)](/docs/Using-WDT.md)

@@ -1,6 +1,6 @@
 * Control the server [directly from the command line](#running-on-the-command-line) for manual testing.
-* Use the [Gradle](#running-with-gradle) or [maven](#running-with-maven) to control and manipulate the server for use in automated builds to support continuous integration.
-* Use [Eclipse and WDT](/docs/Downloading-WAS-Liberty.md) for development in an IDE with live, incremental updates to your application without restarting the server
+* Use [maven](/docs/Maven-integration.md) to control and manipulate the server for use in automated builds to support continuous integration.
+* Use [Eclipse and WDT](/docs/Using-WDT.md) for development in an IDE with live, incremental updates to your application without restarting the server
 
 # Running on the command line
 
@@ -92,20 +92,9 @@ $ tail -f $WLP_USER_DIR/servers/BonusPayout/logs/console.log
 $ export WLP_OUTPUT_DIR=$WLP_USER_DIR/target
 ```
 
+## Tips
 
-## Running with Gradle
-
-The [Gradle plugin](https://github.com/WASdev/ci.gradle) can manage the server using the following operations:
-
-* TODO
-
-## Running with maven
-
-The [maven plugin](https://github.com/WASdev/ci.maven) can manage the server using the following operations:
-
-* TODO:
+* If you use bash, consider trying the [command line tools](https://github.com/WASdev/util.bash.completion), which provide tab-completion for the server and other commands.
 
 
-## Next step
 
-* [Running the sample using the command line, or Maven/Gradle plugins](/docs/Running-the-sample.md)
