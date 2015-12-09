@@ -62,6 +62,7 @@ $ mvn liberty:start-server -Dwlp.install.dir=/my/path/to/wlp
 Just stop the server, using default Liberty install
 ```bash
 $ mvn liberty:stop-server
+```
 
 Just run the integration tests, using pre-existing Liberty install
 ```bash
