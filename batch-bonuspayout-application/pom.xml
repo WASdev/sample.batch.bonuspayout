@@ -29,6 +29,21 @@
         <url>git@github.com:WASdev/sample.batch.bonuspayout.git</url>
     </scm>
 
+    <pluginRepositories>
+        <!-- Configure Sonatype OSS Maven snapshots repository -->
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
     <repositories>
         <repository>
             <id>ibm-maven-repo</id>
@@ -104,7 +119,7 @@
             <plugin>
                 <groupId>net.wasdev.wlp.maven.plugins</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>1.1</version>
+                <version>1.2-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <id>install-server</id>
@@ -120,14 +135,9 @@
                             <goal>install-feature</goal>
                         </goals>
                         <configuration>
+                            <!-- No need to specify any here. Leverage the ability to install needed features from the server.xml -->
                             <features>
                                 <acceptLicense>true</acceptLicense>
-                                <feature>batchManagement-1.0</feature>
-                                <feature>localConnector-1.0</feature>
-                                <!-- This sample can work with or without CDI configured -->
-                                <feature>cdi-1.2</feature>
-                                <feature>jsf-2.2</feature>
-                                <feature>jaxrs-2.0</feature>
                             </features>
                         </configuration>
                     </execution>

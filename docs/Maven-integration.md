@@ -12,7 +12,9 @@ In addition to compiling and packaging the Java application into a WAR, the Mave
 
 In addition, it is designed to allow for [use in a WDT environment](/docs/Using-WDT.md) and the Maven environment at the same time.
 
-The [Liberty maven plugin](https://github.com/WASdev/ci.maven) is used to install Liberty, add the required features, and start and stop the server during the integration tests.
+The [Liberty maven plugin](https://github.com/WASdev/ci.maven) is used to install Liberty, add the required features, and start and stop the server during the integration tests.   
+
+The sample has been updated to use the most recent **1.2-SNAPSHOT** version of the Liberty plugin.  This adds the ability to install the missing features required by the ***server.xml*** without having to list them separately in the ***pom.xml***.  
 
 ## Running with maven
 
