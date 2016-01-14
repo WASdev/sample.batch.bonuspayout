@@ -169,7 +169,7 @@
                     <assemblyArtifact>
                         <groupId>com.ibm.websphere.appserver.runtime</groupId>
                         <artifactId>wlp-webProfile7</artifactId>
-                        <version>8.5.5.7</version>
+                        <version>8.5.5.8</version>
                         <type>zip</type>
                     </assemblyArtifact>
                     <installDirectory>${wlp.install.dir}</installDirectory>
