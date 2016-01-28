@@ -19,10 +19,11 @@
     </library>
 
     <logging traceSpecification="BonusPayout=all=enabled"/>
-
+    
     <dataSource id="batchDB" jndiName="jdbc/batch" type="javax.sql.XADataSource">
         <jdbcDriver libraryRef="DerbyLib"/>
-        <properties.derby.embedded createDatabase="false" databaseName="${shared.resource.dir}/BatchDB" password="pass" user="user"/>
+        <!-- The 'databaseName' is set in bootstrap.properties -->
+        <properties.derby.embedded createDatabase="false" databaseName="${db.url}" user="user" password="pass"/>
     </dataSource>
 
     <databaseStore dataSourceRef="batchDB" id="BatchDatabaseStore" schema="JBATCH" tablePrefix=""/>

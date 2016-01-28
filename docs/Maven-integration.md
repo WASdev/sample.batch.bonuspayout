@@ -32,6 +32,14 @@ Reuse Liberty install in default location, create new application tables, run te
 $ mvn    # Same thing as 'mvn install'
 ```
 
+Use a non-default database location (can use one external to the sample and decouple the lifecycle).
+
+```bash
+$ mvn -Ddb.url=C:/AAA/Work/tmp/db1/a   # Forward slashes work even on Windows (where Derby slash/path issues can arise)
+```
+
+***Note***:  The default database location is: *.../sample.batch.bonuspayout/batch-bonuspayout-wlpcfg/shared/resources/BatchDB*
+
 ### From batch-bonuspayout-application
 
 Create a new Liberty install in default location, run tests

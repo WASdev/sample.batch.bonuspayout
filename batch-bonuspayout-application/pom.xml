@@ -67,6 +67,9 @@
         <warPath>${project.build.directory}/${warName}-${project.version}.war</warPath>
         <wlp.user.dir>${project.basedir}/../batch-bonuspayout-wlpcfg</wlp.user.dir>
         <server.config.dir>${wlp.user.dir}/servers/BonusPayout</server.config.dir>
+        <!-- Though this property can be set across all projects from the invoker (command line),
+             it is convenient to define the default separately to avoid Derby path issues esp. on Windows -->
+        <db.url>${shared.resource.dir}/BatchDB</db.url>
     </properties>
 
     <dependencies>
@@ -176,6 +179,10 @@
                     <userDirectory>${wlp.user.dir}</userDirectory>
                     <configFiles>${server.config.dir}/server.xml</configFiles>
                     <serverName>BonusPayout</serverName>
+                     <bootstrapProperties>
+                         <!-- propagate existing prop -->
+                         <db.url>${db.url}</db.url>
+                     </bootstrapProperties>
                 </configuration>
             </plugin>
 
