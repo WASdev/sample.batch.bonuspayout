@@ -17,7 +17,7 @@ Browse the code to see what it does, or build and run it yourself:
 ## Further reading
 
 * [A nice set of documents](https://www.ibm.com/support/techdocs/atsmastr.nsf/WebIndex/WP102544) describing Java Batch in WebSphere at various levels of detail (WP102544)
-* [The sleepy batchlet sample](https://github.com/WASdev/sample.batch.sleepybatchlet), a simpler sample using just the ***batch-1.0*** feature and thus just the Java Batch 1.0 API, without the managed batch features.
+* [Other WebSphere Liberty Batch links](https://github.com/WASdev/sample.batch.bonuspayout/wiki/WebSphereLibertyBatchLinks)
 
 ## Acknowledgements
 
