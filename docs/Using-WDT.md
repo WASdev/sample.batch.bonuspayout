@@ -90,7 +90,19 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
 
 1. From the ***Servers*** view, right-click the newly-created server and select *Add and Remove*.
 2. Select **batch-bonuspayout-application** from the left-hand pane ("Available") and click "Add" so that it ends up on the right-hand pane ("Configured").   Click "Finish".
-3. Start the server by right-clicking in the ***Servers*** view and selecting ***Start***. Ignore any warnings or error messages that "Problem Occurred" or "Publishing failed".
+3. Start the server by right-clicking in the ***Servers*** view and selecting ***Start***. 
+
+### Troubleshooting  
+
+1. If the application cannot be targeted to the given server, it may be because WDT has not populated the project with the correct facets during import.
+	1. Right-click the `batch-bonuspayout-application` project and select *Properties*.
+	2. Select the *Project Facets* selection on the left-hand pane.
+	3. Make sure **Java Batch** is checked ( version 1.0)
+	4. Make sure **Context and dependency injection (CDI)** is checked (version 1.2)
+2. Make sure the application is not already configured in the server config.
+	1. In particular, this can happen when you create a new WDT/Eclipse workspace after having previously worked through this sample.
+	1. You can restore the original with:  
+		* `git checkout batch-bonuspayout-wlpcfg/servers/BonusPayout/server.xml`
 
 ### Running Liberty and the sample application from WDT
 
@@ -109,7 +121,7 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
 
 ## Using Maven with WDT
 
-Follow for [more info][wdt-maven-notes] on organizing the project to support WDT publish and deploy within Maven build
+Follow for [more info](/docs/Using-Maven-With-WDT-Published-App.md) on organizing the project to support WDT publish and deploy within Maven build
 
 
 ## Links
