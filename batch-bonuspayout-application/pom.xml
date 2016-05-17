@@ -57,6 +57,8 @@
         <!-- EDIT ME (or override on command line) -->
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
+        <!-- Use commented-out value since empty value doesn't flow as well. -->
+        <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
 
         <!-- DON'T EDIT after this point -->
 
@@ -179,10 +181,13 @@
                     <userDirectory>${wlp.user.dir}</userDirectory>
                     <configFiles>${server.config.dir}/server.xml</configFiles>
                     <serverName>BonusPayout</serverName>
-                     <bootstrapProperties>
+                    <bootstrapProperties>
                          <!-- propagate existing prop -->
                          <db.url>${db.url}</db.url>
-                     </bootstrapProperties>
+                    </bootstrapProperties>
+                    <jvmOptions>
+                        <param>${startServerJvmOptions}</param>
+                    </jvmOptions>
                 </configuration>
             </plugin>
 
@@ -263,6 +268,16 @@
             </activation>
             <properties>
                 <wlpInstallDir>${wlp.install.dir}</wlpInstallDir>
+            </properties>
+        </profile>
+        <profile>
+            <id>start-liberty-in-debug</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property><name>startDebug</name></property>
+            </activation>
+            <properties>
+                <startServerJvmOptions>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
             </properties>
         </profile>
     </profiles>
