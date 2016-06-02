@@ -107,7 +107,7 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
 ### Running Liberty and the sample application from WDT
 
 1.  Select the `batch-bonuspayout-application` project
-2.  Find the Job definition (XML) in Package Explorer view (or possibly Enterprise Explorer) in folder ***src/main/java/META-INF/batch-jobs***
+2.  Find the Job definition (XML) in Package Explorer view (or possibly Enterprise Explorer) in folder ***src/main/resources/META-INF/batch-jobs***
 3.  Right-click on BonusPayoutJob.xml and select *Run As->Java EE Batch Job*.
 4.  Most of the wizard will be pre-populated, except for the userid and password.
 5.  Supply the values:
