@@ -59,6 +59,7 @@
         <!-- EDIT ME (or override on command line) -->
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
+        <libertyVersion>16.0.0.3</libertyVersion>
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
 
@@ -176,7 +177,7 @@
                     <assemblyArtifact>
                         <groupId>com.ibm.websphere.appserver.runtime</groupId>
                         <artifactId>wlp-webProfile7</artifactId>
-                        <version>16.0.0.2</version>
+                        <version>${libertyVersion}</version>
                         <type>zip</type>
                     </assemblyArtifact>
                     <installDirectory>${wlp.install.dir}</installDirectory>
