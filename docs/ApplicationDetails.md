@@ -1,6 +1,6 @@
 # Bonus Payout in detail
 
-The [BonusPayoutJob.xml](BonusPayout/src/main/webapp/WEB-INF/classes/META-INF/batch-jobs/BonusPayoutJob.xml) is structured in 3 steps:   
+The [BonusPayoutJob.xml](../batch-bonuspayout-application/src/main/webapp/WEB-INF/classes/META-INF/batch-jobs/BonusPayoutJob.xml) is structured in 3 steps:   
 
 1. The first step, **generate**, is a batchlet step which generates some random values (representing account balances), and writes them into a text file in CSV format.
 
@@ -10,7 +10,7 @@ The [BonusPayoutJob.xml](BonusPayout/src/main/webapp/WEB-INF/classes/META-INF/ba
 For each record, in confirms that the value now read from the database table corresponds to the value in the generated text file, plus the bonus amount.  It also confirms that steps 1 and 2 have written the same number of records. 
 ## SimpleBonusPayoutJob - A simplified sample
 
-We provide a simplified job definition [SimpleBonusPayoutJob.xml](BonusPayout/src/main/webapp/WEB-INF/classes/META-INF/batch-jobs/SimpleBonusPayoutJob.xml) which only includes the first two steps of the BonusPayoutJob.
+We provide a simplified job definition [SimpleBonusPayoutJob.xml](../batch-bonuspayout-application/src/main/webapp/WEB-INF/classes/META-INF/batch-jobs/SimpleBonusPayoutJob.xml) which only includes the first two steps of the BonusPayoutJob.
 
 Though the third step, **validation**, of **BonusPayoutJob** provides a way to force a failure and demonstrate restart, and makes the job more interesting overall, it does make the sample signficantly more complicated.
 
@@ -36,7 +36,7 @@ numRecords  | **1000** | Total number of records generated in step 1 and process
 chunkSize | **100** | The chunk (transaction) size used in steps 2 and 3
 generateFileNameRoot | *\<None\>*  |  Directory+prefix of file generated in step 1.  No default defined in JSL, but there is a default in the Java logic.
 dsJNDI | **java:comp/env/jdbc/BonusPayoutDS** | DataSource JNDI location for application table (the sample could be refactored so this isn't also used for container persistence as it is right now).
-bonusAmount | **100** |	Amount the ìaccount balanceî will be incremented by in step 2
+bonusAmount | **100** |	Amount the ‚Äúaccount balance‚Äù will be incremented by in step 2
 tableName | **BONUSPAYOUT.ACCOUNT** | Application database table
 fileEncoding | *\<None\>* | Char encoding used to write text file generated in step 1 and read in step 3
 
