@@ -1,24 +1,53 @@
-<!-- 
- (C) Copyright IBM Corporation 2017.
+<server description="Server for BonusPayout sample">
 
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
--->
-<server description="Sample Servlet server">
+    <!-- Enable features -->
     <featureManager>
-        <feature>jsp-2.3</feature>
+        <feature>batchManagement-1.0</feature>
+        <feature>localConnector-1.0</feature>
+        <!-- This sample can work with or without CDI configured -->
+        <feature>cdi-1.2</feature>
+        <feature>jsf-2.2</feature>
+        <feature>jaxrs-2.0</feature>
     </featureManager>
+
+    <!-- To access this server from a remote client add a host attribute to
+        the following element, e.g. host="*" -->
+    <httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+
+    <library id="DerbyLib">
+        <fileset dir="${shared.resource.dir}/derby"/>
+    </library>
+
+    <logging traceSpecification="BonusPayout=all=enabled"/>
     
-    <httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" />
-    
+    <dataSource id="batchDB" jndiName="jdbc/batch" type="javax.sql.XADataSource">
+        <jdbcDriver libraryRef="DerbyLib"/>
+        <!-- The 'databaseName' is set in bootstrap.properties -->
+        <properties.derby.embedded createDatabase="false" databaseName="${db.url}" user="user" password="pass"/>
+    </dataSource>
+
+    <databaseStore dataSourceRef="batchDB" id="BatchDatabaseStore" schema="JBATCH" tablePrefix=""/>
+
+    <batchPersistence jobStoreRef="BatchDatabaseStore"/>
+
+    <applicationMonitor updateTrigger="mbean"/>
+
+    <keyStore id="defaultKeyStore" password="Liberty"/>
+
+    <basicRegistry id="basic" realm="ibm/api">
+        <user name="bob" password="bobpwd"/>
+        <user name="jane" password="janepwd"/>
+    </basicRegistry>
+
+    <authorization-roles id="com.ibm.ws.batch">
+        <security-role name="batchSubmitter">
+            <user name="bob"/>
+        </security-role>
+        <security-role name="batchAdmin">
+            <user name="jane"/>
+        </security-role>
+    </authorization-roles>
+
     <webApplication id="batch-bonuspayout-loose-application" location="batch-bonuspayout-loose-application.war" name="batch-bonuspayout-loose-application"/>
+
 </server>
