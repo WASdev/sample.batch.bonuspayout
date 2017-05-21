@@ -55,6 +55,14 @@
 <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>                                 
 
         <!-- DON'T EDIT after this point -->
+
+        <!-- 
+             Confusing, so to clarify, 
+                'wlp.install.dir' => May or may not be set by caller.  If set, points to pre-existing Liberty install.   If not, we install Liberty during build.
+                'wlpInstallDir' =>   Will always be set, to either 'wlp.install.dir' (via plugin activation) or to Liberty default location, (immediately below in next line)
+         --> 
+        <wlpInstallDir>${project.build.directory}/liberty/wlp</wlpInstallDir>  
+
         <batch.props.directory>${project.basedir}/batchprops</batch.props.directory>
         <shared.resource.directory>${project.build.directory}/liberty/wlp/usr/shared/resources</shared.resource.directory>
         <ddl.dir>${project.basedir}/ddls</ddl.dir>
@@ -76,6 +84,16 @@
                 <packaging.type>usr</packaging.type>
             </properties>        
         </profile>    
+        <profile>
+            <id>use-existing-liberty-if-present</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property><name>wlp.install.dir</name></property>
+            </activation>
+            <properties>
+                <wlpInstallDir>${wlp.install.dir}</wlpInstallDir>
+            </properties>
+        </profile>
     </profiles>
     
     <dependencies>
@@ -239,7 +257,7 @@
                         <version>17.0.0.1</version>
                         <type>zip</type>
                     </assemblyArtifact>
-                    <installDirectory>${wlp.install.dir}</installDirectory>
+                    <installDirectory>${wlpInstallDir}</installDirectory>
                     <serverName>${wlpServerName}</serverName>
                     <bootstrapProperties>
                          <!-- propagate existing prop -->
@@ -284,7 +302,7 @@
                     <!-- Set up the CLI, which is running outside the server. -->
                     <systemPropertyVariables>
                         <batch.props.directory>${batch.props.directory}</batch.props.directory>
-                        <wlp.install.dir>${wlpInstallDir}</wlp.install.dir>
+                        <wlpInstallDir>${wlpInstallDir}</wlpInstallDir>
                         <httpsPort>${httpsPort}</httpsPort>
                         <serverHost>${serverHost}</serverHost>
                         <warName>${project.artifactId}</warName>
@@ -322,16 +340,4 @@
             </plugins>
         </pluginManagement>
     </build>
-    <profiles>
-        <profile>
-            <id>use-existing-liberty-if-present</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property><name>wlp.install.dir</name></property>
-            </activation>
-            <properties>
-                <wlpInstallDir>${wlp.install.dir}</wlpInstallDir>
-            </properties>
-        </profile>
-    </profiles>
 </project>

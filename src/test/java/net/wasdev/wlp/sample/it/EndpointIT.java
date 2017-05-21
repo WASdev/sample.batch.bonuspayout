@@ -27,7 +27,7 @@ public class EndpointIT {
 
     @BeforeClass
     public static void init() {
-        URL = "http://localhost:9080/batch-bonuspayout-loose-application/servlet";
+        URL = "http://localhost:9080/batch-bonuspayout-application/servlet";
     }
 
     @Test

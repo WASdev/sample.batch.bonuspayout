@@ -57,7 +57,7 @@ public class BonusPayoutIT {
 	private Expect expect;
 	private Process process;
 	private String warName = System.getProperty("warName");
-	private String wlpInstallDir = System.getProperty("wlp.install.dir");
+	private String wlpInstallDir = System.getProperty("wlpInstallDir");
 	private String batchPropsDir = System.getProperty("batch.props.directory");
 	private String serverHost = System.getProperty("serverHost");
 	private String httpsPort = System.getProperty("httpsPort");
@@ -114,7 +114,7 @@ public class BonusPayoutIT {
 		String submitCmd = wlpInstallDir + "/bin/batchManager submit " +
 				CORE_COMMAND_PARMS +   
 				"--jobXMLName=BonusPayoutJob --applicationName=" + warName + " " +
-				"--jobPropertiesFile=" + batchPropsDir + "/shared/resources/runToCompletionParms.txt ";
+				"--jobPropertiesFile=" + batchPropsDir + "/runToCompletionParms.txt ";
 
 		expect.sendLine(submitCmd);
 
@@ -131,7 +131,7 @@ public class BonusPayoutIT {
 		String submitCmd = wlpInstallDir + "/bin/batchManager submit " +
 				CORE_COMMAND_PARMS +   
 				"--jobXMLName=BonusPayoutJob --applicationName=" + warName + " " +
-				"--jobPropertiesFile=" + batchPropsDir + "/shared/resources/forceFailureParms.txt ";
+				"--jobPropertiesFile=" + batchPropsDir + "/forceFailureParms.txt ";
 
 		expect.sendLine(submitCmd);
 
@@ -142,7 +142,7 @@ public class BonusPayoutIT {
 		String restartCmd = wlpInstallDir + "/bin/batchManager restart " +
 				CORE_COMMAND_PARMS + 
 				"--jobInstanceId=" + jobInstanceId + " " +
-				"--jobPropertiesFile=" + batchPropsDir + "/shared/resources/forceFailureParms.txt ";
+				"--jobPropertiesFile=" + batchPropsDir + "/forceFailureParms.txt ";
 		
 		expect.sendLine(restartCmd);
 		assertJobTerminationStatus(BatchStatus.COMPLETED);
