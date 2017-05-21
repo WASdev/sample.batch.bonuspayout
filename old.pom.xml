@@ -261,7 +261,6 @@
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <profile>
             <id>use-existing-liberty-if-present</id>
