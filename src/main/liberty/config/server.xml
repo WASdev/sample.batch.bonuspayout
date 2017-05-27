@@ -22,7 +22,8 @@
     
     <dataSource id="batchDB" jndiName="jdbc/batch" type="javax.sql.XADataSource">
         <jdbcDriver libraryRef="DerbyLib"/>
-        <!-- The 'databaseName' is set in bootstrap.properties -->
+        <!-- The 'db.url' databaseName is set in bootstrap.properties -->
+        <!-- Set to 'false' since it's created as part of the Maven automation -->
         <properties.derby.embedded createDatabase="false" databaseName="${db.url}" user="user" password="pass"/>
     </dataSource>
 

@@ -52,7 +52,6 @@
         <db.url>${project.build.directory}/liberty/wlp/usr/shared/BatchDB</db.url>                                 
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
-<outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>                                 
 
         <!-- DON'T EDIT after this point -->
 
@@ -143,42 +142,20 @@
                         <configuration>
                             <tasks>
                                 <echo>********</echo>
+                                <echo>********</echo>
                                 <echo>******** Database location will be at URL: </echo>
                                 <echo>******** ${db.url}</echo>
+                                <echo>********</echo>
+                                <echo>******** Liberty install location will be at : </echo>
+                                <echo>******** ${wlpInstallDir}</echo>
+                                <echo>********</echo>
                                 <echo>********</echo>
                             </tasks>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <id>copy-process-resources</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.derby</groupId>
-                                    <artifactId>derby</artifactId>
-                                    <version>${derby.version}</version>
-                                    <type>jar</type>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>${shared.resource.directory}/derby</outputDirectory>
-                                    <destFileName>derby.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Used to create and prime the database with the BonusPayout application-level table. 
+           <!-- Used to create and prime the database with the BonusPayout application-level table. 
                 By calling it "application-level", we're referring to the fact that this 
                 is data written by the application, not by the runtime. Note the runtime 
                 tables may be created in the same database, as we do in this sample execution. -->
@@ -200,7 +177,7 @@
                 <executions>
                     <execution>
                         <id>drop-db-before-test-if-any</id>
-                        <phase>process-test-resources</phase>
+                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
@@ -213,7 +190,7 @@
                     </execution>
                     <execution>
                         <id>create-db</id>
-                        <phase>process-test-resources</phase>
+                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
@@ -227,7 +204,7 @@
                     </execution>
                     <execution>
                         <id>shutdown-database-so-that-test-can-run</id>
-                        <phase>process-test-resources</phase>
+                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
@@ -238,6 +215,34 @@
                     </execution>
                 </executions>
             </plugin>            
+            <!-- For a pre-existing install, we assume derby's already in place -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-derby</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.derby</groupId>
+                                    <artifactId>derby</artifactId>
+                                    <version>${derby.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${shared.resource.directory}/derby</outputDirectory>
+                                    <destFileName>derby.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
