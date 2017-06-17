@@ -262,7 +262,7 @@
                         <version>17.0.0.1</version>
                         <type>zip</type>
                     </assemblyArtifact>
-                    <installDirectory>${wlpInstallDir}</installDirectory>
+                    <installDirectory>${wlp.install.dir}</installDirectory>
                     <serverName>${wlpServerName}</serverName>
                     <bootstrapProperties>
                          <!-- propagate existing prop -->
