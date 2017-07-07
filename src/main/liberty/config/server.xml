@@ -49,6 +49,4 @@
         </security-role>
     </authorization-roles>
 
-    <webApplication id="batch-bonuspayout-loose-application" location="batch-bonuspayout-loose-application.war" name="batch-bonuspayout-loose-application"/>
-
 </server>
