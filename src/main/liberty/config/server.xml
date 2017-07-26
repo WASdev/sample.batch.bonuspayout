@@ -19,8 +19,16 @@
     </library>
 
     <logging traceSpecification="BonusPayout=all=enabled"/>
-    
-    <dataSource id="batchDB" jndiName="jdbc/batch" type="javax.sql.XADataSource">
+
+    <dataSource id="batchDB" type="javax.sql.XADataSource">
+        <jdbcDriver libraryRef="DerbyLib"/>
+        <!-- The 'db.url' databaseName is set in bootstrap.properties -->
+        <!-- Set to 'false' since it's created as part of the Maven automation -->
+        <properties.derby.embedded createDatabase="false" databaseName="${db.url}" user="user" password="pass"/>
+    </dataSource>
+
+    <!--  In this sample we'll use the same database (as the runtime DB) but use a different DS to access it. -->
+    <dataSource id="appDB" jndiName="jdbc/batch" type="javax.sql.XADataSource">
         <jdbcDriver libraryRef="DerbyLib"/>
         <!-- The 'db.url' databaseName is set in bootstrap.properties -->
         <!-- Set to 'false' since it's created as part of the Maven automation -->
