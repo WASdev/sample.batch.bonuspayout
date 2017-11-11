@@ -57,13 +57,13 @@
 
         <!-- 
              Confusing, so to clarify, 
-                'wlp.install.dir' => May or may not be set by caller.  If set, points to pre-existing Liberty install.   If not, we install Liberty during build.
-                'wlpInstallDir' =>   Will always be set, to either 'wlp.install.dir' (via plugin activation) or to Liberty default location, (immediately below in next line)
+                'wlpInstallDir' => May or may not be set by caller.  If set, points to pre-existing Liberty install.   If not, we install Liberty during build.
+                'wlp.install.dir' =>   Will always be set, to either 'wlpInstallDir' (via plugin activation) or to Liberty default location, (immediately below in next line)
          --> 
-        <wlpInstallDir>${project.build.directory}/liberty/wlp</wlpInstallDir>  
+        <wlp.install.dir>${project.build.directory}/liberty/wlp</wlp.install.dir>  
 
         <batch.props.directory>${project.basedir}/batchprops</batch.props.directory>
-        <shared.resource.directory>${wlpInstallDir}/usr/shared/resources</shared.resource.directory>
+        <shared.resource.directory>${wlp.install.dir}/usr/shared/resources</shared.resource.directory>
         <ddl.dir>${project.basedir}/ddls</ddl.dir>
         <wlpServerName>BonusPayout</wlpServerName>
         <derby.version>10.11.1.1</derby.version>
@@ -87,10 +87,10 @@
             <id>use-existing-liberty-if-present</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
-                <property><name>wlp.install.dir</name></property>
+                <property><name>wlpInstallDir</name></property>
             </activation>
             <properties>
-                <wlpInstallDir>${wlp.install.dir}</wlpInstallDir>
+                <wlp.install.dir>${wlpInstallDir}</wlp.install.dir>
             </properties>
         </profile>
     </profiles>
@@ -147,7 +147,7 @@
                                 <echo>******** ${db.url}</echo>
                                 <echo>********</echo>
                                 <echo>******** Liberty install location will be at : </echo>
-                                <echo>******** ${wlpInstallDir}</echo>
+                                <echo>******** ${wlp.install.dir}</echo>
                                 <echo>********</echo>
                                 <echo>********</echo>
                             </tasks>
@@ -263,7 +263,7 @@
                         <version>${libertyVersion}</version>
                         <type>zip</type>
                     </assemblyArtifact>
-                    <installDirectory>${wlp.install.dir}</installDirectory>
+                    <installDirectory>${wlpInstallDir}</installDirectory>
                     <userDirectory>${wlpUserDir}</userDirectory>
                     <serverName>${wlpServerName}</serverName>
                     <bootstrapProperties>
@@ -320,7 +320,7 @@
                     <!-- Set up the CLI, which is running outside the server. -->
                     <systemPropertyVariables>
                         <batch.props.directory>${batch.props.directory}</batch.props.directory>
-                        <wlpInstallDir>${wlpInstallDir}</wlpInstallDir>
+                        <wlp.install.dir>${wlp.install.dir}</wlp.install.dir>
                         <httpsPort>${httpsPort}</httpsPort>
                         <serverHost>${serverHost}</serverHost>
                         <warName>${project.artifactId}</warName>
