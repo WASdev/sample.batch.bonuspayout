@@ -4,8 +4,8 @@ The WebSphere Development Tools (WDT) for Eclipse can be used to control the ser
 
 WDT also provides:
 
-* content-assist for server configuration (a nice to have: server configuration is minimal, but the tools can help you find what you need and identify finger-checks, etc.)
-* automatic incremental publish of applications so that you can write and test your changes locally without having to go through a build/publish cycle or restart the server (which is not that big a deal given the server restarts lickety-split, but less is more!).
+* content-assist for server configuration (a nice to have: server configuration is minimal, but the tools can help you find what you need and identify typos, etc.)
+* automatic incremental publish of applications so that you can write and test your changes locally without having to go through a build/publish cycle or restart the server (which is not that big a deal given the server restarts in a few seconds, but still!)
 
 ## Installing
 
@@ -21,13 +21,15 @@ Installing WDT on Eclipse is as simple as a drag-and-drop, but the process is ex
 ### Tested versions:
 
 The latest versions of WDT and the ***Java EE Batch*** tools are  recommended.  This sample was tested at versions:
- * [Eclipse Mars SR 1](https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/mars1)
- * ***IBM Java EE Batch Tools for WebSphere Liberty Profile***  
-     * Version: 1.0.100.v20151015_1628
+ * [Eclipse Oxygen 1a](https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen1a)
+ * WebSphere Developer Tools v17.0.0.2 or above
+	 * (More complete Eclipse plugin version info not listed here)
+ * ***IBM Java EE Batch Tools for WebSphere Liberty***  
+     * Version: 1.0.251.v20171004_2101
 
-### m2e installs
+### Other necessary Eclipse plugins (m2e, etc.)
 
-If this is the first time you've ever used Maven from within your Eclipse installation, you will probably be prompted somewhere along the way to install some m2e-related Eclipse plugins into your Eclipse installation (some m2e connector).   We don't heavily rely on m2e in particular but it's nice to see the red X's disappear.
+If this is the first time you've ever used Maven from within your Eclipse installation, you may need to install other plugins like m2e (Maven-to-Eclipse).  Probably most install methods would include these anyway as dependencies, but just noting since there are a lot of possible routes to install/update a given Eclipse installation with this full set of pluigns.
 
 ## Clone Git Repo
 
@@ -36,7 +38,8 @@ If the sample git repository hasn't been cloned yet, WDT has git tools integrate
 1.  Open the Git repositories view
     * *Window -> Show View -> Other*
     * Type "git" in the filter box, and select *Git Repositories*
-2.  Copy Git repo url by finding the textbox under "HTTPS clone URL" at the top of this page, and select *Copy to clipboard*
+2.  Copy Git repo url:
+	* **https://github.com/WASdev/sample.batch.bonuspayout**
 3.  In the Git repositories view, select the hyperlink `Clone a Git repository`
 4.  The git repo url should already be filled in.  Select *Next -> Next -> Finish*
 5.  The "sample.batch.bonuspayout [master]" repo should appear in the view
