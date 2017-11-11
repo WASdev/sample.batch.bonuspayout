@@ -1,5 +1,7 @@
 # Common ignore entries from other samples
 **/.settings/
+**/.factorypath
+**/.apt_generated/
 **/target/
 .*.swp
 **/.project
