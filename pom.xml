@@ -63,7 +63,7 @@
         <wlpInstallDir>${project.build.directory}/liberty/wlp</wlpInstallDir>  
 
         <batch.props.directory>${project.basedir}/batchprops</batch.props.directory>
-        <shared.resource.directory>${project.build.directory}/liberty/wlp/usr/shared/resources</shared.resource.directory>
+        <shared.resource.directory>${wlpInstallDir}/usr/shared/resources</shared.resource.directory>
         <ddl.dir>${project.basedir}/ddls</ddl.dir>
         <wlpServerName>BonusPayout</wlpServerName>
         <derby.version>10.11.1.1</derby.version>
@@ -215,7 +215,6 @@
                     </execution>
                 </executions>
             </plugin>            
-            <!-- For a pre-existing install, we assume derby's already in place -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -265,6 +264,7 @@
                         <type>zip</type>
                     </assemblyArtifact>
                     <installDirectory>${wlp.install.dir}</installDirectory>
+                    <userDirectory>${wlpUserDir}</userDirectory>
                     <serverName>${wlpServerName}</serverName>
                     <bootstrapProperties>
                          <!-- propagate existing prop -->
