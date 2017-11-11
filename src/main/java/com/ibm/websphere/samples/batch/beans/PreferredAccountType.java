@@ -19,9 +19,10 @@ package com.ibm.websphere.samples.batch.beans;
 @PriorityAccount
 public class PreferredAccountType implements AccountType {
 
+	public static final String CODE = "CHK";
+
     @Override
     public String getAccountCode() {
-        return "PREF";
+        return CODE;
     }
-
 }

@@ -27,9 +27,10 @@ import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.beans.AccountType;
 import com.ibm.websphere.samples.batch.beans.CheckingAccountType;
+import com.ibm.websphere.samples.batch.beans.PreferredAccountType;
 import com.ibm.websphere.samples.batch.beans.PriorityAccount;
-import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
+import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 
 /**
  * Generate some random data, then write in CSV format into a text file.
@@ -111,12 +112,25 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
         }
         writer.close();
 
-        return null;
+        String cdi = isCDIEnabledExitStatus(accountCode);
+        //jobCtx.setExitStatus(cdi);
+        return cdi;
     }
 
     @Override
     public void stop() {
         stopped = true;
     }
+
+    private String isCDIEnabledExitStatus(String accountCode) {
+        if (accountCode.equals(CheckingAccountType.CODE)) {
+        	return "NOCDI";
+        } else if (accountCode.equals(PreferredAccountType.CODE)) {
+        	return "CDI";
+        } else {
+        	return "OTHER";
+        }
+    }
+
 
 }

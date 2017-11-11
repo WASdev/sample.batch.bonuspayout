@@ -18,9 +18,11 @@ package com.ibm.websphere.samples.batch.beans;
 
 public class CheckingAccountType implements AccountType {
 
+	public static final String CODE = "CHK";
+
     @Override
     public String getAccountCode() {
-        return "CHK";
+        return CODE;
     }
 
 }

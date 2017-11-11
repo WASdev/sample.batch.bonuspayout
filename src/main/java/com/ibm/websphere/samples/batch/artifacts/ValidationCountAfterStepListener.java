@@ -60,6 +60,9 @@ public class ValidationCountAfterStepListener extends AbstractStepListener imple
             logger.severe(errorMsg);
             throw new IllegalStateException(errorMsg);
         }
+        
+        
+        jobCtx.setExitStatus("YAYUH");
     }
 
 }
