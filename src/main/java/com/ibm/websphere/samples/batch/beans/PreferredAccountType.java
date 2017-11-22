@@ -16,10 +16,13 @@
  */
 package com.ibm.websphere.samples.batch.beans;
 
+import javax.enterprise.context.ApplicationScoped;
+
 @PriorityAccount
+@ApplicationScoped
 public class PreferredAccountType implements AccountType {
 
-	public static final String CODE = "CHK";
+    public static final String CODE = "PREF";
 
     @Override
     public String getAccountCode() {
