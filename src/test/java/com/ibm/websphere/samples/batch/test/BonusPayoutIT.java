@@ -47,7 +47,7 @@ import net.sf.expectit.Result;
 public class BonusPayoutIT {
 
 	// How long we wait for matching command line output in these tests
-	private int COMMAND_LINE_WAIT_TIME_SECONDS = 25;
+	private int COMMAND_LINE_WAIT_TIME_SECONDS = 40;
 	
 	private static enum SHELL_TYPE {UNIX, WINDOWS};
 	private static SHELL_TYPE shellType;
@@ -57,7 +57,7 @@ public class BonusPayoutIT {
 	private Expect expect;
 	private Process process;
 	private String warName = System.getProperty("warName");
-	private String wlpInstallDir = System.getProperty("wlpInstallDir");
+	private String wlpInstallDir = System.getProperty("wlp.install.dir");
 	private String batchPropsDir = System.getProperty("batch.props.directory");
 	private String serverHost = System.getProperty("serverHost");
 	private String httpsPort = System.getProperty("httpsPort");
