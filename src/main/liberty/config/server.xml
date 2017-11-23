@@ -4,10 +4,9 @@
     <featureManager>
         <feature>batchManagement-1.0</feature>
         <feature>localConnector-1.0</feature>
+        <feature>appSecurity-2.0</feature>
         <!-- This sample can work with or without CDI configured -->
         <feature>cdi-1.2</feature>
-        <feature>jsf-2.2</feature>
-        <feature>jaxrs-2.0</feature>
     </featureManager>
 
     <!-- To access this server from a remote client add a host attribute to
@@ -46,14 +45,18 @@
     <basicRegistry id="basic" realm="ibm/api">
         <user name="bob" password="bobpwd"/>
         <user name="jane" password="janepwd"/>
+        <user name="sam" password="sampwd"/>
     </basicRegistry>
 
     <authorization-roles id="com.ibm.ws.batch">
-        <security-role name="batchSubmitter">
+        <security-role name="batchAdmin">
             <user name="bob"/>
         </security-role>
         <security-role name="batchAdmin">
             <user name="jane"/>
+        </security-role>
+        <security-role name="batchSubmitter">
+            <user name="sam"/>
         </security-role>
     </authorization-roles>
 
