@@ -76,7 +76,7 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
         this.acctType = acctType;
     }
 
-    private boolean stopped = false;
+    private volatile boolean stopped = false;
 
     private BufferedWriter writer = null;
 
@@ -107,7 +107,7 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
             writer.newLine();
 
             if (stopped) {
-                logger.info("Aborting GenerateDataBatchlet since a stop was received");
+                logger.info("Stopping GenerateDataBatchlet since a stop was received");
                 writer.close();
                 return null;
             }
@@ -121,6 +121,7 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
 
     @Override
     public void stop() {
+        logger.info("Stop requested");
         stopped = true;
     }
 
