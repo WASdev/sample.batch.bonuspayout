@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.batch.api.BatchProperty;
 import javax.batch.api.Batchlet;
 import javax.batch.runtime.context.JobContext;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.beans.AccountType;
@@ -35,6 +36,7 @@ import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 /**
  * Generate some random data, then write in CSV format into a text file.
  */
+@Dependent
 public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
 
     private final static Logger logger = Logger.getLogger(BONUS_PAYOUT_LOGGER);
@@ -124,11 +126,11 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
 
     private String isCDIEnabledExitStatus(String accountCode) {
         if (accountCode.equals(CheckingAccountType.CODE)) {
-        	return "NOCDI";
+            return "NOCDI";
         } else if (accountCode.equals(PreferredAccountType.CODE)) {
-        	return "CDI";
+            return "CDI";
         } else {
-        	return "OTHER";
+            return "OTHER";
         }
     }
 
