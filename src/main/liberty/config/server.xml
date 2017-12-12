@@ -17,7 +17,11 @@
         <fileset dir="${shared.resource.dir}/derby"/>
     </library>
 
+    <!--
     <logging traceSpecification="BonusPayout=all=enabled"/>
+    <logging traceSpecification="BonusPayout=all=enabled:com.ibm.jbatch.*=all:com.ibm.ws.jbatch.*=all"/>
+    -->
+    <logging traceSpecification="BonusPayout=all=enabled:com.ibm.jbatch.*=all:com.ibm.ws.jbatch.*=all:RRA=all:WAS.j2c=all"/>
 
     <dataSource id="batchDB" type="javax.sql.XADataSource">
         <jdbcDriver libraryRef="DerbyLib"/>
