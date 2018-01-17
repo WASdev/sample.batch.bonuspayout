@@ -21,11 +21,13 @@ import java.util.logging.Logger;
 
 import javax.batch.api.BatchProperty;
 import javax.batch.api.chunk.ItemProcessor;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.beans.AccountDataObject;
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
 
+@Dependent
 public class ValidationProcessor implements ItemProcessor, BonusPayoutConstants {
 
     private final static Logger logger = Logger.getLogger(BONUS_PAYOUT_LOGGER);

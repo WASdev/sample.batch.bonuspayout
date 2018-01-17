@@ -19,10 +19,12 @@ package com.ibm.websphere.samples.batch.artifacts;
 import java.util.List;
 
 import javax.batch.api.chunk.AbstractItemWriter;
+import javax.enterprise.context.Dependent;
 
 /**
  * Does nothing (but spec doesn't allow an empty writer).
  */
+@Dependent
 public class NoOpWriter extends AbstractItemWriter {
 
     @Override

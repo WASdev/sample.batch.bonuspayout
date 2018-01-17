@@ -18,6 +18,7 @@ package com.ibm.websphere.samples.batch.artifacts;
 
 import javax.batch.api.BatchProperty;
 import javax.batch.api.chunk.listener.AbstractItemReadListener;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.beans.AccountDataObject;
@@ -30,6 +31,7 @@ import com.ibm.websphere.samples.batch.beans.AccountDataObject;
  * the count is performed relative to the first account number number read, rather
  * than kept as state in the form of a field of this class itself.
  */
+@Dependent
 public class ForceFailureReadListener extends AbstractItemReadListener {
 
     @Inject

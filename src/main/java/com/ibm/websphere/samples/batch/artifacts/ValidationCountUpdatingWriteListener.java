@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.batch.api.chunk.listener.AbstractItemWriteListener;
 import javax.batch.runtime.context.StepContext;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 /**
@@ -27,6 +28,7 @@ import javax.inject.Inject;
  * go out of our way to instead make use of persistent userdata in this class to
  * count the number of records validated in this step (or this partition).
  */
+@Dependent
 public class ValidationCountUpdatingWriteListener extends AbstractItemWriteListener {
 
     @Inject

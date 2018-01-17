@@ -27,11 +27,12 @@ import javax.batch.api.BatchProperty;
 import javax.batch.api.chunk.ItemReader;
 import javax.batch.runtime.context.JobContext;
 import javax.batch.runtime.context.StepContext;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.beans.AccountDataObject;
-import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
+import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 import com.ibm.websphere.samples.batch.util.TransientDataHolder;
 
 /*
@@ -42,8 +43,8 @@ import com.ibm.websphere.samples.batch.util.TransientDataHolder;
  * We will use an aggregate readItem to do this, reading both from the 
  * text file generated in the first step and the DB table inserted into
  * in the second step.
- * 
  */
+@Dependent
 public class ValidationReader implements ItemReader, BonusPayoutConstants {
 
     protected final static Logger logger = Logger.getLogger(BONUS_PAYOUT_LOGGER);

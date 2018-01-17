@@ -22,6 +22,7 @@ import javax.batch.api.listener.AbstractStepListener;
 import javax.batch.runtime.BatchStatus;
 import javax.batch.runtime.context.JobContext;
 import javax.batch.runtime.context.StepContext;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
@@ -30,6 +31,7 @@ import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
  * Verifies that the number of records we've processed in the validation step
  * equals the original number of records specified to be used for this job. 
  */
+@Dependent
 public class ValidationCountAfterStepListener extends AbstractStepListener implements BonusPayoutConstants {
 
     private final static Logger logger = Logger.getLogger(BONUS_PAYOUT_LOGGER);

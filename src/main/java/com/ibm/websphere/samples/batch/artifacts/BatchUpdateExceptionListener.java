@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.batch.api.chunk.listener.AbstractItemWriteListener;
+import javax.enterprise.context.Dependent;
 
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
 
@@ -29,6 +30,7 @@ import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
  * This class simply breaks apart a BatchUpdateException to log a more detailed
  * error message.
  */
+@Dependent
 public class BatchUpdateExceptionListener extends AbstractItemWriteListener implements BonusPayoutConstants {
 
     private final static Logger logger = Logger.getLogger(BONUS_PAYOUT_LOGGER);

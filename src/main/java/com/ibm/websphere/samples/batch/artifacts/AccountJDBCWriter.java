@@ -26,18 +26,20 @@ import javax.batch.api.BatchProperty;
 import javax.batch.api.chunk.AbstractItemWriter;
 import javax.batch.api.chunk.ItemWriter;
 import javax.batch.runtime.context.JobContext;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import com.ibm.websphere.samples.batch.beans.AccountDataObject;
-import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
+import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 
 /**
  * Loops through the items list building and finally executing a batch insert. 
  * 
  * Follow get-use-close pattern with JDBC Connection.
  */
+@Dependent
 public class AccountJDBCWriter extends AbstractItemWriter implements ItemWriter, BonusPayoutConstants {
 
     private final static Logger logger = Logger.getLogger(BONUS_PAYOUT_LOGGER);

@@ -22,15 +22,17 @@ import java.util.logging.Logger;
 
 import javax.batch.api.chunk.ItemReader;
 import javax.batch.runtime.context.JobContext;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.beans.AccountDataObject;
-import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
+import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 
 /**
  * Parses a line of the CSV file into an AccountDataObject.
  */
+@Dependent
 public class GeneratedCSVReader implements ItemReader, BonusPayoutConstants {
 
     private final static Logger logger = Logger.getLogger(BONUS_PAYOUT_LOGGER);

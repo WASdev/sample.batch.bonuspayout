@@ -26,14 +26,16 @@ import javax.batch.api.BatchProperty;
 import javax.batch.api.chunk.listener.ChunkListener;
 import javax.batch.runtime.context.JobContext;
 import javax.batch.runtime.context.StepContext;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
+import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 import com.ibm.websphere.samples.batch.util.TransientDataHolder;
 
+@Dependent
 public class ValidationDBReadChunkListener implements ChunkListener, BonusPayoutConstants {
 
     private final static Logger logger = Logger.getLogger(BONUS_PAYOUT_LOGGER);

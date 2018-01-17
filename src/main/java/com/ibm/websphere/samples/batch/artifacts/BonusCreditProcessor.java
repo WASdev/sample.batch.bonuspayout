@@ -18,6 +18,7 @@ package com.ibm.websphere.samples.batch.artifacts;
 
 import javax.batch.api.BatchProperty;
 import javax.batch.api.chunk.ItemProcessor;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.ibm.websphere.samples.batch.beans.AccountDataObject;
@@ -26,6 +27,7 @@ import com.ibm.websphere.samples.batch.util.BonusPayoutConstants;
 /**
  * Credit each balance with a 'bonus' amount.
  */
+@Dependent
 public class BonusCreditProcessor implements ItemProcessor, BonusPayoutConstants {
 
     @Inject
