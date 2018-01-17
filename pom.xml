@@ -3,7 +3,12 @@
     <groupId>net.wasdev.wlp.sample</groupId>
     <artifactId>batch-bonuspayout-application</artifactId>
     <packaging>war</packaging>
-    <!-- Never released 1.0, but this is a significant rework from 1.0-SNAPSHOT, so reversioning to 2.0-SNAPSHOT -->
+    <!--
+        The use of the liberty-maven 2.x plugin involves a significant rework from 1.0, so marking the next version as 2.0
+        (even though neither the application logic nor the packaged WAR structure has changed much since 1.0).
+
+        We are not currently releasing to Maven Central, but may use GitHub releases.
+    -->
     <version>2.0-SNAPSHOT</version>  
     <name>WAS Liberty Sample - Batch BonusPayout Sample</name>
 
@@ -48,7 +53,7 @@
        
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
-        <libertyVersion>17.0.0.3</libertyVersion>
+        <libertyVersion>17.0.0.4</libertyVersion>
         <db.url>${wlp.install.dir}/usr/shared/BatchDB</db.url>                                 
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
