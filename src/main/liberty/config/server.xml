@@ -17,25 +17,27 @@
         <fileset dir="${shared.resource.dir}/derby"/>
     </library>
 
-    <!--
     <logging traceSpecification="BonusPayout=all=enabled"/>
+    <!--
+         Debug batch runtime:
     <logging traceSpecification="BonusPayout=all=enabled:com.ibm.jbatch.*=all:com.ibm.ws.jbatch.*=all"/>
-    -->
+         Debug batch runtime and JDBC:
     <logging traceSpecification="BonusPayout=all=enabled:com.ibm.jbatch.*=all:com.ibm.ws.jbatch.*=all:RRA=all:WAS.j2c=all"/>
+    -->
 
     <dataSource id="batchDB" type="javax.sql.XADataSource">
         <jdbcDriver libraryRef="DerbyLib"/>
         <!-- The 'db.url' databaseName is set in bootstrap.properties -->
-        <!-- Set to 'false' since it's created as part of the Maven automation -->
-        <properties.derby.embedded createDatabase="false" databaseName="${db.url}" user="user" password="pass"/>
+        <properties.derby.embedded createDatabase="create" databaseName="${db.url}" user="user" password="pass"/>
     </dataSource>
 
-    <!--  In this sample we'll use the same database (as the runtime DB) but use a different DS to access it. -->
+    <!--  In this sample we'll use the same database (as the runtime DB) but use a different DS to access it.
+          Note that, while the database can be auto-created here, the application table within it needs to be
+          by first running the Maven build (so the app will fail if first run in WDT without creating the tables).
+    -->
     <dataSource id="appDB" jndiName="jdbc/batch" type="javax.sql.XADataSource">
         <jdbcDriver libraryRef="DerbyLib"/>
-        <!-- The 'db.url' databaseName is set in bootstrap.properties -->
-        <!-- Set to 'false' since it's created as part of the Maven automation -->
-        <properties.derby.embedded createDatabase="false" databaseName="${db.url}" user="user" password="pass"/>
+        <properties.derby.embedded createDatabase="create" databaseName="${db.url}" user="user" password="pass"/>
     </dataSource>
 
     <databaseStore dataSourceRef="batchDB" id="BatchDatabaseStore" schema="JBATCH" tablePrefix=""/>
