@@ -264,7 +264,7 @@
                 <configuration>
                     <assemblyArtifact>
                         <groupId>com.ibm.websphere.appserver.runtime</groupId>
-                        <artifactId>wlp-webProfile7</artifactId>
+                        <artifactId>wlp-javaee7</artifactId>
                         <version>${libertyVersion}</version>
                         <type>zip</type>
                     </assemblyArtifact>
