@@ -32,7 +32,8 @@ Say you have iterated through the above, and are happy with your updates and are
  
 1. Do a full Maven build:
 `$ mvn clean install`
-	* This will stop the server, wipe out and replace your WLP install with a clean installation, run the integration tests, and produce new binaries.
+
+This will stop the server, wipe out and replace your WLP install with a clean installation, run the integration tests, and produce new binaries.
 	
 At this point, you could start fresh from "Work with the app in both Maven & WDT" above and iterate through the process again. 
 
@@ -52,18 +53,28 @@ You can see them both here:
 
 ![serverConfig Image](images/serverConfig.png)  
 
-The top one is the [src/main/liberty/config/server.xml](../src/main/liberty/config/server.xml) that corresponds to the 
+The top one is the [src/main/liberty/config/server.xml](../src/main/liberty/config/server.xml) file that is versioned with your Git repostiory.
+
+The bottom one is derived by the WDT Maven plugin, and is the config that the Liberty server actually runs against.
+If you open it up you'll see it it lives within the **target** subdirectory of the repository root.
+
+So a good practice is to simply:
+ 
+1. Edit the **src** (top) version when making changes, Save, and, 
+2. Allow the WDT Maven plugin to propagate/synchronize the changes to the **target** version, where they will be picked up by the runtime (restarting the app, and starting/stopping/restarting runtime components as necessary).
+
+And of course, since the **src** server.xml is versioned along with the rest of the Git repo, you can leverage Git to manage change history, etc.  
   
-----
-https://developer.ibm.com/wasdev/blog/2017/06/28/wdt-in-eclipse-and-maven-integration/
-
-Use the Servers view to see a clear representation of the server configuration files within your Maven project. The files listed under the Maven Target folder are derived from your Maven project’s target folder. These files are intended for read-only consumption. Use the files listed directly under the server that correspond to the files in your Maven project’s src folder to update your server’s configuration. They are copied to the target.
-
-9. server config change
-
 ## Further Reading
+
+Each of these articles give a different overview/introduction to the Maven WDT integration, with different screenshots and highlights (from a broader rather than a batch-specific perspective). 
+
+If you've worked through this sample up until now these will help reinforce what you learned and show another thing or two. 
+
 * [WDT in Eclipse and Maven integration][wdt-mvn-1]
 * [Building and running Liberty apps with Maven in Eclipse][wdt-mvn-2]
+
+**Note**: the current sample has a couple differences, most importantly the need to do a Maven build **before** importing the project into WDT.   Also we do **Run As -> Java EE Batch Job** rather than ** Run On Server**.
 
 ## Links
 * Jump to [main page](/README.md)
