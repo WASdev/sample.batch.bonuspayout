@@ -2,7 +2,7 @@
 
 Finally we get to our ultimate goal, and the whole point of structuring the project and importing it following the steps described up until now (see [previous instructions][wdt]).
 
-## Modifying the app or server config
+## Modifying the app
 
 You could modify the app in any number of ways:
 * You could cause the job to fail.   
@@ -36,13 +36,24 @@ Say you have iterated through the above, and are happy with your updates and are
 	
 At this point, you could start fresh from "Work with the app in both Maven & WDT" above and iterate through the process again. 
 
-### Changing server configuration
+## Changing server configuration
 
-Of course, this is Liberty, so you can modify the server configuration at any point, and even if the server is started the runtime will dynamically adjust to incorporate your changes.   
+Of course, this is Liberty, so you can modify the server configuration at any point. Even if the server is started, the runtime will dynamically adjust to incorporate your changes.   
 
-So you don't need to think of this as a separate "use case" as it could be done at any point in the "Work with the app..." sequences detailed above.
+So you don't need to think of this as a separate "use case".  It could be done at any point in the "Work with the app..." sequences detailed above.
 
-The one thing you should realize is that there are actually **two** copies of the server.xml that you can see and might come across in your WDT workspace.  
+You could add/remove features, add more trace/logging, change connection pooling parameters, any number of things, then "Save" and the server and application will automatically update (similar to how the app will be updated with a change to an application part). 
+
+### Where to find server config in WDT (server.xml)
+
+One thing you should realize is that there are actually **two** copies of the server.xml that you can see in your WDT workspace.
+
+You can see them both here:
+
+![serverConfig Image](images/serverConfig.png)  
+
+The top one is the [src/main/liberty/config/server.xml](../src/main/liberty/config/server.xml) that corresponds to the 
+  
 ----
 https://developer.ibm.com/wasdev/blog/2017/06/28/wdt-in-eclipse-and-maven-integration/
 
@@ -51,8 +62,8 @@ Use the Servers view to see a clear representation of the server configuration f
 9. server config change
 
 ## Further Reading
-* [WDT in Eclipse and Maven integration](https://developer.ibm.com/wasdev/blog/2017/06/28/wdt-in-eclipse-and-maven-integration)
-* [Building and running Liberty apps with Maven in Eclipse](https://developer.ibm.com/wasdev/docs/building-liberty-apps-maven-in-eclipse/) 
+* [WDT in Eclipse and Maven integration][wdt-mvn-1]
+* [Building and running Liberty apps with Maven in Eclipse][wdt-mvn-2]
 
 ## Links
 * Jump to [main page](/README.md)
@@ -61,3 +72,5 @@ Use the Servers view to see a clear representation of the server configuration f
 
 
 [wdt]: /docs/Using-WDT.md  "Using WDT"
+[wdt-mvn-1]: https://developer.ibm.com/wasdev/blog/2017/06/28/wdt-in-eclipse-and-maven-integration "WDT in Eclipse and Maven integration"
+[wdt-mvn-2]: https://developer.ibm.com/wasdev/docs/building-liberty-apps-maven-in-eclipse/ "Building and running Liberty apps with Maven in Eclipse"
