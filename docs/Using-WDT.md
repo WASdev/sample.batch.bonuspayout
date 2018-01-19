@@ -1,4 +1,4 @@
-# Eclipse / WDT
+# Using WDT (in Eclipse)
 
 The WebSphere Development Tools (WDT) for Eclipse can be used to control the server (start/stop/dump/etc.), it also supports incremental publishing with minimal restarts, working with a debugger to step through your applications, etc.
 
