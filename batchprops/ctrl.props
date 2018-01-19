@@ -1,0 +1,7 @@
+--batchManager=localhost:9443
+--user=bob
+--password=bobpwd
+--applicationName=batch-bonuspayout-application
+--pollingInterval_s=2
+--jobXMLName=BonusPayoutJob
+--wait
