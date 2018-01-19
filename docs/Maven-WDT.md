@@ -38,6 +38,16 @@ At this point, you could start fresh from "Work with the app in both Maven & WDT
 
 ### Changing server configuration
 
+Of course, this is Liberty, so you can modify the server configuration at any point, and even if the server is started the runtime will dynamically adjust to incorporate your changes.   
+
+So you don't need to think of this as a separate "use case" as it could be done at any point in the "Work with the app..." sequences detailed above.
+
+The one thing you should realize is that there are actually **two** copies of the server.xml that you can see and might come across in your WDT workspace.  
+----
+https://developer.ibm.com/wasdev/blog/2017/06/28/wdt-in-eclipse-and-maven-integration/
+
+Use the Servers view to see a clear representation of the server configuration files within your Maven project. The files listed under the Maven Target folder are derived from your Maven project’s target folder. These files are intended for read-only consumption. Use the files listed directly under the server that correspond to the files in your Maven project’s src folder to update your server’s configuration. They are copied to the target.
+
 9. server config change
 
 ## Further Reading
