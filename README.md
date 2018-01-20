@@ -5,7 +5,14 @@ It uses the *batchManager* command-line utility to conveniently wrapper the REST
 
 It involves a three-step job, which generates some random data, performs a calculation on it (writing the result into the database), and then verifies the result.
 
-Browse the code to see what it does, or build and run it yourself:
+## SAMPLE INSTRUCTIONS ON WIKI
+[START HERE](https://github.com/WASdev/sample.batch.bonuspayout/wiki/)
+
+## QUICK LINKS
+
+The first time through you should start at the above link and step through in-order.
+
+Once you are more familiar, here are some key shortcuts to the Wiki doc:
 
 * [Building and running with Maven][1]
 * [Using Eclipse and WebSphere Development Tools (WDT)][2]
