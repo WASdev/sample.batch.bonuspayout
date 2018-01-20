@@ -7,26 +7,33 @@ It involves a three-step job, which generates some random data, performs a calcu
 
 Browse the code to see what it does, or build and run it yourself:
 
-* [Building and running with Maven](/docs/Maven-integration.md)
-* [Using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
-* [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
-* [Run the sample manually from the command line](/docs/Running-manually-from-CLI.md)
-* [Take a deeper look at the sample application](/docs/ApplicationDetails.md)
-* [Organizing the project to support WDT publish and deploy within Maven build] (/docs/Using-Maven-With-WDT-Published-App.md)
+* [Building and running with Maven][1]
+* [Using Eclipse and WebSphere Development Tools (WDT)][2]
+* [Using WDT and Maven at the same time][3]
+* [Run the sample manually from the command line][4]
+* [Take a deeper look at the sample application][5]
 
 ## Further reading
 
 * [A nice set of documents](https://www.ibm.com/support/techdocs/atsmastr.nsf/WebIndex/WP102544) describing Java Batch in WebSphere at various levels of detail (WP102544)
-* [Other WebSphere Liberty Batch links](https://github.com/WASdev/sample.batch.bonuspayout/wiki/WebSphereLibertyBatchLinks)
+* [Other WebSphere Liberty Batch links][6]
 
 ## Acknowledgements
 
 * As noted in the [maven integration](/docs/Maven-integration.md) page, this sample uses the [Liberty maven](https://github.com/WASdev/ci.maven) plugin
 * Uses [ExpectIt](https://github.com/Alexey1Gavrilov/ExpectIt) for testing the ***batchManager*** command-line output
 
+[1]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Maven-integration.md "Running with Maven"
+[2]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-WDT.md "Using WDT"
+[3]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Maven-WDT.md "Maven with WDT"
+[4]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Running-manually-from-CLI.md "Running with CLI"
+[5]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/ApplicationDetails.md "App details"
+[6]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/WebSphereLibertyBatchLinks "Liberty Batch links"
+
+
 ## Notice
 
-© Copyright IBM Corporation 2015.
+© Copyright IBM Corporation 2015, 2018.
 
 ## License
 
