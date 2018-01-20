@@ -30,11 +30,11 @@ Once you are more familiar, here are some key shortcuts to the Wiki doc:
 * As noted in the [maven integration](/docs/Maven-integration.md) page, this sample uses the [Liberty maven](https://github.com/WASdev/ci.maven) plugin
 * Uses [ExpectIt](https://github.com/Alexey1Gavrilov/ExpectIt) for testing the ***batchManager*** command-line output
 
-[1]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Maven-integration.md "Running with Maven"
-[2]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-WDT.md "Using WDT"
-[3]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Maven-WDT.md "Maven with WDT"
-[4]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Running-manually-from-CLI.md "Running with CLI"
-[5]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/ApplicationDetails.md "App details"
+[1]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-Maven "Running with Maven"
+[2]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-WDT "Using WDT"
+[3]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-Maven-With-WDT "Maven with WDT"
+[4]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-batchManager-CLI "Running with CLI"
+[5]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/ApplicationDetails "App details"
 [6]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/WebSphereLibertyBatchLinks "Liberty Batch links"
 
 
