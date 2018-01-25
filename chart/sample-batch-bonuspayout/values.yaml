@@ -71,7 +71,7 @@ resources:
 
 ssl:
   enabled: true
-  useClusterSSLConfiguration: false
+  useClusterSSLConfiguration: true
   createClusterSSLConfiguration: false
 
 ingress:
