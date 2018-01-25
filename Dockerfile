@@ -2,7 +2,7 @@ FROM websphere-liberty:latest
 
 #Copy server config
 COPY src/main/liberty/config/server.xml /config/server.xml
-COPY target/liberty/wlp/usr/servers/BonusPayout/bootstrap.properties /config/bootstrap.properties
+RUN echo db.url=/opt/ibm/wlp/usr/shared/BatchDB >> /config/bootstrap.properties
 
 #Copy derby database artifacts
 COPY target/liberty/wlp/usr/shared /opt/ibm/wlp/usr/shared
