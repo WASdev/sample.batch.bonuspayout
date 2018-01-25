@@ -46,7 +46,7 @@
 
     <applicationMonitor updateTrigger="mbean"/>
 
-    <keyStore id="defaultKeyStore" password="${MB_KEYSTORE_PASSWORD}"/>
+    <keyStore id="defaultKeyStore" password="${env.MB_KEYSTORE_PASSWORD}"/>
 
     <basicRegistry id="basic" realm="ibm/api">
         <user name="bob" password="bobpwd"/>
