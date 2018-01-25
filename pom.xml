@@ -276,7 +276,8 @@
                          <db.url>${db.url}</db.url>
                          <appLocation>${project.artifactId}.war</appLocation>
                     </bootstrapProperties>
-                    <configFile>src/main/liberty/config/server.xml</configFile>
+                    <configDirectory>src/main/liberty/config</configDirectory>
+                    <!--<configFile>src/main/liberty/config/server.xml</configFile>-->
                     <appsDirectory>apps</appsDirectory>
                     <installAppPackages>project</installAppPackages>
                     <looseApplication>true</looseApplication>
@@ -328,7 +329,6 @@
                         <httpsPort>${httpsPort}</httpsPort>
                         <serverHost>${serverHost}</serverHost>
                         <warName>${project.artifactId}</warName>
-                        <MB_KEYSTORE_PASSWORD>Liberty</MB_KEYSTORE_PASSWORD>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
