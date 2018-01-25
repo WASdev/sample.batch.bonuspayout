@@ -46,7 +46,7 @@
 
     <applicationMonitor updateTrigger="mbean"/>
 
-    <keyStore id="defaultKeyStore" password="Liberty"/>
+    <!--<keyStore id="defaultKeyStore" password="Liberty"/>-->
 
     <basicRegistry id="basic" realm="ibm/api">
         <user name="bob" password="bobpwd"/>
