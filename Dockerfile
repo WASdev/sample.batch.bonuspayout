@@ -9,6 +9,9 @@ COPY target/liberty/wlp/usr/shared /opt/ibm/wlp/usr/shared
 #Copy application war
 COPY target/batch-bonuspayout-application.war /config/dropins/batch-bonuspayout-application.war
 
+#Copy database ddls
+COPY ddls /opt/ddls
+
 #Copy batch job props
 COPY batchprops /opt/batchprops
 
