@@ -77,8 +77,8 @@ ssl:
 ingress:
   enabled: false
   secureBackends: true
-  rewriteTarget: "/"
-  path: "/liberty"
+  rewriteTarget: "/ibm/api/batch"
+  path: "/ibm/api/batch/"
 
 ###############################################################################
 ## MicroProfile
