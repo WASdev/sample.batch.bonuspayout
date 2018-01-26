@@ -75,7 +75,7 @@ ssl:
   createClusterSSLConfiguration: false
 
 ingress:
-  enabled: false
+  enabled: true
   secureBackends: true
   rewriteTarget: "/ibm/api/batch"
   path: "/ibm/api/batch/"
