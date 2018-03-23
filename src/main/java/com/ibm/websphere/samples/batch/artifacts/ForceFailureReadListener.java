@@ -18,6 +18,7 @@ package com.ibm.websphere.samples.batch.artifacts;
 
 import javax.batch.api.BatchProperty;
 import javax.batch.api.chunk.listener.AbstractItemReadListener;
+import javax.batch.runtime.context.JobContext;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
@@ -38,6 +39,9 @@ public class ForceFailureReadListener extends AbstractItemReadListener {
     @BatchProperty(name = "forceFailure")
     private String failOnStr;
 
+    @Inject
+    JobContext jobCtx;
+    
     // Helps initialize, toggle on/off, and cache the forced failure config.
     private ForcedFailureConfig failureConfig;
 
@@ -68,6 +72,7 @@ public class ForceFailureReadListener extends AbstractItemReadListener {
                 String excMessage = "Forcing failure.  The failOn property = " + failOn +
                                     ", with the first record number = " + firstRecordNumber +
                                     ", and the current record number = " + currentRecordNumber;
+                jobCtx.setExitStatus("FORCE FAILURE ON = " + failOn + " AT " + currentRecordNumber) ;
                 throw new IllegalStateException(excMessage);
             }
         }
