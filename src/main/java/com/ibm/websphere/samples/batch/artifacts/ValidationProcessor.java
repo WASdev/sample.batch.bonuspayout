@@ -67,8 +67,8 @@ public class ValidationProcessor implements ItemProcessor, BonusPayoutConstants 
             throw new IllegalStateException(errorMsg);
         }
 
-        if (logger.isLoggable(Level.FINER)) {
-            logger.finer("Verified match for records for account # " + tableDO.getAccountNumber());
+        if (logger.isLoggable(Level.FINEST)) {
+            logger.finest("Verified match for records for account # " + tableDO.getAccountNumber());
         }
         return tableDO;
     }
