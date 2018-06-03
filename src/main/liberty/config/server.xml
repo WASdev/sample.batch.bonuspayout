@@ -15,9 +15,6 @@
 -->
     </featureManager>
 
-    <include location="db2cl.xml" />
-
-
 <!-- A user of the Admin Center Java Batch tool must ALSO be an administrator.  This is independent of whatever batch roles,
      "batchAdmin", "batchSubmitter", etc. are mapped to this user. 
      Leave this commented out for now -->
