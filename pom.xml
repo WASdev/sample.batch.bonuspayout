@@ -53,7 +53,7 @@
        
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
-        <libertyVersion>18.0.0.1</libertyVersion>
+        <libertyVersion>18.0.0.2</libertyVersion>
         <db.url>${wlp.install.dir}/usr/shared/BatchDB</db.url>                                 
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
