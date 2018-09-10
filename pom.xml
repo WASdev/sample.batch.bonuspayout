@@ -314,6 +314,7 @@
                 <version>2.19.1</version>
                 <executions>
                     <execution>
+                        <id>integration-test</id>
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
