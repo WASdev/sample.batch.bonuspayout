@@ -1,4 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>net.wasdev.wlp.maven.parent</groupId>
+        <artifactId>liberty-maven-app-parent</artifactId>
+        <version>2.6</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.wasdev.wlp.sample</groupId>
     <artifactId>batch-bonuspayout-application</artifactId>
@@ -20,11 +27,7 @@
         </license>
     </licenses>
 
-    <parent>
-        <groupId>net.wasdev.wlp.maven.parent</groupId>
-        <artifactId>liberty-maven-app-parent</artifactId>
-        <version>2.1</version>
-    </parent>
+
     
     <scm>
         <connection>scm:git:git@github.com:WASdev/sample.batch.bonuspayout.git</connection>
@@ -259,7 +262,6 @@
             <plugin>
                 <groupId>net.wasdev.wlp.maven.plugins</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>2.6</version>
                 <extensions>true</extensions>
                 <configuration>
                     <assemblyArtifact>
@@ -282,31 +284,10 @@
                     <looseApplication>true</looseApplication>
                     <packageFile>${package.file}</packageFile>
                     <include>${packaging.type}</include>
+                    <features>
+                        <acceptLicense>true</acceptLicense>
+                    </features>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>install-feature</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>install-feature</goal>
-                        </goals>
-                        <configuration>
-                            <features>
-                                <acceptLicense>true</acceptLicense>
-                            </features>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>package-server</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>package-server</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipPackage}</skip>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
