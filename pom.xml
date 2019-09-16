@@ -54,7 +54,7 @@
        
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
-        <libertyVersion>19.0.0.4</libertyVersion>
+        <openliberty.version>19.0.0.9</openliberty.version>
         <db.url>${wlp.install.dir}/usr/shared/BatchDB</db.url>                                 
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
@@ -263,9 +263,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <assemblyArtifact>
-                        <groupId>com.ibm.websphere.appserver.runtime</groupId>
-                        <artifactId>wlp-javaee7</artifactId>
-                        <version>${libertyVersion}</version>
+                        <groupId>io.openliberty</groupId>
+                        <artifactId>openliberty-runtime</artifactId>
+                        <version>${openliberty.version}</version>
                         <type>zip</type>
                     </assemblyArtifact>
                     <installDirectory>${wlpInstallDir}</installDirectory>
