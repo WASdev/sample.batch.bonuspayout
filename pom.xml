@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>net.wasdev.wlp.maven.parent</groupId>
+        <groupId>io.openliberty.tools</groupId>
         <artifactId>liberty-maven-app-parent</artifactId>
-        <version>2.6</version>
+        <version>3.0.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -11,12 +11,12 @@
     <artifactId>batch-bonuspayout-application</artifactId>
     <packaging>war</packaging>
     <!--
-        The use of the liberty-maven 2.x plugin involves a significant rework from 1.0, so marking the next version as 2.0
+        The use of the liberty-maven 3.0 plugin involves a significant rework from 2.0, so marking the next version as 3.0
         (even though neither the application logic nor the packaged WAR structure has changed much since 1.0).
 
         We are not currently releasing to Maven Central, but may use GitHub releases.
     -->
-    <version>2.0-SNAPSHOT</version>  
+    <version>3.0-SNAPSHOT</version>  
     <name>WAS Liberty Sample - Batch BonusPayout Sample</name>
 
     <licenses>
@@ -27,8 +27,6 @@
         </license>
     </licenses>
 
-
-    
     <scm>
         <connection>scm:git:git@github.com:WASdev/sample.batch.bonuspayout.git</connection>
         <developerConnection>scm:git@github.com:WASdev/sample.batch.bonuspayout.git</developerConnection>
@@ -79,16 +77,16 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <package.file>${project.build.directory}/${project.artifactId}.jar</package.file>
-        <packaging.type>minify,runnable</packaging.type>
+        <packaging.include>minify</packaging.include>
+        <packaging.type>jar</packaging.type>
     </properties>
     
     <profiles>
         <profile>
             <id>usr-package</id>
             <properties>
-                <package.file>${project.build.directory}/${project.artifactId}.zip</package.file>
-                <packaging.type>usr</packaging.type>
+                <packaging.include>usr</packaging.include>
+                <packaging.type>zip</packaging.type>
             </properties>        
         </profile>    
         <profile>
@@ -260,7 +258,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
@@ -274,19 +272,11 @@
                     <userDirectory>${wlpUserDir}</userDirectory>
                     <serverName>${wlpServerName}</serverName>
                     <bootstrapProperties>
-                         <!-- propagate existing prop -->
                          <db.url>${db.url}</db.url>
                          <appLocation>${project.artifactId}.war</appLocation>
                     </bootstrapProperties>
-                    <configFile>src/main/liberty/config/server.xml</configFile>
-                    <appsDirectory>apps</appsDirectory>
-                    <installAppPackages>project</installAppPackages>
-                    <looseApplication>true</looseApplication>
-                    <packageFile>${package.file}</packageFile>
-                    <include>${packaging.type}</include>
-                    <features>
-                        <acceptLicense>true</acceptLicense>
-                    </features>
+                    <include>${packaging.include}</include>
+                    <packageType>${packaging.type}</packageType>
                 </configuration>
             </plugin>
             <plugin>
