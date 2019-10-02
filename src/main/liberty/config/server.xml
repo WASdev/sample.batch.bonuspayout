@@ -7,7 +7,7 @@
         <feature>appSecurity-2.0</feature>
 
         <!-- This sample can work without CDI configured, but the use of CDI is always strongly encouraged with batch. -->
-        <feature>cdi-1.2</feature>
+        <feature>cdi-2.0</feature>
 
         <!-- Admin Center Java Batch tool, don't download by default  -->
 <!--

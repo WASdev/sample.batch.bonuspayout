@@ -54,7 +54,7 @@
        
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
-        <openliberty.version>19.0.0.9</openliberty.version>
+        <liberty.version>19.0.0.9</liberty.version>
         <db.url>${wlp.install.dir}/usr/shared/BatchDB</db.url>                                 
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
@@ -98,6 +98,30 @@
             <properties>
                 <wlp.install.dir>${wlpInstallDir}</wlp.install.dir>
             </properties>
+        </profile>
+        <profile>
+            <id>use-open-liberty</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property><name>ol</name></property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.openliberty.tools</groupId>
+                        <artifactId>liberty-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <assemblyArtifact>
+                                <groupId>io.openliberty</groupId>
+                                <artifactId>openliberty-runtime</artifactId>
+                                <version>${liberty.version}</version>
+                                <type>zip</type>
+                            </assemblyArtifact>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
     
@@ -263,9 +287,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <assemblyArtifact>
-                        <groupId>io.openliberty</groupId>
-                        <artifactId>openliberty-runtime</artifactId>
-                        <version>${openliberty.version}</version>
+                        <groupId>com.ibm.websphere.appserver.runtime</groupId>
+                        <artifactId>wlp-javaee8</artifactId>
+                        <version>${liberty.version}</version>
                         <type>zip</type>
                     </assemblyArtifact>
                     <installDirectory>${wlpInstallDir}</installDirectory>
