@@ -10,19 +10,15 @@
         <feature>cdi-2.0</feature>
 
         <!-- Admin Center Java Batch tool, don't download by default  -->
-<!--
         <feature>adminCenter-1.0</feature>
--->
     </featureManager>
 
 <!-- A user of the Admin Center Java Batch tool must ALSO be an administrator.  This is independent of whatever batch roles,
      "batchAdmin", "batchSubmitter", etc. are mapped to this user. 
      Leave this commented out for now -->
-<!--
     <administrator-role>
       <user>bob</user>
    </administrator-role>
--->
 
     <!-- To access this server from a remote client add a host attribute to
         the following element, e.g. host="*" -->
@@ -53,6 +49,13 @@
     <dataSource id="appDB" jndiName="jdbc/batch" type="javax.sql.XADataSource">
         <jdbcDriver libraryRef="DerbyLib"/>
         <properties.derby.embedded createDatabase="create" databaseName="${db.url}" user="user" password="pass"/>
+    </dataSource>
+
+    <!-- Create a non-transactional datasource that can be used with a holdable cursor -->
+    <dataSource id="appReadOnlyDB" jndiName="jdbc/ReadOnlyDS">
+        <jdbcDriver libraryRef="DerbyLib"/>
+        <properties.derby.embedded createDatabase="create" databaseName="${db.url}" user="user" password="pass"/>
+        <connectionManager enableSharingForDirectLookups="false"/>
     </dataSource>
 
     <databaseStore dataSourceRef="batchDB" id="BatchDatabaseStore" schema="JBATCH" tablePrefix=""/>
