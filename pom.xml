@@ -3,7 +3,7 @@
     <parent>
         <groupId>io.openliberty.tools</groupId>
         <artifactId>liberty-maven-app-parent</artifactId>
-        <version>3.0.1</version>
+        <version>3.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -11,7 +11,7 @@
     <artifactId>batch-bonuspayout-application</artifactId>
     <packaging>war</packaging>
     <!--
-        The use of the liberty-maven 3.0 plugin involves a significant rework from 2.0, so marking the next version as 3.0
+        The use of the liberty-maven 3.x plugin involves a significant rework from 2.0, so marking the next version as 3.0
         (even though neither the application logic nor the packaged WAR structure has changed much since 1.0).
 
         We are not currently releasing to Maven Central, but may use GitHub releases.
