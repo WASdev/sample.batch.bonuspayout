@@ -70,7 +70,9 @@
 
     <batchPersistence jobStoreRef="BatchDatabaseStore"/>
 
+    <!--
     <applicationMonitor updateTrigger="mbean"/>
+-->
 
     <keyStore id="defaultKeyStore" password="Liberty"/>
 
@@ -92,4 +94,6 @@
         </security-role>
     </authorization-roles>
 
+    <webApplication id="batch-bonuspayout-application" location="batch-bonuspayout-application.war" name="batch-bonuspayout-application"/>
+    
 </server>
