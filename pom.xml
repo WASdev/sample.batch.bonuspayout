@@ -1,15 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <parent>
-        <groupId>io.openliberty.tools</groupId>
-        <artifactId>liberty-maven-app-parent</artifactId>
-        <version>3.1</version>
+    <parent><!--required parent POM-->
+        <groupId>dev.appsody</groupId>
+        <artifactId>java-openliberty</artifactId>
+        <version>[0.1,0.2)</version>
+        <relativePath/>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.wasdev.wlp.sample</groupId>
     <artifactId>batch-bonuspayout-application</artifactId>
     <packaging>war</packaging>
+
     <!--
         The use of the liberty-maven 3.x plugin involves a significant rework from 2.0, so marking the next version as 3.0
         (even though neither the application logic nor the packaged WAR structure has changed much since 1.0).
@@ -55,22 +57,27 @@
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
         <liberty.version>19.0.0.12</liberty.version>
-        <db.url>${wlp.install.dir}/usr/shared/BatchDB</db.url>                                 
+
+        <!-- app-specific at this point -->
+        <wlp.user.dir>${wlp.install.dir}/usr</wlp.user.dir>
+
+        <db.url>${wlp.user.dir}/shared/BatchDB</db.url>                                 
+
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
-
-        <!-- DON'T EDIT after this point -->
 
         <!-- 
              Confusing, so to clarify, 
                 'wlpInstallDir' => May or may not be set by caller.  If set, points to pre-existing Liberty install.   If not, we install Liberty during build.
                 'wlp.install.dir' =>   Will always be set, to either 'wlpInstallDir' (via plugin activation) or to Liberty default location, (immediately below in next line)
-         --> 
+
         <wlp.install.dir>${project.build.directory}/liberty/wlp</wlp.install.dir>  
+         --> 
 
         <batch.props.directory>${project.basedir}/batchprops</batch.props.directory>
-        <shared.resource.directory>${wlp.install.dir}/usr/shared/resources</shared.resource.directory>
+        <shared.resource.directory>${wlp.user.dir}/shared/resources</shared.resource.directory>
         <ddl.dir>${project.basedir}/ddls</ddl.dir>
+
         <wlpServerName>BonusPayout</wlpServerName>
         <derby.version>10.11.1.1</derby.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,6 +89,7 @@
     </properties>
     
     <profiles>
+        <!--
         <profile>
             <id>usr-package</id>
             <properties>
@@ -123,6 +131,7 @@
                 </plugins>
             </build>
         </profile>
+     -->
     </profiles>
     
     <dependencies>
@@ -139,11 +148,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Just add one dependency on all EE 7 APIs -->
+         <!-- Aggregate of Jakarta EE APIs -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>8.0.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -176,8 +185,8 @@
                                 <echo>******** Database location will be at URL: </echo>
                                 <echo>******** ${db.url}</echo>
                                 <echo>********</echo>
-                                <echo>******** Liberty install location will be at : </echo>
-                                <echo>******** ${wlp.install.dir}</echo>
+                                <echo>******** Liberty user dir will be at : </echo>
+                                <echo>******** ${wlp.user.dir}</echo>
                                 <echo>********</echo>
                                 <echo>********</echo>
                             </tasks>
@@ -275,7 +284,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>${version.maven-war-plugin}</version>
                 <configuration>
                     <packagingExcludes>pom.xml</packagingExcludes>
                     <stripVersion>true</stripVersion>
@@ -284,32 +293,19 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <extensions>true</extensions>
                 <configuration>
-                    <assemblyArtifact>
-                        <groupId>com.ibm.websphere.appserver.runtime</groupId>
-                        <artifactId>wlp-javaee8</artifactId>
-                        <version>${liberty.version}</version>
-                        <type>zip</type>
-                    </assemblyArtifact>
-                    <installDirectory>${wlpInstallDir}</installDirectory>
-                    <userDirectory>${wlpUserDir}</userDirectory>
-                    <serverName>${wlpServerName}</serverName>
                     <bootstrapProperties>
                          <db.url>${db.url}</db.url>
-                         <appLocation>${project.artifactId}.war</appLocation>
                     </bootstrapProperties>
-                    <include>${packaging.include}</include>
-                    <packageType>${packaging.type}</packageType>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>${version.maven-failsafe-plugin}</version>
                 <executions>
                     <execution>
-                        <id>integration-test</id>
+                        <id>default-cli</id>
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
