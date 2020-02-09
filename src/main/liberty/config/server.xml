@@ -9,8 +9,10 @@
         <!-- This sample can work without CDI configured, but the use of CDI is always strongly encouraged with batch. -->
         <feature>cdi-2.0</feature>
 
-        <!-- Admin Center Java Batch tool, don't download by default  -->
-        <feature>adminCenter-1.0</feature>
+        <!-- For connection validation -->
+        <feature>appSecurity-2.0</feature>
+        <feature>restConnector-2.0</feature>
+
     </featureManager>
 
 <!-- A user of the Admin Center Java Batch tool must ALSO be an administrator.  This is independent of whatever batch roles,
@@ -39,7 +41,7 @@
     <dataSource id="batchDB" type="javax.sql.XADataSource">
         <jdbcDriver libraryRef="DerbyLib"/>
         <!-- The 'db.url' databaseName is set in bootstrap.properties -->
-        <properties.derby.embedded createDatabase="create" databaseName="${db.url}" user="user" password="pass"/>
+        <properties.derby.embedded createDatabase="create" databaseName="${db.url}" user="user" password="pass" />
     </dataSource>
 
     <!--  In this sample we'll use the same database (as the runtime DB) but use a different DS to access it.
