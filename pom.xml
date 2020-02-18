@@ -217,7 +217,7 @@
                 <executions>
                     <execution>
                         <id>drop-db-before-test-if-any</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
@@ -230,7 +230,7 @@
                     </execution>
                     <execution>
                         <id>create-db</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
@@ -244,7 +244,7 @@
                     </execution>
                     <execution>
                         <id>shutdown-database-so-that-test-can-run</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
