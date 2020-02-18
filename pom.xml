@@ -294,6 +294,15 @@
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>create</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <bootstrapProperties>
                          <db.url>${db.url}</db.url>
