@@ -75,6 +75,9 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
     public void setAccountType(@PriorityAccount AccountType acctType) {
         this.acctType = acctType;
     }
+    static { System.out.println("TKTK: Running with patch developed 2-13-20 of class GDB");
+		// TODO Auto-generated constructor stub
+	}
 
     private volatile boolean stopped = false;
 

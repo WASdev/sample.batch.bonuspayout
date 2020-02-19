@@ -306,6 +306,7 @@
                 <configuration>
                     <bootstrapProperties>
                          <db.url>${db.url}</db.url>
+                         <serverStartTimeout>75</serverStartTimeout>
                     </bootstrapProperties>
                 </configuration>
             </plugin>
