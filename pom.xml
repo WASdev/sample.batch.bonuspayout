@@ -62,7 +62,8 @@
         <!-- app-specific at this point -->
         <wlp.user.dir>${wlp.install.dir}/usr</wlp.user.dir>
 
-        <db.url>${wlp.user.dir}/shared/BatchDB</db.url>                                 
+        <derby.url>${wlp.user.dir}/shared/BatchDB</derby.url>                                 
+        <liberty.defaultVar.derby.url>${derby.url}</liberty.defaultVar.derby.url>
 
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
@@ -184,7 +185,7 @@
                                 <echo>********</echo>
                                 <echo>********</echo>
                                 <echo>******** Database location will be at URL: </echo>
-                                <echo>******** ${db.url}</echo>
+                                <echo>******** ${derby.url}</echo>
                                 <echo>********</echo>
                                 <echo>******** Liberty user dir will be at : </echo>
                                 <echo>******** ${wlp.user.dir}</echo>
@@ -212,7 +213,7 @@
                 </dependencies>
                 <configuration>
                     <driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
-                    <url>jdbc:derby:${db.url};create=true</url>
+                    <url>jdbc:derby:${derby.url};create=true</url>
                 </configuration>
                 <executions>
                     <execution>
@@ -249,7 +250,7 @@
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                            <url>jdbc:derby:${db.url};shutdown=true</url>
+                            <url>jdbc:derby:${derby.url};shutdown=true</url>
                             <skipOnConnectionError>true</skipOnConnectionError>
                         </configuration>
                     </execution>
@@ -304,10 +305,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <bootstrapProperties>
-                         <db.url>${db.url}</db.url>
-                         <serverStartTimeout>75</serverStartTimeout>
-                    </bootstrapProperties>
+                    <serverStartTimeout>75</serverStartTimeout>
                 </configuration>
             </plugin>
             <plugin>
