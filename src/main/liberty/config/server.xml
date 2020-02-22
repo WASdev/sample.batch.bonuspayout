@@ -5,6 +5,8 @@
         <feature>batchManagement-1.0</feature>
         <feature>localConnector-1.0</feature>
         <feature>appSecurity-2.0</feature>
+        <feature>mpMetrics-2.2</feature>
+        <feature>mpHealth-2.0</feature>
 
         <!-- This sample can work without CDI configured, but the use of CDI is always strongly encouraged with batch. -->
         <feature>cdi-2.0</feature>
@@ -26,7 +28,7 @@
 
     <!-- To access this server from a remote client add a host attribute to
         the following element, e.g. host="*" -->
-    <httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
+    <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
 
     <library id="DerbyLib">
         <fileset dir="${shared.resource.dir}/derby"/>
