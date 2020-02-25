@@ -17,22 +17,33 @@
 package com.ibm.websphere.samples.batch.beans;
 
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.annotation.security.RunAs;
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
-import javax.ejb.Schedule;
 import javax.ejb.Singleton;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Startup;
+import javax.enterprise.concurrent.ManagedScheduledExecutorService;
+import javax.sql.DataSource;
 
-//@Singleton
+@Singleton
 @RunAs("JOBSTARTER")
-@RequestScoped
+@Startup
+//@ApplicationScoped
 public class StartupJobRunner {
 
+	@Resource(shareable=false, name="jdbc/BonusPayoutDS")
+	private DataSource datasource;
+
+    	
     //@Schedule(hour = "*", minute = "*", second = "*/20", persistent = false)
-    public void init() {
+    public void runJob() {
         System.out.println("\n\nRunning batch job from the StartupJobRunner bean\n\n");
+    	System.out.println("from runner DS =" + datasource);
+
         try {
             JobOperator jobOperator = BatchRuntime.getJobOperator();
             Properties parms = new Properties();
@@ -43,5 +54,19 @@ public class StartupJobRunner {
         }
     }
 
+    
+    static final long INITIAL_DELAY = 10;
+    static final long PERIOD = 15;
+
+    
+    @Resource
+    ManagedScheduledExecutorService scheduler;
+    
+    @PostConstruct
+    public void init() {
+        this.scheduler.scheduleWithFixedDelay(this::runJob, 
+                INITIAL_DELAY, PERIOD, 
+                TimeUnit.SECONDS);
+    }
 }
 
