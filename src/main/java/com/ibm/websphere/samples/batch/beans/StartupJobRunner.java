@@ -16,22 +16,28 @@
  */
 package com.ibm.websphere.samples.batch.beans;
 
+import java.util.Properties;
+
 import javax.annotation.security.RunAs;
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.enterprise.context.RequestScoped;
 
-@Singleton
+//@Singleton
 @RunAs("JOBSTARTER")
+@RequestScoped
 public class StartupJobRunner {
 
-    @Schedule(hour = "*", minute = "*", second = "*/20", persistent = false)
-    public void initialize() {
-        System.out.println("\n\nRunning batch job from the ControllerBean startup EJB\n\n");
+    //@Schedule(hour = "*", minute = "*", second = "*/20", persistent = false)
+    public void init() {
+        System.out.println("\n\nRunning batch job from the StartupJobRunner bean\n\n");
         try {
             JobOperator jobOperator = BatchRuntime.getJobOperator();
-            jobOperator.start("BonusPayoutJob", null);
+            Properties parms = new Properties();
+            parms.setProperty("AAA", "111");
+            jobOperator.start("BonusPayoutJob", parms);
         } catch (Exception e) {
             e.printStackTrace();
         }
