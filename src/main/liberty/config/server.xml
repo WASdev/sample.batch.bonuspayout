@@ -2,25 +2,12 @@
 
     <!-- Enable features -->
     <featureManager>
-        <feature>batchManagement-1.0</feature>
-        <feature>localConnector-1.0</feature>
-        <!-- 
-        <feature>appSecurity-2.0</feature>
- -->
-        <feature>mpMetrics-2.2</feature>
-        <feature>mpHealth-2.0</feature>
-
         <!-- This sample can work without CDI configured, but the use of CDI is always strongly encouraged with batch. -->
         <feature>cdi-2.0</feature>
-
-        <!-- For connection validation -->
-        <feature>restConnector-2.0</feature>
-
-        <!-- for job runner bean -->
-        <feature>ejbLite-3.2</feature>
         <feature>jaxrs-2.1</feature>
-        <feature>concurrent-1.0</feature>
-
+        <feature>jndi-1.0</feature>
+        <feature>batch-1.0</feature>
+        <feature>jpa-2.2</feature>
     </featureManager>
 
 <!-- A user of the Admin Center Java Batch tool must ALSO be an administrator.  This is independent of whatever batch roles,
