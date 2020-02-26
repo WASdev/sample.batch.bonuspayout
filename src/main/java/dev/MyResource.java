@@ -14,7 +14,7 @@ public class MyResource {
     @Resource(shareable=false, name="jdbc/BonusPayoutDS")
     private DataSource datasource;
 
-    //@Inject
+    @Inject
     MyBean mybean;
 
     @GET
@@ -22,7 +22,7 @@ public class MyResource {
 
     	System.out.println("DS =" + datasource);
 
-//	mybean.m1();
+	mybean.m1();
 
         return "got request";
     }
