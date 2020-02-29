@@ -26,13 +26,19 @@ import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.enterprise.concurrent.ManagedScheduledExecutorService;
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 
 @Singleton
 @RunAs("JOBSTARTER")
 @Startup
 //@ApplicationScoped
+@TransactionManagement(TransactionManagementType.BEAN)
 public class StartupJobRunner {
 
 	@Resource(shareable=false, name="jdbc/BonusPayoutDS")
@@ -64,6 +70,16 @@ public class StartupJobRunner {
     
     @PostConstruct
     public void init() {
+    	
+    	try {
+    	Object obj = new InitialContext().lookup("java:comp/UserTransaction");
+    	System.out.println("SKSK: jndi init(): " + obj);
+    	} catch (Exception e) { 
+    		   System.out.println("SKSK: caught exception and printing stack trace for " + e );
+    		     e.printStackTrace(); 
+    		     throw new RuntimeException(e); 
+    	}
+    	
         this.scheduler.scheduleWithFixedDelay(this::runJob, 
                 INITIAL_DELAY, PERIOD, 
                 TimeUnit.SECONDS);

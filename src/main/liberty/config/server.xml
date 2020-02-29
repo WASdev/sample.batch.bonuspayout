@@ -11,6 +11,7 @@
         <feature>mpHealth-2.0</feature>
 
         <!-- This sample can work without CDI configured, but the use of CDI is always strongly encouraged with batch. -->
+        <feature>jndi-1.0</feature>
         <feature>cdi-2.0</feature>
 
         <!-- For connection validation -->
