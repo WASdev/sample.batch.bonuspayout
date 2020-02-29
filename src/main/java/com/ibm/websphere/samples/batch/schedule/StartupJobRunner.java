@@ -36,6 +36,8 @@ public class StartupJobRunner {
 
     public void runJob() {
         try {
+        	System.out.println("SKSK: Running scheduled job");
+
             JobOperator jobOperator = BatchRuntime.getJobOperator();
             Properties parms = new Properties();
             parms.setProperty("started-by", this.getClass().getCanonicalName());

@@ -75,9 +75,6 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
     public void setAccountType(@PriorityAccount AccountType acctType) {
         this.acctType = acctType;
     }
-    static { System.out.println("TKTK: Running with patch developed 2-13-20 of class GDB");
-		// TODO Auto-generated constructor stub
-	}
 
     private volatile boolean stopped = false;
 
@@ -86,7 +83,9 @@ public class GenerateDataBatchlet implements Batchlet, BonusPayoutConstants {
     @Override
     public String process() throws Exception {
 
-        writer = new BonusPayoutUtils(jobCtx).openCurrentInstanceStreamWriter();
+    	System.out.println("\n\n\n\n\nSKSK: Running with patch developed 2-29-20 of class GenerateDataBatchlet\n\n\n\n");        
+
+    	writer = new BonusPayoutUtils(jobCtx).openCurrentInstanceStreamWriter();
 
         String accountCode = acctType.getAccountCode();
         
