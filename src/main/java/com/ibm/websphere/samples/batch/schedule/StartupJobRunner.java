@@ -1,3 +1,5 @@
+package com.ibm.websphere.samples.batch.schedule;
+
 /*
  * Copyright 2020 International Business Machines Corp.
  * 
@@ -14,8 +16,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ibm.websphere.samples.batch.beans;
-
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -26,63 +26,40 @@ import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
 import javax.enterprise.concurrent.ManagedScheduledExecutorService;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import com.ibm.websphere.samples.batch.util.BonusPayoutUtils;
 
 @Singleton
 @RunAs("JOBSTARTER")
 @Startup
-//@ApplicationScoped
-@TransactionManagement(TransactionManagementType.BEAN)
 public class StartupJobRunner {
 
-	@Resource(shareable=false, name="jdbc/BonusPayoutDS")
-	private DataSource datasource;
-
-    	
-    //@Schedule(hour = "*", minute = "*", second = "*/20", persistent = false)
     public void runJob() {
-        System.out.println("\n\nRunning batch job from the StartupJobRunner bean\n\n");
-    	System.out.println("from runner DS =" + datasource);
-
         try {
             JobOperator jobOperator = BatchRuntime.getJobOperator();
             Properties parms = new Properties();
-            parms.setProperty("AAA", "111");
+            parms.setProperty("started-by", this.getClass().getCanonicalName());
             jobOperator.start("BonusPayoutJob", parms);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     
-    static final long INITIAL_DELAY = 10;
+    static final long INITIAL_DELAY = 6;
     static final long PERIOD = 15;
-
     
     @Resource
     ManagedScheduledExecutorService scheduler;
     
     @PostConstruct
     public void init() {
-    	
-    	try {
-    	Object obj = new InitialContext().lookup("java:comp/UserTransaction");
-    	System.out.println("SKSK: jndi init(): " + obj);
-    	} catch (Exception e) { 
-    		   System.out.println("SKSK: caught exception and printing stack trace for " + e );
-    		     e.printStackTrace(); 
-    		     throw new RuntimeException(e); 
-    	}
-    	
-        this.scheduler.scheduleWithFixedDelay(this::runJob, 
+    	if (scheduler != null) {
+    		this.scheduler.scheduleWithFixedDelay(this::runJob, 
                 INITIAL_DELAY, PERIOD, 
                 TimeUnit.SECONDS);
+    	}
     }
 }
+
+
 

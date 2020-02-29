@@ -1,0 +1,9 @@
+<server description="Extra features">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>ejbLite-3.2</feature>
+        <feature>concurrent-1.0</feature>
+    </featureManager>
+
+</server>
