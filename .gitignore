@@ -20,3 +20,4 @@ derby.log
 *.csv
 /batch-bonuspayout-wlpcfg/servers/BonusPayout/bootstrap.properties
 /.apt_generated/
+!.appsody-config.yaml
