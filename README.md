@@ -32,7 +32,7 @@ Once you are more familiar, here are some key shortcuts to the Wiki doc:
 
 [1]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-Maven "Running with Maven"
 [2]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-WDT "Using WDT"
-[3]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-Maven-With-WDT "Maven with WDT"
+[3]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-WDT-With-Maven "Maven with WDT"
 [4]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/Using-batchManager-CLI "Running with CLI"
 [5]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/ApplicationDetails "App details"
 [6]: https://github.com/WASdev/sample.batch.bonuspayout/wiki/WebSphereLibertyBatchLinks "Liberty Batch links"
