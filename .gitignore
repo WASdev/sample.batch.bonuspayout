@@ -20,3 +20,7 @@ derby.log
 *.csv
 /batch-bonuspayout-wlpcfg/servers/BonusPayout/bootstrap.properties
 /.apt_generated/
+
+/.odo
+.odo\env
+.odo\odo-file-index.json
