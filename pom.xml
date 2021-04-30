@@ -3,7 +3,7 @@
     <parent>
         <groupId>io.openliberty.tools</groupId>
         <artifactId>liberty-maven-app-parent</artifactId>
-        <version>3.1</version>
+        <version>3.3.4</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -54,7 +54,7 @@
        
         <serverHost>localhost</serverHost>
         <httpsPort>9443</httpsPort>
-        <liberty.version>20.0.0.3</liberty.version>
+        <liberty.version>21.0.0.4</liberty.version>
         <db.url>${wlp.install.dir}/usr/shared/BatchDB</db.url>                                 
         <!-- Use commented-out value since empty value doesn't flow as well. -->
         <startServerJvmOptions>#-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=7777</startServerJvmOptions>
