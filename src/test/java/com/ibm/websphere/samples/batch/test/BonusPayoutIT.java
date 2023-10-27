@@ -26,7 +26,6 @@ import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.acl.Group;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.ConsoleHandler;
 
