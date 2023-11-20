@@ -72,7 +72,7 @@
         <shared.resource.directory>${wlp.install.dir}/usr/shared/resources</shared.resource.directory>
         <ddl.dir>${project.basedir}/ddls</ddl.dir>
         <wlpServerName>BonusPayout</wlpServerName>
-        <derby.version>10.14.2.0</derby.version>
+        <derby.version>10.17.1.0</derby.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
